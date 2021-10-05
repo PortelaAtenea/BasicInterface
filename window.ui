@@ -6,21 +6,21 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>825</width>
-    <height>600</height>
+    <width>672</width>
+    <height>539</height>
    </rect>
   </property>
   <property name="windowTitle">
-   <string>MainWindow</string>
+   <string>IMPORT-EXPORTS TEIS</string>
   </property>
   <widget class="QWidget" name="centralwidget">
    <widget class="QPushButton" name="btnAceptar">
     <property name="geometry">
      <rect>
-      <x>270</x>
-      <y>330</y>
-      <width>75</width>
-      <height>23</height>
+      <x>380</x>
+      <y>430</y>
+      <width>121</width>
+      <height>41</height>
      </rect>
     </property>
     <property name="text">
@@ -30,44 +30,79 @@
    <widget class="QLabel" name="lblTitulo">
     <property name="geometry">
      <rect>
-      <x>240</x>
-      <y>170</y>
-      <width>191</width>
-      <height>51</height>
+      <x>320</x>
+      <y>50</y>
+      <width>281</width>
+      <height>71</height>
      </rect>
     </property>
     <property name="font">
      <font>
-      <family>Caladea</family>
-      <pointsize>12</pointsize>
-      <italic>true</italic>
+      <family>Arial</family>
+      <pointsize>16</pointsize>
+      <weight>50</weight>
+      <italic>false</italic>
+      <bold>false</bold>
      </font>
     </property>
-    <property name="text">
-     <string>MI PRIMERA VENTANA</string>
+    <property name="styleSheet">
+     <string notr="true">color: pink;
+border-color: rgb(0, 0, 0);
+font: 16pt &quot;Arial&quot;;
+background-color: qlineargradient(spread:pad, x1:0, y1:0, x2:1, y2:0, stop:0 rgba(9, 41, 4, 255), stop:0.085 rgba(2, 79, 0, 255), stop:0.19 rgba(50, 147, 22, 255), stop:0.275 rgba(236, 191, 49, 255), stop:0.39 rgba(243, 61, 34, 255), stop:0.555 rgba(135, 81, 60, 255), stop:0.667 rgba(121, 75, 255, 255), stop:0.825 rgba(164, 255, 244, 255), stop:0.885 rgba(104, 222, 71, 255), stop:1 rgba(93, 128, 0, 255));
+</string>
     </property>
-   </widget>
-   <widget class="QLineEdit" name="txtDatos">
-    <property name="geometry">
-     <rect>
-      <x>240</x>
-      <y>300</y>
-      <width>221</width>
-      <height>20</height>
-     </rect>
+    <property name="text">
+     <string>XESTION CLIENTES</string>
     </property>
    </widget>
    <widget class="QPushButton" name="btnSalir">
     <property name="geometry">
      <rect>
-      <x>360</x>
-      <y>330</y>
-      <width>75</width>
-      <height>23</height>
+      <x>530</x>
+      <y>430</y>
+      <width>111</width>
+      <height>41</height>
      </rect>
     </property>
     <property name="text">
      <string>Salir</string>
+    </property>
+   </widget>
+   <widget class="QLabel" name="lblDni">
+    <property name="geometry">
+     <rect>
+      <x>100</x>
+      <y>70</y>
+      <width>31</width>
+      <height>41</height>
+     </rect>
+    </property>
+    <property name="text">
+     <string>DNI</string>
+    </property>
+   </widget>
+   <widget class="QLineEdit" name="txtDni">
+    <property name="geometry">
+     <rect>
+      <x>130</x>
+      <y>80</y>
+      <width>120</width>
+      <height>20</height>
+     </rect>
+    </property>
+   </widget>
+   <widget class="QLabel" name="lblValidoDni">
+    <property name="geometry">
+     <rect>
+      <x>260</x>
+      <y>82</y>
+      <width>51</width>
+      <height>21</height>
+     </rect>
+    </property>
+    <property name="text">
+     <string/>
     </property>
    </widget>
   </widget>
@@ -76,47 +111,30 @@
     <rect>
      <x>0</x>
      <y>0</y>
-     <width>825</width>
-     <height>21</height>
+     <width>672</width>
+     <height>29</height>
     </rect>
+   </property>
+   <property name="styleSheet">
+    <string notr="true">font: 16pt &quot;Miriam Mono CLM&quot;;
+alternate-background-color: rgb(255, 170, 255);
+</string>
    </property>
    <widget class="QMenu" name="menuArchivo">
     <property name="title">
      <string>Archivo</string>
     </property>
-    <widget class="QMenu" name="menuAbrir">
-     <property name="title">
-      <string>Abrir</string>
-     </property>
-     <addaction name="actionFichero"/>
-    </widget>
-    <addaction name="menuAbrir"/>
-    <addaction name="actionGuadar"/>
-    <addaction name="actionGuardar_Como"/>
-    <addaction name="separator"/>
     <addaction name="actionSalir"/>
    </widget>
    <addaction name="menuArchivo"/>
   </widget>
   <widget class="QStatusBar" name="statusbar"/>
-  <action name="actionGuadar">
-   <property name="text">
-    <string>Guadar</string>
-   </property>
-  </action>
-  <action name="actionGuardar_Como">
-   <property name="text">
-    <string>Guardar Como</string>
-   </property>
-  </action>
-  <action name="actionFichero">
-   <property name="text">
-    <string>Fichero</string>
-   </property>
-  </action>
   <action name="actionSalir">
    <property name="text">
     <string>Salir</string>
+   </property>
+   <property name="shortcut">
+    <string>Ctrl+S</string>
    </property>
   </action>
  </widget>
