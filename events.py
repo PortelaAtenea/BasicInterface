@@ -4,14 +4,16 @@ fichero de eventos generales(eventos que no tienen relacion directa con ningun o
 
 
 '''
-import sys
-
-import var
+import sys, var
 
 
 class Eventos():
     def Salir(self):
         try:
-            sys.exit()
+            var.dlgaviso.show()
+            if var.dlgaviso.exec_():
+                sys.exit()
+            else:
+                var.dlgaviso.hide()
         except Exception as error:
             print('Error en modulo salir ', error)
