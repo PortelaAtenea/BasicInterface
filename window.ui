@@ -6,9 +6,15 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>672</width>
+    <width>725</width>
     <height>539</height>
    </rect>
+  </property>
+  <property name="sizePolicy">
+   <sizepolicy hsizetype="Preferred" vsizetype="Preferred">
+    <horstretch>0</horstretch>
+    <verstretch>0</verstretch>
+   </sizepolicy>
   </property>
   <property name="windowTitle">
    <string>IMPORT-EXPORTS TEIS</string>
@@ -17,8 +23,8 @@
    <widget class="QPushButton" name="btnAceptar">
     <property name="geometry">
      <rect>
-      <x>380</x>
-      <y>430</y>
+      <x>220</x>
+      <y>260</y>
       <width>121</width>
       <height>41</height>
      </rect>
@@ -30,8 +36,8 @@
    <widget class="QLabel" name="lblTitulo">
     <property name="geometry">
      <rect>
-      <x>320</x>
-      <y>50</y>
+      <x>240</x>
+      <y>0</y>
       <width>281</width>
       <height>71</height>
      </rect>
@@ -46,21 +52,24 @@
      </font>
     </property>
     <property name="styleSheet">
-     <string notr="true">color: pink;
+     <string notr="true">color: purple;
 border-color: rgb(0, 0, 0);
 font: 16pt &quot;Arial&quot;;
-background-color: qlineargradient(spread:pad, x1:0, y1:0, x2:1, y2:0, stop:0 rgba(9, 41, 4, 255), stop:0.085 rgba(2, 79, 0, 255), stop:0.19 rgba(50, 147, 22, 255), stop:0.275 rgba(236, 191, 49, 255), stop:0.39 rgba(243, 61, 34, 255), stop:0.555 rgba(135, 81, 60, 255), stop:0.667 rgba(121, 75, 255, 255), stop:0.825 rgba(164, 255, 244, 255), stop:0.885 rgba(104, 222, 71, 255), stop:1 rgba(93, 128, 0, 255));
+background-color: qradialgradient(spread:pad, cx:0.5, cy:0.5, radius:0.5, fx:0.5, fy:0.5, stop:0 rgba(0, 0, 0, 0), stop:0.52 rgba(0, 0, 0, 0), stop:0.565 rgba(82, 121, 76, 33), stop:0.65 rgba(159, 235, 148, 64), stop:0.721925 rgba(255, 238, 150, 129), stop:0.77 rgba(255, 128, 128, 204), stop:0.89 rgba(191, 128, 255, 64), stop:1 rgba(0, 0, 0, 0));
 </string>
     </property>
     <property name="text">
      <string>XESTION CLIENTES</string>
     </property>
+    <property name="alignment">
+     <set>Qt::AlignCenter</set>
+    </property>
    </widget>
    <widget class="QPushButton" name="btnSalir">
     <property name="geometry">
      <rect>
-      <x>530</x>
-      <y>430</y>
+      <x>360</x>
+      <y>260</y>
       <width>111</width>
       <height>41</height>
      </rect>
@@ -69,40 +78,87 @@ background-color: qlineargradient(spread:pad, x1:0, y1:0, x2:1, y2:0, stop:0 rgb
      <string>Salir</string>
     </property>
    </widget>
-   <widget class="QLabel" name="lblDni">
+   <widget class="QWidget" name="layoutWidget">
     <property name="geometry">
      <rect>
-      <x>100</x>
-      <y>70</y>
-      <width>31</width>
+      <x>80</x>
+      <y>50</y>
+      <width>201</width>
       <height>41</height>
      </rect>
     </property>
-    <property name="text">
-     <string>DNI</string>
-    </property>
+    <layout class="QHBoxLayout" name="horizontalLayout">
+     <item>
+      <widget class="QLabel" name="lblDni">
+       <property name="text">
+        <string>DNI</string>
+       </property>
+      </widget>
+     </item>
+     <item>
+      <widget class="QLineEdit" name="txtDni"/>
+     </item>
+     <item>
+      <widget class="QLabel" name="lblValidoDni">
+       <property name="sizePolicy">
+        <sizepolicy hsizetype="Expanding" vsizetype="Expanding">
+         <horstretch>0</horstretch>
+         <verstretch>0</verstretch>
+        </sizepolicy>
+       </property>
+       <property name="styleSheet">
+        <string notr="true">font: 75 14pt &quot;Arial&quot;;</string>
+       </property>
+       <property name="text">
+        <string/>
+       </property>
+      </widget>
+     </item>
+    </layout>
    </widget>
-   <widget class="QLineEdit" name="txtDni">
+   <widget class="QWidget" name="layoutWidget">
     <property name="geometry">
      <rect>
-      <x>130</x>
-      <y>80</y>
-      <width>120</width>
-      <height>20</height>
+      <x>10</x>
+      <y>90</y>
+      <width>691</width>
+      <height>41</height>
      </rect>
     </property>
+    <layout class="QHBoxLayout" name="horizontalLayout_2">
+     <item>
+      <widget class="QLabel" name="lblApel">
+       <property name="text">
+        <string>Apelidos</string>
+       </property>
+      </widget>
+     </item>
+     <item>
+      <widget class="QLineEdit" name="txtApel"/>
+     </item>
+     <item>
+      <widget class="QLabel" name="lblNome_2">
+       <property name="text">
+        <string>Nome</string>
+       </property>
+      </widget>
+     </item>
+     <item>
+      <widget class="QLineEdit" name="txtlNome"/>
+     </item>
+    </layout>
    </widget>
-   <widget class="QLabel" name="lblValidoDni">
+   <widget class="Line" name="line">
     <property name="geometry">
      <rect>
-      <x>260</x>
-      <y>82</y>
-      <width>51</width>
-      <height>21</height>
+      <x>0</x>
+      <y>230</y>
+      <width>711</width>
+      <height>31</height>
      </rect>
     </property>
-    <property name="text">
-     <string/>
+    <property name="orientation">
+     <enum>Qt::Horizontal</enum>
     </property>
    </widget>
   </widget>
@@ -111,13 +167,12 @@ background-color: qlineargradient(spread:pad, x1:0, y1:0, x2:1, y2:0, stop:0 rgb
     <rect>
      <x>0</x>
      <y>0</y>
-     <width>672</width>
-     <height>29</height>
+     <width>725</width>
+     <height>21</height>
     </rect>
    </property>
    <property name="styleSheet">
-    <string notr="true">font: 16pt &quot;Miriam Mono CLM&quot;;
-alternate-background-color: rgb(255, 170, 255);
+    <string notr="true">font: 9pt &quot;Arial&quot;;
 </string>
    </property>
    <widget class="QMenu" name="menuArchivo">
@@ -132,6 +187,12 @@ alternate-background-color: rgb(255, 170, 255);
   <action name="actionSalir">
    <property name="text">
     <string>Salir</string>
+   </property>
+   <property name="font">
+    <font>
+     <family>Arial</family>
+     <pointsize>9</pointsize>
+    </font>
    </property>
    <property name="shortcut">
     <string>Ctrl+S</string>
