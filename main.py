@@ -26,15 +26,26 @@ class Main(QtWidgets.QMainWindow):
         '''
         Eventos de boton
         '''
-        var.ui.btnSalir.clicked.connect(events.Eventos.Salir)
+        var.ui.btnSalir.clicked.connect(events.Eventos.Salir) #SAlir del programa
+        var.ui.rbtGroupSex.buttonClicked.connect(clients.Clientes.selSex)   #Seleccion del sexo
+        var.ui.chkGroupPago.buttonClicked.connect(clients.Clientes.selPago)  #Seleccion del metodo de pago
         '''
         Eventos de la barra de menus
         '''
-        var.ui.actionSalir.triggered.connect(events.Eventos.Salir)
+        var.ui.actionSalir.triggered.connect(events.Eventos.Salir)  #Slair del programa por la barrita de arriba
         '''
         Eventos de la caje de texto
         '''
-        var.ui.txtDni.editingFinished.connect(clients.Clientes.validarDNI)
+        var.ui.txtDni.editingFinished.connect(clients.Clientes.validarDNI)  #Validar dni
+        '''
+        Eventos  de comboBox
+        '''
+        clients.Clientes.cargaProv_(self)       #Cargar provincias en el combox
+        var.ui.cmbProv.activated[str].connect(clients.Clientes.selProv)     #Seleccion de la provincia
+
+        var.ui.cmbMuni.activated[str].connect(clients.Clientes.selMuni)     #Seleccion del municipio
+
+
 if __name__ == '__main__':
     app = QtWidgets.QApplication([])
     window = Main()
