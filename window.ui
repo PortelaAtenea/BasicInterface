@@ -6,7 +6,7 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>970</width>
+    <width>954</width>
     <height>600</height>
    </rect>
   </property>
@@ -23,8 +23,8 @@
    <widget class="QPushButton" name="btnAceptar">
     <property name="geometry">
      <rect>
-      <x>130</x>
-      <y>340</y>
+      <x>160</x>
+      <y>350</y>
       <width>121</width>
       <height>41</height>
      </rect>
@@ -36,7 +36,7 @@
    <widget class="QLabel" name="lblTitulo">
     <property name="geometry">
      <rect>
-      <x>260</x>
+      <x>280</x>
       <y>0</y>
       <width>281</width>
       <height>71</height>
@@ -52,11 +52,10 @@
      </font>
     </property>
     <property name="styleSheet">
-     <string notr="true">color: purple;
+     <string notr="true">color: rgb(255, 255, 255);
 border-color: rgb(0, 0, 0);
 font: 16pt &quot;Arial&quot;;
-background-color: qradialgradient(spread:pad, cx:0.5, cy:0.5, radius:0.5, fx:0.5, fy:0.5, stop:0 rgba(0, 0, 0, 0), stop:0.52 rgba(0, 0, 0, 0), stop:0.565 rgba(82, 121, 76, 33), stop:0.65 rgba(159, 235, 148, 64), stop:0.721925 rgba(255, 238, 150, 129), stop:0.77 rgba(255, 128, 128, 204), stop:0.89 rgba(191, 128, 255, 64), stop:1 rgba(0, 0, 0, 0));
-</string>
+background-color:qradialgradient(spread:reflect, cx:0.551, cy:0.448864, radius:0.5, fx:0.369, fy:0.528, stop:0.125 rgba(255, 0, 187, 255), stop:1 rgba(255, 255, 255, 255))</string>
     </property>
     <property name="text">
      <string>XESTION CLIENTES</string>
@@ -68,8 +67,8 @@ background-color: qradialgradient(spread:pad, cx:0.5, cy:0.5, radius:0.5, fx:0.5
    <widget class="QPushButton" name="btnSalir">
     <property name="geometry">
      <rect>
-      <x>520</x>
-      <y>340</y>
+      <x>550</x>
+      <y>350</y>
       <width>111</width>
       <height>41</height>
      </rect>
@@ -94,8 +93,8 @@ background-color: qradialgradient(spread:pad, cx:0.5, cy:0.5, radius:0.5, fx:0.5
    <widget class="QWidget" name="layoutWidget">
     <property name="geometry">
      <rect>
-      <x>10</x>
-      <y>120</y>
+      <x>0</x>
+      <y>130</y>
       <width>761</width>
       <height>22</height>
      </rect>
@@ -144,8 +143,8 @@ background-color: qradialgradient(spread:pad, cx:0.5, cy:0.5, radius:0.5, fx:0.5
     <property name="geometry">
      <rect>
       <x>0</x>
-      <y>50</y>
-      <width>791</width>
+      <y>60</y>
+      <width>951</width>
       <height>41</height>
      </rect>
     </property>
@@ -156,8 +155,8 @@ background-color: qradialgradient(spread:pad, cx:0.5, cy:0.5, radius:0.5, fx:0.5
    <widget class="QLabel" name="lblFechaAlta">
     <property name="geometry">
      <rect>
-      <x>578</x>
-      <y>80</y>
+      <x>588</x>
+      <y>100</y>
       <width>86</width>
       <height>16</height>
      </rect>
@@ -176,40 +175,18 @@ background-color: qradialgradient(spread:pad, cx:0.5, cy:0.5, radius:0.5, fx:0.5
    <widget class="QLineEdit" name="txtFechaAlta">
     <property name="geometry">
      <rect>
-      <x>670</x>
-      <y>80</y>
-      <width>54</width>
+      <x>680</x>
+      <y>100</y>
+      <width>71</width>
       <height>19</height>
      </rect>
     </property>
    </widget>
-   <widget class="QLabel" name="lbnaviso">
-    <property name="enabled">
-     <bool>true</bool>
-    </property>
+   <widget class="QPushButton" name="btnGuardar">
     <property name="geometry">
      <rect>
-      <x>730</x>
-      <y>80</y>
-      <width>31</width>
-      <height>19</height>
-     </rect>
-    </property>
-    <property name="text">
-     <string/>
-    </property>
-    <property name="pixmap">
-     <pixmap>img/calendario.png</pixmap>
-    </property>
-    <property name="scaledContents">
-     <bool>true</bool>
-    </property>
-   </widget>
-   <widget class="QPushButton" name="btnAceptar_2">
-    <property name="geometry">
-     <rect>
-      <x>380</x>
-      <y>340</y>
+      <x>410</x>
+      <y>350</y>
       <width>121</width>
       <height>41</height>
      </rect>
@@ -218,11 +195,11 @@ background-color: qradialgradient(spread:pad, cx:0.5, cy:0.5, radius:0.5, fx:0.5
      <string>Guardar</string>
     </property>
    </widget>
-   <widget class="QPushButton" name="btnSalir_2">
+   <widget class="QPushButton" name="btnModificar">
     <property name="geometry">
      <rect>
-      <x>260</x>
-      <y>340</y>
+      <x>290</x>
+      <y>350</y>
       <width>111</width>
       <height>41</height>
      </rect>
@@ -231,11 +208,11 @@ background-color: qradialgradient(spread:pad, cx:0.5, cy:0.5, radius:0.5, fx:0.5
      <string>Modificar</string>
     </property>
    </widget>
-   <widget class="QWidget" name="">
+   <widget class="QWidget" name="layoutWidget">
     <property name="geometry">
      <rect>
-      <x>10</x>
-      <y>90</y>
+      <x>0</x>
+      <y>100</y>
       <width>201</width>
       <height>25</height>
      </rect>
@@ -279,11 +256,11 @@ background-color: qradialgradient(spread:pad, cx:0.5, cy:0.5, radius:0.5, fx:0.5
      </item>
     </layout>
    </widget>
-   <widget class="QWidget" name="">
+   <widget class="QWidget" name="layoutWidget">
     <property name="geometry">
      <rect>
-      <x>12</x>
-      <y>270</y>
+      <x>0</x>
+      <y>290</y>
       <width>751</width>
       <height>19</height>
      </rect>
@@ -375,11 +352,11 @@ background-color: qradialgradient(spread:pad, cx:0.5, cy:0.5, radius:0.5, fx:0.5
      </item>
     </layout>
    </widget>
-   <widget class="QWidget" name="">
+   <widget class="QWidget" name="layoutWidget">
     <property name="geometry">
      <rect>
-      <x>12</x>
-      <y>232</y>
+      <x>0</x>
+      <y>230</y>
       <width>191</width>
       <height>21</height>
      </rect>
@@ -421,11 +398,11 @@ background-color: qradialgradient(spread:pad, cx:0.5, cy:0.5, radius:0.5, fx:0.5
      </item>
     </layout>
    </widget>
-   <widget class="QWidget" name="">
+   <widget class="QWidget" name="layoutWidget">
     <property name="geometry">
      <rect>
-      <x>14</x>
-      <y>151</y>
+      <x>4</x>
+      <y>161</y>
       <width>751</width>
       <height>22</height>
      </rect>
@@ -450,11 +427,11 @@ background-color: qradialgradient(spread:pad, cx:0.5, cy:0.5, radius:0.5, fx:0.5
      </item>
     </layout>
    </widget>
-   <widget class="QWidget" name="">
+   <widget class="QWidget" name="layoutWidget">
     <property name="geometry">
      <rect>
-      <x>10</x>
-      <y>180</y>
+      <x>0</x>
+      <y>190</y>
       <width>276</width>
       <height>22</height>
      </rect>
@@ -496,13 +473,59 @@ background-color: qradialgradient(spread:pad, cx:0.5, cy:0.5, radius:0.5, fx:0.5
      </item>
     </layout>
    </widget>
+   <widget class="QLabel" name="lblDatosPersonales">
+    <property name="geometry">
+     <rect>
+      <x>0</x>
+      <y>60</y>
+      <width>161</width>
+      <height>16</height>
+     </rect>
+    </property>
+    <property name="styleSheet">
+     <string notr="true">font: 75 14pt &quot;MS Shell Dlg 2&quot;;</string>
+    </property>
+    <property name="text">
+     <string>Datos Personales</string>
+    </property>
+   </widget>
+   <widget class="Line" name="line_3">
+    <property name="geometry">
+     <rect>
+      <x>0</x>
+      <y>260</y>
+      <width>811</width>
+      <height>16</height>
+     </rect>
+    </property>
+    <property name="orientation">
+     <enum>Qt::Horizontal</enum>
+    </property>
+   </widget>
+   <widget class="QPushButton" name="btnCalendar">
+    <property name="geometry">
+     <rect>
+      <x>760</x>
+      <y>90</y>
+      <width>21</width>
+      <height>21</height>
+     </rect>
+    </property>
+    <property name="text">
+     <string/>
+    </property>
+    <property name="icon">
+     <iconset>
+      <normaloff>img/calendario.png</normaloff>img/calendario.png</iconset>
+    </property>
+   </widget>
   </widget>
   <widget class="QMenuBar" name="menubar">
    <property name="geometry">
     <rect>
      <x>0</x>
      <y>0</y>
-     <width>970</width>
+     <width>954</width>
      <height>21</height>
     </rect>
    </property>

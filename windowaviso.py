@@ -41,5 +41,6 @@ class Ui_windowaviso(object):
 
     def retranslateUi(self, windowaviso):
         _translate = QtCore.QCoreApplication.translate
-        windowaviso.setWindowTitle(_translate("windowaviso", "AVISO"))
+        windowaviso.setWindowTitle(_translate("windowaviso", "Dialog"))
         self.lblpregunta.setText(_translate("windowaviso", "Desea Salir?"))
+
