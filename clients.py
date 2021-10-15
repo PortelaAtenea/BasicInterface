@@ -90,3 +90,26 @@ class Clientes():
 
         except Exception as error:
             print('Error en cargar la lista', error)
+
+    def cargarFecha(qDate):
+        try:
+            data = ('{0}/{1}/{2}'.format(qDate.day(), qDate.month(), qDate.year()))
+            var.ui.txtAltaCli.setText(str(data))
+            var.dlgcalendar.hide()
+        except Exception as error:
+            print('Error en cargar fecha del calendario', error)
+    def mayus():
+        try:
+            apellido = var.ui.txtApel.text()
+            apellido = apellido.title()
+            var.ui.txtApel.setText(apellido)
+            nombre = var.ui.txtNome.text()
+            nombre = nombre.title()
+            var.ui.txtNome.setText(nombre)
+            dir = var.ui.txtDir.text()
+            dir = dir.title()
+            var.ui.txtDir.setText(dir)
+        except:
+            print('Error en la aplicacion')
+            return None
+

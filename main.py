@@ -24,8 +24,7 @@ class dialogCalendar(QtWidgets.QDialog):
         mesactual = datetime.now().month
         anoactual = datetime.now().year
         var.dlgcalendar.Calendar.setSelectedDate(QtCore.QDate(anoactual, mesactual, diaactual))
-        #var.dlgcalendar.Calendar.clicked.connect(clients.Clientes.cargarFecha)
-        var.ui.btnCalendar.clicked.connect(events.Eventos.abrirCal)
+        var.dlgcalendar.Calendar.clicked.connect(clients.Clientes.cargarFecha)
 
 
 
@@ -47,9 +46,12 @@ class Main(QtWidgets.QMainWindow):
         '''
         Eventos de boton
         '''
+
+        var.ui.btnCalendar.clicked.connect(events.Eventos.abrirCal)
         var.ui.btnSalir.clicked.connect(events.Eventos.Salir) #SAlir del programa
         var.ui.rbtGroupSex.buttonClicked.connect(clients.Clientes.selSex)   #Seleccion del sexo
         var.ui.chkGroupPago.buttonClicked.connect(clients.Clientes.selPago)  #Seleccion del metodo de pago
+
 
         '''
         Eventos de la barra de menus
@@ -59,6 +61,9 @@ class Main(QtWidgets.QMainWindow):
         Eventos de la caje de texto
         '''
         var.ui.txtDni.editingFinished.connect(clients.Clientes.validarDNI)  #Validar dni
+        var.ui.txtApel.editingFinished.connect(clients.Clientes.mayus)
+        var.ui.txtNome.editingFinished.connect(clients.Clientes.mayus)
+        var.ui.txtDir.editingFinished.connect(clients.Clientes.mayus)
         '''
         Eventos  de comboBox
         '''
