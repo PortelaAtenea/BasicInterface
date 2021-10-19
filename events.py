@@ -6,6 +6,8 @@ fichero de eventos generales(eventos que no tienen relacion directa con ningun o
 '''
 import sys, var
 
+from window import *
+
 
 class Eventos():
 
@@ -25,3 +27,14 @@ class Eventos():
             var.dlgcalendar.show()
         except Exception as error:
             print('Error al abrir el calendario ', error)
+
+
+    def resizeTablaCli(self):
+        try:
+            header = var.ui.tabClientes.horizontalHeader()
+            for i in range(4):
+                header.setSectionResizeMode(i, QtWidgets.QHeaderView.Stretch)
+                if i == 2:
+                    header.setSectionResizeMode(i, QtWidgets.QHeaderView.ResizeToContents)
+        except Exception as error:
+            print('Error en el tamaño de la tabla ', error)

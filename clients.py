@@ -77,7 +77,7 @@ class Clientes():
             return prov;
         except Exception as error:
             print('Error en seleccion provincia', error)
-    def selMuni(prov):
+    def cargaMuni_(self):
         try:
             var.ui.cmbProv.clear()
             muniPonte = ['', 'Moaña', 'Vigo', 'Redondela', 'Cangas', 'Bueu']
@@ -90,6 +90,7 @@ class Clientes():
 
         except Exception as error:
             print('Error en cargar la lista', error)
+
 
     def cargarFecha(qDate):
         try:
@@ -113,3 +114,47 @@ class Clientes():
             print('Error en la aplicacion')
             return None
 
+    def guardaCli(self):
+        try:
+            # preparamos el registro
+            newcli = []
+            client = [var.ui.txtApel, var.ui.txtNome, var.ui.txtAltaCli]
+            for i in client:
+                newcli.append(i.text())
+            #Cargamos en la tabla
+            row = 0
+            column = 0
+            var.ui.tabClientes.insertRow(row)
+            for campo in newcli:
+                cell = QtWidgets.QTableWidgetItem(campo)
+                var.ui.tabClientes.setItem(row, column, cell)
+                column += 1
+        except:
+            print('Error en Guardar clientes')
+            return None
+    def limpiaFormcli(self):
+        try:
+            var.ui.txtApel.setText("")
+            var.ui.txtDni.setText("")
+            var.ui.txtAltaCli.setText("")
+            var.ui.txtNome.setText("")
+            var.ui.txtDir.setText("")
+            cajas = [var.ui.txtApel,var.ui.txtNome,  var.ui.txtDni,var.ui.txtAltaCli,var.ui.txtDir]
+            for i in cajas:
+               i.setText('')
+            var.ui.rbtGroupSex.setExclusive(False)
+            var.ui.rbtFem.setChecked(False)
+            var.ui.rbtHom.setChecked(False)
+            var.ui.rbtGroupSex.setExclusive(True)
+            var.ui.chkCargoCuenta.setChecked(False)
+            var.ui.chkTargeta.setChecked(False)
+            var.ui.chkTransfe.setChecked(False)
+            var.ui.chkEfectivo.setChecked(False)
+            var.ui.cmbProv.setCurrentIndex(0)
+            var.ui.cmbMuni.setCurrentIndex(0)
+
+
+
+        except:
+            print('Error en Limpiar Formato')
+            return None

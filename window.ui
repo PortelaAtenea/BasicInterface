@@ -436,7 +436,7 @@ background-color:qradialgradient(spread:reflect, cx:0.551, cy:0.448864, radius:0
       <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
      </property>
     </widget>
-    <widget class="QWidget" name="">
+    <widget class="QWidget" name="layoutWidget">
      <property name="geometry">
       <rect>
        <x>190</x>
@@ -454,7 +454,7 @@ background-color:qradialgradient(spread:reflect, cx:0.551, cy:0.448864, radius:0
        </widget>
       </item>
       <item>
-       <widget class="QPushButton" name="btnGuardar">
+       <widget class="QPushButton" name="btnGrabaCli">
         <property name="text">
          <string>Guardar</string>
         </property>
@@ -482,8 +482,31 @@ background-color:qradialgradient(spread:reflect, cx:0.551, cy:0.448864, radius:0
       <enum>Qt::Horizontal</enum>
      </property>
     </widget>
+    <widget class="QPushButton" name="btnLimpiar">
+     <property name="geometry">
+      <rect>
+       <x>30</x>
+       <y>20</y>
+       <width>31</width>
+       <height>31</height>
+      </rect>
+     </property>
+     <property name="text">
+      <string/>
+     </property>
+     <property name="icon">
+      <iconset>
+       <normaloff>img/recargar.png</normaloff>img/recargar.png</iconset>
+     </property>
+     <property name="iconSize">
+      <size>
+       <width>20</width>
+       <height>20</height>
+      </size>
+     </property>
+    </widget>
    </widget>
-   <widget class="QTableWidget" name="tableWidget">
+   <widget class="QTableWidget" name="tabClientes">
     <property name="geometry">
      <rect>
       <x>30</x>
@@ -491,6 +514,9 @@ background-color:qradialgradient(spread:reflect, cx:0.551, cy:0.448864, radius:0
       <width>761</width>
       <height>261</height>
      </rect>
+    </property>
+    <property name="alternatingRowColors">
+     <bool>true</bool>
     </property>
     <column>
      <property name="text">
@@ -514,12 +540,8 @@ background-color:qradialgradient(spread:reflect, cx:0.551, cy:0.448864, radius:0
     </column>
    </widget>
    <zorder>groupBox</zorder>
-   <zorder>btnAceptar</zorder>
    <zorder>lblTitulo</zorder>
-   <zorder>btnSalir</zorder>
-   <zorder>btnGuardar</zorder>
-   <zorder>btnModificar</zorder>
-   <zorder>tableWidget</zorder>
+   <zorder>tabClientes</zorder>
   </widget>
   <widget class="QMenuBar" name="menubar">
    <property name="geometry">
