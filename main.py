@@ -72,7 +72,7 @@ class Main(QtWidgets.QMainWindow):
         '''
         clients.Clientes.cargaProv_(self)       #Cargar provincias en el combox
         var.ui.cmbProv.activated[str].connect(clients.Clientes.selProv)     #Seleccion de la provincia
-        clients.Clientes.cargaMuni_(self)
+        #clients.Clientes.cargaMuni_(self)
         #var.ui.cmbMuni.activated[str].connect(clients.Clientes.selMuni)     #Seleccion del municipio
         '''
         Eventos QTabWidget

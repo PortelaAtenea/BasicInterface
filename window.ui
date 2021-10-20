@@ -520,6 +520,11 @@ background-color:qradialgradient(spread:reflect, cx:0.551, cy:0.448864, radius:0
     </property>
     <column>
      <property name="text">
+      <string>DNI</string>
+     </property>
+    </column>
+    <column>
+     <property name="text">
       <string>Apellidos</string>
      </property>
     </column>
@@ -583,11 +588,11 @@ background-color:qradialgradient(spread:reflect, cx:0.551, cy:0.448864, radius:0
  <resources/>
  <connections/>
  <buttongroups>
+  <buttongroup name="rbtGroupSex"/>
   <buttongroup name="chkGroupPago">
    <property name="exclusive">
     <bool>false</bool>
    </property>
   </buttongroup>
-  <buttongroup name="rbtGroupSex"/>
  </buttongroups>
 </ui>

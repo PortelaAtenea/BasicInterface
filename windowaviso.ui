@@ -74,9 +74,7 @@
    </property>
   </widget>
  </widget>
- <resources>
-  <include location="img/warning.qrc"/>
- </resources>
+ <resources/>
  <connections>
   <connection>
    <sender>btnrespuesta</sender>
