@@ -79,12 +79,9 @@ class Main(QtWidgets.QMainWindow):
         '''
 
         events.Eventos.resizeTablaCli(self)
-        # header = var.ui.tabClientes.horizontalHeader()
-        # for i in range(4):
-        #     header.setSectionResizeMode(i, QtWidgets.QHeaderView.Stretch)
-        #     if i == 2:
-        #         header.setSectionResizeMode(i, QtWidgets.QHeaderView.ResizeToContents)
 
+        var.ui.tabClientes.clicked.connect(clients.Clientes.cargaCli)
+        var.ui.tabClientes.setSelectionBehavior(QtWidgets.QTableWidget.SelectRows)
 
 if __name__ == '__main__':
     app = QtWidgets.QApplication([])
