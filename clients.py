@@ -5,6 +5,7 @@ from tkinter import Label
 
 from PyQt5.QtWidgets import QMessageBox
 
+import conexion
 from window import *
 import var
 
@@ -141,13 +142,25 @@ class Clientes():
     def guardaCli(self):
         try:
             # preparamos el registro
-            newcli = []  # para la base de datos
+            newcli = [] #para la base de datos
+            cliente = [var.ui.txtDni, var.ui.txtApel, var.ui.txtNome, var.ui.txtAltaCli, var.ui.txtDir ] # para la base de datos
             tabClie = []  # para la tableWidget
             client = [var.ui.txtDni, var.ui.txtApel, var.ui.txtNome, var.ui.txtAltaCli]
             # codigo para cargar en la table
+            for i in cliente:
+                newcli.append(i.text())
             for i in client:
                 tabClie.append(i.text())
+
             # cargar los radiobuttons
+            newcli.append(var.ui.cmbProv.currentText)
+            newcli.append(var.ui.cmbMuni.currentText)
+            if var.ui.rbtHom.isChecked():
+                newcli.append('Hombre')
+            elif var.ui.rbtFem.isChecked():
+                newcli.append('Mujer')
+            else:
+                newcli.append('No especificado')
             pagos = []
             if var.ui.chkCargoCuenta.isChecked():
                 pagos.append('Cargo Cuenta')
@@ -158,7 +171,9 @@ class Clientes():
             if var.ui.chkTargeta.isChecked():
                 pagos.append('Targeta')
             pagos = set(pagos)  # evita duplicados
+            newcli.append(' ; '.join(pagos))
             tabClie.append(' ; '.join(pagos))
+            print(newcli)
             # Cargamos en la tabla
 
             if validodni:  # la global
@@ -169,6 +184,7 @@ class Clientes():
                     cell = QtWidgets.QTableWidgetItem(str(campo))
                     var.ui.tabClientes.setItem(row, column, cell)
                     column += 1
+                #conexion.Conexion.altaCli(newcli)
             else:
                 msg = QtWidgets.QMessageBox()
                 msg.setWindowTitle('AVISO')

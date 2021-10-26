@@ -2,6 +2,7 @@ import sys, var, events
 from datetime import datetime
 
 import clients
+import conexion
 from windowaviso import *
 from window import *
 from windowcal import *
@@ -13,9 +14,7 @@ from windowcal import *
 class dialogCalendar(QtWidgets.QDialog):
     def __init__(self):
         '''
-
         Ventana del calendario
-
         '''
         super(dialogCalendar, self).__init__()
         var.dlgcalendar = Ui_windowcal()
@@ -82,6 +81,8 @@ class Main(QtWidgets.QMainWindow):
 
         var.ui.tabClientes.clicked.connect(clients.Clientes.cargaCli)
         var.ui.tabClientes.setSelectionBehavior(QtWidgets.QTableWidget.SelectRows)
+
+        conexion.Conexion.db_connect(var.filedb)
 
 if __name__ == '__main__':
     app = QtWidgets.QApplication([])

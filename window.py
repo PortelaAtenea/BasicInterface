@@ -164,7 +164,7 @@ class Ui_MainWindow(object):
         self.chkGroupPago.addButton(self.chkTransfe)
         self.horizontalLayout_5.addWidget(self.chkTransfe)
         self.layoutWidget3 = QtWidgets.QWidget(self.groupBox)
-        self.layoutWidget3.setGeometry(QtCore.QRect(30, 220, 237, 73))
+        self.layoutWidget3.setGeometry(QtCore.QRect(30, 220, 237, 31))
         self.layoutWidget3.setObjectName("layoutWidget3")
         self.horizontalLayout_4 = QtWidgets.QHBoxLayout(self.layoutWidget3)
         self.horizontalLayout_4.setContentsMargins(0, 0, 0, 0)
