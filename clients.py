@@ -56,28 +56,28 @@ class Clientes():
             print('Error en la aplicacion')
             return None
 
-    def selSex(self):
-        try:
-            if var.ui.rbtFem.isChecked():
-                print('Marcado Femenino :)')
-            if var.ui.rbtHom.isChecked():
-                print('Marcado Masculino :(')
-        except Exception as error:
-            print('Error en Modulo Sex')
-
-    def selPago(self):
-        try:
-            if var.ui.chkEfectivo.isChecked():
-                print('Ha Selecionado efectivo')
-            if var.ui.chkTargeta.isChecked():
-                print('Ha Selecionado Targeta')
-            if var.ui.chkTransfe.isChecked():
-                print('Ha Selecionado Transferencia')
-            if var.ui.chkCargoCuenta.isChecked():
-                print('Ha Selecionado Cargo a cuenta')
-
-        except Exception as error:
-            print('Error en modulo Seleccionar modo de pago')
+    # def selSex(self):
+    #     try:
+    #         if var.ui.rbtFem.isChecked():
+    #             print('Marcado Femenino :)')
+    #         if var.ui.rbtHom.isChecked():
+    #             print('Marcado Masculino :(')
+    #     except Exception as error:
+    #         print('Error en Modulo Sex')
+    #
+    # def selPago(self):
+    #     try:
+    #         if var.ui.chkEfectivo.isChecked():
+    #             print('Ha Selecionado efectivo')
+    #         if var.ui.chkTargeta.isChecked():
+    #             print('Ha Selecionado Targeta')
+    #         if var.ui.chkTransfe.isChecked():
+    #             print('Ha Selecionado Transferencia')
+    #         if var.ui.chkCargoCuenta.isChecked():
+    #             print('Ha Selecionado Cargo a cuenta')
+    #
+    #     except Exception as error:
+    #         print('Error en modulo Seleccionar modo de pago')
 
     def cargaProv_(self):
         try:
@@ -85,36 +85,43 @@ class Clientes():
             prov = ['', 'A Coruña', 'Lugo', 'Ourense', 'Pontevedra', 'Vigo']
             for i in prov:
                 var.ui.cmbProv.addItem(i)
+
         except Exception as error:
             print('Error en cargar la lista', error)
 
-    def selProv(prov):
-        try:
-            print('Has seleccionado la provincia: ', prov)
-            return prov;
-        except Exception as error:
-            print('Error en seleccion provincia', error)
+    # def selProv(prov):
+    #     try:
+    #         print('Has seleccionado la provincia: ', prov)
+    #         return prov;
+    #     except Exception as error:
+    #         print('Error en seleccion provincia', error)
 
     def cargaMuni_(self):
         try:
-            var.ui.cmbProv.clear()
-            muniPonte = ['', 'Moaña', 'Vigo', 'Redondela', 'Cangas', 'Bueu']
-            muniCoru = ['', 'Moaña', 'Vigo', 'Redondela', 'Cangas', 'Bueu']
-            muniOu = ['', 'Moaña', 'Vigo', 'Redondela', 'Cangas', 'Bueu']
-            muniLugo = ['', 'Moaña', 'Vigo', 'Redondela', 'Cangas', 'Bueu']
-
-            for i in muniPonte:
-                var.ui.cmbMuni.addItem(i)
+            muni=[]
+            var.ui.cmbMuni.clear()
+            if 'Lugo' == var.ui.cmbProv.currentText():
+                muni = ['', 'Concellos', 'de', 'Lugo', 'Cangas', 'Bueu']
+            if 'Pontevedra' == var.ui.cmbProv.currentText():
+                muni = ['', 'Moaña', 'Vigo', 'Redondela', 'Cangas', 'Bueu']
+            if var.ui.cmbProv.currentText() == 'A Coruña' :
+                muni = ['', 'Concellos', 'de', 'A', 'Coruña', 'Bueu']
+            if var.ui.cmbProv.currentText() == 'Ourense':
+                muni = ['', 'Concellos', 'de', 'Ou', 'Cangas', 'Bueu']
+            if 'Vigo' in var.ui.cmbProv.currentText():
+                muni = ['', 'Vigo1', 'Vigo', 'Vigo2', 'Cangas', 'Bueu']
+            for i in muni:
+                 var.ui.cmbMuni.addItem(i)
 
         except Exception as error:
             print('Error en cargar la lista', error)
 
-    def selMuni(muni):
-        try:
-            print('Has seleccionado el municipio: ', muni)
-            return muni;
-        except Exception as error:
-            print('Error en seleccion municipio', error)
+    # def selMuni(muni):
+    #     try:
+    #         print('Has seleccionado el municipio: ', muni)
+    #         return muni;
+    #     except Exception as error:
+    #         print('Error en seleccion municipio', error)
 
     def cargarFecha(qDate):
         try:
@@ -143,7 +150,7 @@ class Clientes():
         try:
             # preparamos el registro
             newcli = [] #para la base de datos
-            cliente = [var.ui.txtDni, var.ui.txtApel, var.ui.txtNome, var.ui.txtAltaCli, var.ui.txtDir ] # para la base de datos
+            cliente = [var.ui.txtDni, var.ui.txtAltaCli, var.ui.txtApel, var.ui.txtNome,  var.ui.txtDir ] # para la base de datos
             tabClie = []  # para la tableWidget
             client = [var.ui.txtDni, var.ui.txtApel, var.ui.txtNome, var.ui.txtAltaCli]
             # codigo para cargar en la table
@@ -153,8 +160,8 @@ class Clientes():
                 tabClie.append(i.text())
 
             # cargar los radiobuttons
-            newcli.append(var.ui.cmbProv.currentText)
-            newcli.append(var.ui.cmbMuni.currentText)
+            newcli.append(var.ui.cmbProv.currentText())
+            newcli.append(var.ui.cmbMuni.currentText())
             if var.ui.rbtHom.isChecked():
                 newcli.append('Hombre')
             elif var.ui.rbtFem.isChecked():
@@ -173,7 +180,7 @@ class Clientes():
             pagos = set(pagos)  # evita duplicados
             newcli.append(' ; '.join(pagos))
             tabClie.append(' ; '.join(pagos))
-            print(newcli)
+
             # Cargamos en la tabla
 
             if validodni:  # la global
@@ -184,7 +191,7 @@ class Clientes():
                     cell = QtWidgets.QTableWidgetItem(str(campo))
                     var.ui.tabClientes.setItem(row, column, cell)
                     column += 1
-                #conexion.Conexion.altaCli(newcli)
+                conexion.Conexion.altaCli(newcli)
             else:
                 msg = QtWidgets.QMessageBox()
                 msg.setWindowTitle('AVISO')
@@ -221,15 +228,23 @@ class Clientes():
             return None
 
     def cargaCli(self):
+        #carga los datos dfel cliente al selecionar uno en la tabla
         try:
-            fila = var.ui.tabClientes.selectedItem()
+            fila = var.ui.tabClientes.selectedItems() #seleciona la fila
             datos = [var.ui.txtDni, var.ui.txtApel, var.ui.txtNome, var.ui.txtAltaCli]
             if fila:
                 row = [dato.text() for dato in fila]
+            print(row)
             for i, dato in enumerate(datos):
                 dato.setText(row[i])
-                if i == 5:
-                    pass
-        except:
-            print('Error en Cargar datos de un cliente')
+            if 'Efectivo' in row[4]:
+                var.ui.chkEfectivo.setChecked(True)
+            if 'Targeta' in row[4]:
+                var.ui.chkTargeta.setChecked(True)
+            if 'Transferencia' in row[4]:
+                var.ui.chkTransfe.setChecked(True)
+            if 'Cargo' in row[4]:
+                var.ui.chkCargoCuenta.setChecked(True)
+        except Exception as error:
+            print('Error en Cargar datos de un cliente',error)
             return None

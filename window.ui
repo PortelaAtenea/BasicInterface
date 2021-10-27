@@ -470,24 +470,31 @@ background-color: rgb(239, 219, 255);</string>
       <widget class="QWidget" name="layoutWidget">
        <property name="geometry">
         <rect>
-         <x>190</x>
-         <y>310</y>
-         <width>431</width>
+         <x>120</x>
+         <y>290</y>
+         <width>581</width>
          <height>73</height>
         </rect>
        </property>
        <layout class="QHBoxLayout" name="horizontalLayout_7">
         <item>
-         <widget class="QPushButton" name="btnModificar">
+         <widget class="QPushButton" name="btnGrabaCli">
+          <property name="text">
+           <string>Guardar</string>
+          </property>
+         </widget>
+        </item>
+        <item>
+         <widget class="QPushButton" name="btnModifCli">
           <property name="text">
            <string>Modificar</string>
           </property>
          </widget>
         </item>
         <item>
-         <widget class="QPushButton" name="btnGrabaCli">
+         <widget class="QPushButton" name="btnBajaCli">
           <property name="text">
-           <string>Guardar</string>
+           <string>Eliminar</string>
           </property>
          </widget>
         </item>
