@@ -3,6 +3,7 @@ Funciones  gestion de clientes
 '''
 from tkinter import Label
 
+from PyQt5 import QtSql
 from PyQt5.QtWidgets import QMessageBox
 
 import conexion
@@ -228,6 +229,58 @@ class Clientes():
             return None
 
     def cargaCli(self):
+        print('hola')
+    def oneClie(dni):
+        #supongo que tengo que llamarlo desde cargaCli
+        #carga los datos dfel cliente al selecionar uno en la tabla
+        try:
+            fila = var.ui.tabClientes.selectedItems()  # seleciona la fila
+            datos = [var.ui.txtDni, var.ui.txtApel, var.ui.txtNome, var.ui.txtAltaCli]
+            if fila:
+                row = [dato.text() for dato in fila]
+            print(row[0])
+            dniBuscado = row[0]
+
+            query = QtSql.QSqlQuery()
+            consulta = "select direcion, provincia, sexo from clientes where dni = :dni'%s'" % dniBuscado
+            query.bindValue(':dni', dni)
+            #hay que tener cuidado con los espacios
+            #no tengo ni idea de lo que estpy hacinedo
+            query.prepare(consulta)
+           
+            query.exec_()
+            print('hola')
+            direcion = query.value(0)
+            provincia = query.value(1)
+            sexo = query.value(2)
+            print(datos)
+
+            # Te pone el dni, apellidos nombre alta y opago
+            for i, dato in enumerate(datos):
+                dato.setText(row[i])
+            var.ui.txtDir.setText(direcion)
+            if 'Pontevedra' in provincia:
+                var.ui.cmbProv.setChecked('Pontevedra')
+            if 'mujer' in sexo:
+                var.ui.rbtFem.setChecked(True)
+            if 'hombre' in sexo:
+                var.ui.rbtHom.setChecked(True)
+            if 'Efectivo' in row[5]:
+                var.ui.chkEfectivo.setChecked(True)
+            if 'Targeta' in row[5]:
+                var.ui.chkTargeta.setChecked(True)
+            if 'Transferencia' in row[5]:
+                var.ui.chkTransfe.setChecked(True)
+            if 'Cargo' in row[5]:
+                var.ui.chkCargoCuenta.setChecked(True)
+
+            print('La consulta sql no se llego a ejecuta --> query.exec_() = false')
+
+
+        except Exception as error:
+            print('Error en Cargar datos de un cliente',error)
+            return None
+        ''' def cargaCli(self):
         #carga los datos dfel cliente al selecionar uno en la tabla
         try:
             fila = var.ui.tabClientes.selectedItems() #seleciona la fila
@@ -247,4 +300,4 @@ class Clientes():
                 var.ui.chkCargoCuenta.setChecked(True)
         except Exception as error:
             print('Error en Cargar datos de un cliente',error)
-            return None
+            return None'''

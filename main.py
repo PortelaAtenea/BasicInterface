@@ -49,7 +49,7 @@ class Main(QtWidgets.QMainWindow):
         var.ui.btnCalendar.clicked.connect(events.Eventos.abrirCal)
         var.ui.btnGrabaCli.clicked.connect(clients.Clientes.guardaCli) #Acciones del boton de Aceptar
         var.ui.btnLimpiar.clicked.connect(clients.Clientes.limpiaFormcli)
-        # var.ui.btnSalir.clicked.connect(events.Eventos.Salir) #SAlir del programa
+        var.ui.btnSalir.clicked.connect(events.Eventos.Salir) #SAlir del programa
         # var.ui.rbtGroupSex.buttonClicked.connect(clients.Clientes.selSex)   #Seleccion del sexo
         # var.ui.chkGroupPago.buttonClicked.connect(clients.Clientes.selPago)  #Seleccion del metodo de pago
 
@@ -84,9 +84,15 @@ class Main(QtWidgets.QMainWindow):
 
         conexion.Conexion.db_connect(var.filedb)
 
+        conexion.Conexion.cargaTabCli(self)
+
 if __name__ == '__main__':
     app = QtWidgets.QApplication([])
     window = Main()
+    desktop = QtWidgets.QApplication.desktop()
+    x = (desktop.width() - window.width())//2
+    y = (desktop.height() - window.height())//2
+    window.move(x, y)
     var.dlgaviso = DialogAviso()
     var.dlgcalendar = dialogCalendar()
     window.show()

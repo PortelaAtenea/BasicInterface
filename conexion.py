@@ -1,5 +1,8 @@
 from PyQt5 import QtSql
 from PyQt5 import QtCore, QtGui, QtWidgets
+from PyQt5.QtWidgets import QTableWidgetItem
+
+import var
 
 
 class Conexion():
@@ -57,3 +60,27 @@ class Conexion():
 
         except Exception as error:
             print('Problemas con el nuevo cliente ', error)
+
+    def cargaTabCli(self):
+        try:
+            index = 0
+            query = QtSql.QSqlQuery()
+            query.prepare('select dni, apellidos, nombre, alta, pago from clientes')
+            if query.exec_():
+                while query.next():
+                    dni = query.value(0)
+                    apellidos = query.value(1)
+                    nombre = query.value(2)
+                    alta = query.value(3)
+                    pago = query.value(4)
+                    var.ui.tabClientes.setRowCount(index+1) #creamos la fila
+                    #cargamos datos
+                    var.ui.tabClientes.setItem(index, 0, QTableWidgetItem(dni))
+                    var.ui.tabClientes.setItem(index, 1, QTableWidgetItem(apellidos))
+                    var.ui.tabClientes.setItem(index, 2, QTableWidgetItem(nombre))
+                    var.ui.tabClientes.setItem(index, 3, QTableWidgetItem(alta))
+                    var.ui.tabClientes.setItem(index, 4, QTableWidgetItem(pago))
+                    index+=1
+
+        except Exception as error:
+            print('Problemas al mostrar table clientes :(  ', error)
