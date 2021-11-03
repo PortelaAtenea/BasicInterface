@@ -65,7 +65,7 @@ class Conexion():
         try:
             index = 0
             query = QtSql.QSqlQuery()
-            query.prepare('select dni, apellidos, nombre, alta, pago from clientes')
+            query.prepare('select dni, apellidos, nombre, alta, pago from clientes order by apellidos, nombre')
             if query.exec_():
                 while query.next():
                     dni = query.value(0)
@@ -84,3 +84,46 @@ class Conexion():
 
         except Exception as error:
             print('Problemas al mostrar table clientes :(  ', error)
+
+    def oneClie(dni):
+
+        try:
+            record = []
+
+            query = QtSql.QSqlQuery()
+
+            query.prepare("select direccion, provincia, sexo from clientes where dni = :dni")
+            query.bindValue(':dni', dni)
+
+            if query.exec_():
+                while query.next():
+                    for i in range(4):
+                        record.append(query.value(i))
+            return record
+
+        except Exception as error:
+            print('Error en Cargar datos de un cliente de la bd  ', error)
+            return None
+
+
+    def bajaCli( dni):
+        try:
+            query = QtSql.QSqlQuery()
+            query.prepare('delete from clientes where dni = :dni')
+            query.bindValue(':dni', str(dni))
+            if query.exec_():
+                msg = QtWidgets.QMessageBox()
+                msg.setWindowTitle('AVISO')
+                msg.setIcon(QtWidgets.QMessageBox.Warning)
+                msg.setText('CLIENTE DADO DE BAJA DE LA BBDD CON EXITO')
+                msg.exec()
+            else:
+                msg = QtWidgets.QMessageBox()
+                msg.setWindowTitle('ERROR!!!')
+                msg.setIcon(QtWidgets.QMessageBox.Warning)
+                msg.setText(query.lastError().text())
+                msg.exec()
+
+        except Exception as error:
+            print('Error en baja de un cliente de la bd  ', error)
+            return None

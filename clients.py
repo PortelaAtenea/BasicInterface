@@ -12,6 +12,7 @@ import var
 
 
 class Clientes():
+
     def validarDNI():
         try:
             global validodni
@@ -99,20 +100,20 @@ class Clientes():
 
     def cargaMuni_(self):
         try:
-            muni=[]
+            muni = []
             var.ui.cmbMuni.clear()
             if 'Lugo' == var.ui.cmbProv.currentText():
                 muni = ['', 'Concellos', 'de', 'Lugo', 'Cangas', 'Bueu']
             if 'Pontevedra' == var.ui.cmbProv.currentText():
                 muni = ['', 'Moaña', 'Vigo', 'Redondela', 'Cangas', 'Bueu']
-            if var.ui.cmbProv.currentText() == 'A Coruña' :
+            if var.ui.cmbProv.currentText() == 'A Coruña':
                 muni = ['', 'Concellos', 'de', 'A', 'Coruña', 'Bueu']
             if var.ui.cmbProv.currentText() == 'Ourense':
                 muni = ['', 'Concellos', 'de', 'Ou', 'Cangas', 'Bueu']
             if 'Vigo' in var.ui.cmbProv.currentText():
                 muni = ['', 'Vigo1', 'Vigo', 'Vigo2', 'Cangas', 'Bueu']
             for i in muni:
-                 var.ui.cmbMuni.addItem(i)
+                var.ui.cmbMuni.addItem(i)
 
         except Exception as error:
             print('Error en cargar la lista', error)
@@ -150,8 +151,9 @@ class Clientes():
     def guardaCli(self):
         try:
             # preparamos el registro
-            newcli = [] #para la base de datos
-            cliente = [var.ui.txtDni, var.ui.txtAltaCli, var.ui.txtApel, var.ui.txtNome,  var.ui.txtDir ] # para la base de datos
+            newcli = []  # para la base de datos
+            cliente = [var.ui.txtDni, var.ui.txtAltaCli, var.ui.txtApel, var.ui.txtNome,
+                       var.ui.txtDir]  # para la base de datos
             tabClie = []  # para la tableWidget
             client = [var.ui.txtDni, var.ui.txtApel, var.ui.txtNome, var.ui.txtAltaCli]
             # codigo para cargar en la table
@@ -173,7 +175,7 @@ class Clientes():
             if var.ui.chkCargoCuenta.isChecked():
                 pagos.append('Cargo Cuenta')
             if var.ui.chkTransfe.isChecked():
-                pagos.append('Transeferencia')
+                pagos.append('Transferencia')
             if var.ui.chkEfectivo.isChecked():
                 pagos.append('Efectivo')
             if var.ui.chkTargeta.isChecked():
@@ -185,14 +187,16 @@ class Clientes():
             # Cargamos en la tabla
 
             if validodni:  # la global
-                row = 0
-                column = 0
-                var.ui.tabClientes.insertRow(row)
-                for campo in tabClie:
-                    cell = QtWidgets.QTableWidgetItem(str(campo))
-                    var.ui.tabClientes.setItem(row, column, cell)
-                    column += 1
-                conexion.Conexion.altaCli(newcli)
+                # row = 0
+                # column = 0
+                # var.ui.tabClientes.insertRow(row)
+                # for campo in tabClie:
+                #     cell = QtWidgets.QTableWidgetItem(str(campo))
+                #     var.ui.tabClientes.setItem(row, column, cell)
+                #     column += 1
+                conexion.Conexion.altaCli(newcli)  # graba en la tabla de la base de datos
+                conexion.Conexion.cargaTabCli(self)  # reacrga la tabla
+
             else:
                 msg = QtWidgets.QMessageBox()
                 msg.setWindowTitle('AVISO')
@@ -228,66 +232,24 @@ class Clientes():
             print('Error en Limpiar Formato')
             return None
 
-    def cargaCli(self):
-        print('hola')
-    def oneClie(dni):
-        #supongo que tengo que llamarlo desde cargaCli
-        #carga los datos dfel cliente al selecionar uno en la tabla
+    def bajaCli(self):
         try:
+            dni = var.ui.txtDni.text()
+            conexion.Conexion.bajaCli(dni)
+            conexion.Conexion.cargaTabCli(self)
+
+        except Exception as error:
+            print('Error en dar de baja un clientes', error)
+
+    def cargaCli(self):
+
+        # carga los datos dfel cliente al selecionar uno en la tabla
+        try:
+            Clientes.limpiaFormcli(self)
             fila = var.ui.tabClientes.selectedItems()  # seleciona la fila
             datos = [var.ui.txtDni, var.ui.txtApel, var.ui.txtNome, var.ui.txtAltaCli]
             if fila:
                 row = [dato.text() for dato in fila]
-            print(row[0])
-            dniBuscado = row[0]
-
-            query = QtSql.QSqlQuery()
-            consulta = "select direcion, provincia, sexo from clientes where dni = :dni'%s'" % dniBuscado
-            query.bindValue(':dni', dni)
-            #hay que tener cuidado con los espacios
-            #no tengo ni idea de lo que estpy hacinedo
-            query.prepare(consulta)
-           
-            query.exec_()
-            print('hola')
-            direcion = query.value(0)
-            provincia = query.value(1)
-            sexo = query.value(2)
-            print(datos)
-
-            # Te pone el dni, apellidos nombre alta y opago
-            for i, dato in enumerate(datos):
-                dato.setText(row[i])
-            var.ui.txtDir.setText(direcion)
-            if 'Pontevedra' in provincia:
-                var.ui.cmbProv.setChecked('Pontevedra')
-            if 'mujer' in sexo:
-                var.ui.rbtFem.setChecked(True)
-            if 'hombre' in sexo:
-                var.ui.rbtHom.setChecked(True)
-            if 'Efectivo' in row[5]:
-                var.ui.chkEfectivo.setChecked(True)
-            if 'Targeta' in row[5]:
-                var.ui.chkTargeta.setChecked(True)
-            if 'Transferencia' in row[5]:
-                var.ui.chkTransfe.setChecked(True)
-            if 'Cargo' in row[5]:
-                var.ui.chkCargoCuenta.setChecked(True)
-
-            print('La consulta sql no se llego a ejecuta --> query.exec_() = false')
-
-
-        except Exception as error:
-            print('Error en Cargar datos de un cliente',error)
-            return None
-        ''' def cargaCli(self):
-        #carga los datos dfel cliente al selecionar uno en la tabla
-        try:
-            fila = var.ui.tabClientes.selectedItems() #seleciona la fila
-            datos = [var.ui.txtDni, var.ui.txtApel, var.ui.txtNome, var.ui.txtAltaCli]
-            if fila:
-                row = [dato.text() for dato in fila]
-            print(row)
             for i, dato in enumerate(datos):
                 dato.setText(row[i])
             if 'Efectivo' in row[4]:
@@ -298,6 +260,14 @@ class Clientes():
                 var.ui.chkTransfe.setChecked(True)
             if 'Cargo' in row[4]:
                 var.ui.chkCargoCuenta.setChecked(True)
+            registro = conexion.Conexion.oneClie(row[0])  # row[0] es el dni
+            var.ui.txtDir.setText(str(registro[0]))
+            var.ui.cmbProv.setCurrentText(str(registro[1]))
+            var.ui.cmbMuni.setCurrentText(str(registro[2]))
+            if str(registro[3]) == 'Mujer':
+                var.ui.rbtFem.setChecked(True)
+            elif str(registro[3]) == 'Hombre':
+                var.ui.rbtHom.setChecked(True)
         except Exception as error:
-            print('Error en Cargar datos de un cliente',error)
-            return None'''
+            print('Error en Cargar datos de un cliente', error)
+            return None

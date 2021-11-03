@@ -52,6 +52,7 @@ class Main(QtWidgets.QMainWindow):
         var.ui.btnSalir.clicked.connect(events.Eventos.Salir) #SAlir del programa
         # var.ui.rbtGroupSex.buttonClicked.connect(clients.Clientes.selSex)   #Seleccion del sexo
         # var.ui.chkGroupPago.buttonClicked.connect(clients.Clientes.selPago)  #Seleccion del metodo de pago
+        var.ui.btnBajaCli.clicked.connect(clients.Clientes.bajaCli)
 
 
 
@@ -78,12 +79,13 @@ class Main(QtWidgets.QMainWindow):
         '''
 
         events.Eventos.resizeTablaCli(self)
-
         var.ui.tabClientes.clicked.connect(clients.Clientes.cargaCli)
         var.ui.tabClientes.setSelectionBehavior(QtWidgets.QTableWidget.SelectRows)
-
+        '''
+        Eventos de la bbdd
+        '''
         conexion.Conexion.db_connect(var.filedb)
-
+        conexion.Conexion.cargaTabCli(self)
         conexion.Conexion.cargaTabCli(self)
 
 if __name__ == '__main__':
