@@ -81,42 +81,24 @@ class Clientes():
     #     except Exception as error:
     #         print('Error en modulo Seleccionar modo de pago')
 
-    def cargaProv_(self):
+    def cargaProv(self):
         try:
             var.ui.cmbProv.clear()
-            prov = ['', 'A Coruña', 'Lugo', 'Ourense', 'Pontevedra', 'Vigo']
+            prov = conexion.Conexion.listaProvincias(self)
             for i in prov:
                 var.ui.cmbProv.addItem(i)
-
         except Exception as error:
-            print('Error en cargar la lista', error)
+            print('Error en módulos al cargar provinvia, ', error)
 
-    # def selProv(prov):
-    #     try:
-    #         print('Has seleccionado la provincia: ', prov)
-    #         return prov;
-    #     except Exception as error:
-    #         print('Error en seleccion provincia', error)
-
-    def cargaMuni_(self):
+    def cargaMun(self):
         try:
-            muni = []
             var.ui.cmbMuni.clear()
-            if 'Lugo' == var.ui.cmbProv.currentText():
-                muni = ['', 'Concellos', 'de', 'Lugo', 'Cangas', 'Bueu']
-            if 'Pontevedra' == var.ui.cmbProv.currentText():
-                muni = ['', 'Moaña', 'Vigo', 'Redondela', 'Cangas', 'Bueu']
-            if var.ui.cmbProv.currentText() == 'A Coruña':
-                muni = ['', 'Concellos', 'de', 'A', 'Coruña', 'Bueu']
-            if var.ui.cmbProv.currentText() == 'Ourense':
-                muni = ['', 'Concellos', 'de', 'Ou', 'Cangas', 'Bueu']
-            if 'Vigo' in var.ui.cmbProv.currentText():
-                muni = ['', 'Vigo1', 'Vigo', 'Vigo2', 'Cangas', 'Bueu']
-            for i in muni:
+            prov = var.ui.cmbProv.currentText()
+            mun = conexion.Conexion.listaMunicipios(prov)
+            for i in mun:
                 var.ui.cmbMuni.addItem(i)
-
         except Exception as error:
-            print('Error en cargar la lista', error)
+            print('Error en módulo de cargar municipio, ', error)
 
     # def selMuni(muni):
     #     try:

@@ -92,7 +92,7 @@ class Conexion():
 
             query = QtSql.QSqlQuery()
 
-            query.prepare("select direccion, provincia, sexo from clientes where dni = :dni")
+            query.prepare("select direccion, provincia,municipio, sexo from clientes where dni = :dni")
             query.bindValue(':dni', dni)
 
             if query.exec_():
@@ -127,3 +127,28 @@ class Conexion():
         except Exception as error:
             print('Error en baja de un cliente de la bd  ', error)
             return None
+
+    def listaMunicipios(prov):
+        municipios = []
+        try:
+            query = QtSql.QSqlQuery()
+            query.prepare('SELECT municipio FROM municipios WHERE provincia_id = (SELECT id FROM provincias WHERE provincia =:prov)')
+            query.bindValue(':prov', str(prov))
+            if query.exec_():
+                while query.next():
+                    municipios.append(query.value(0))
+        except Exception as error:
+            print('Error en lista municipios (conexión) ', error)
+        return municipios
+
+    def listaProvincias(self):
+        provincias = []
+        try:
+            query = QtSql.QSqlQuery()
+            query.prepare('SELECT provincia FROM provincias')
+            if query.exec_():
+                while query.next():
+                    provincias.append(query.value(0))
+        except Exception as error:
+            print('Error en lista municipios (conexión) ', error)
+        return provincias

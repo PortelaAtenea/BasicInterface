@@ -70,10 +70,8 @@ class Main(QtWidgets.QMainWindow):
         '''
         Eventos  de comboBox
         '''
-        clients.Clientes.cargaProv_(self)       #Cargar provincias en el combox
-        # var.ui.cmbProv.activated[str].connect(clients.Clientes.selProv)     #Seleccion de la provincia
-        clients.Clientes.cargaMuni_(self)
-        # var.ui.cmbMuni.activated[str].connect(clients.Clientes.selMuni)     #Seleccion del municipio
+
+        var.ui.cmbProv.currentIndexChanged.connect(clients.Clientes.cargaMun)
         '''
         Eventos QTabWidget
         '''
@@ -86,7 +84,7 @@ class Main(QtWidgets.QMainWindow):
         '''
         conexion.Conexion.db_connect(var.filedb)
         conexion.Conexion.cargaTabCli(self)
-        conexion.Conexion.cargaTabCli(self)
+        clients.Clientes.cargaProv(self)
 
 if __name__ == '__main__':
     app = QtWidgets.QApplication([])

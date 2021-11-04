@@ -1,0 +1,60 @@
+---En clase clients--
+    def cargaProv(self):
+        try:
+            var.ui.cmbProv.clear()
+            prov=conexion.Conexion.listaProvincias(self)
+            for i in prov:
+                var.ui.cmbProv.addItem(i)
+        except Exception as error:
+            print('Error en módulos al cargar provinvia, ',error)
+
+    def cargaMun(self):
+        try:
+            var.ui.cmbMun.clear()
+            prov=var.ui.cmbProv.currentText()
+            mun=conexion.Conexion.listaMunicipios(prov)
+            for i in mun:
+                var.ui.cmbMun.addItem(i)
+        except Exception as error:
+            print('Error en módulo de cargar municipio, ',error)
+
+
+---En clase conexion--
+
+    def listaMunicipios(prov):
+        municipios = []
+        try:
+            query = QtSql.QSqlQuery()
+            query.prepare('SELECT municipio FROM municipios WHERE provincia_id = (SELECT id FROM provincias WHERE provincia =:prov)')
+            query.bindValue(':prov', str(prov))
+            if query.exec_():
+                while query.next():
+                    municipios.append(query.value(0))
+        except Exception as error:
+            print('Error en lista municipios (conexión) ', error)
+        return municipios
+
+    def listaProvincias(self):
+        provincias = []
+        try:
+            query = QtSql.QSqlQuery()
+            query.prepare('SELECT provincia FROM provincias')
+            if query.exec_():
+                while query.next():
+                    provincias.append(query.value(0))
+        except Exception as error:
+            print('Error en lista municipios (conexión) ', error)
+        return provincias
+
+--En clase main--
+ 	'''
+        Eventos de comboBox
+        '''
+        var.ui.cmbProv.currentIndexChanged.connect(clients.Clientes.cargaMun)
+
+	'''
+        Base de datos
+        '''
+        conexion.Conexion.db_connect(var.filedb)
+        conexion.Conexion.cargaTabCli(self)
+        clients.Clientes.cargaProv(self)
