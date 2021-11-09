@@ -150,5 +150,35 @@ class Conexion():
                 while query.next():
                     provincias.append(query.value(0))
         except Exception as error:
-            print('Error en lista municipios (conexión) ', error)
+            print('Error en lista provincias (conexión) ', error)
         return provincias
+
+
+    def modifCli( modcliente):
+        try:
+            query = QtSql.QSqlQuery()
+            query.prepare('UPDATE clientes SET alta =:alta, apellidos =:apellidos, nombre =:nombre, direccion =:direcion, provincia =:provincia, municipio =:municipio, '
+                          ' sexo =:sexo, pago =:pago WHERE dni =:dni')
+            query.bindValue(':dni', str(modcliente[0]))
+            query.bindValue(':alta', str(modcliente[1]))
+            query.bindValue(':apellidos', str(modcliente[2]))
+            query.bindValue(':nombre', str(modcliente[3]))
+            query.bindValue(':direcion', str(modcliente[4]))
+            query.bindValue(':provincia', str(modcliente[5]))
+            query.bindValue(':municipio', str(modcliente[6]))
+            query.bindValue(':sexo', str(modcliente[7]))
+            query.bindValue(':pago', str(modcliente[8]))
+            if query.exec_():
+                msg = QtWidgets.QMessageBox()
+                msg.setWindowTitle('AVISO')
+                msg.setIcon(QtWidgets.QMessageBox.Warning)
+                msg.setText('CLIENTE MODIFICADO EN LA BBDD CON EXITO')
+                msg.exec()
+            else:
+                msg = QtWidgets.QMessageBox()
+                msg.setWindowTitle('ERROR!!!')
+                msg.setIcon(QtWidgets.QMessageBox.Warning)
+                msg.setText(query.lastError().text())
+                msg.exec()
+        except Exception as error:
+            print('Error en modificar clientes (conexión) ', error)

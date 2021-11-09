@@ -1,4 +1,5 @@
-import sys, var, events
+import locale
+import sys, var, events, locale
 from datetime import datetime
 
 import clients
@@ -6,7 +7,7 @@ import conexion
 from windowaviso import *
 from window import *
 from windowcal import *
-
+locale.setlocale(locale.LC_ALL, 'es-ES')
 
 # Press Shift+F10 to execute it or replace it with your code.
 # Press Double Shift to search everywhere for classes, files, tool windows, actions, and settings.
@@ -53,6 +54,7 @@ class Main(QtWidgets.QMainWindow):
         # var.ui.rbtGroupSex.buttonClicked.connect(clients.Clientes.selSex)   #Seleccion del sexo
         # var.ui.chkGroupPago.buttonClicked.connect(clients.Clientes.selPago)  #Seleccion del metodo de pago
         var.ui.btnBajaCli.clicked.connect(clients.Clientes.bajaCli)
+        var.ui.btnModifCli.clicked.connect(clients.Clientes.modifCli)
 
 
 
@@ -60,6 +62,7 @@ class Main(QtWidgets.QMainWindow):
         Eventos de la barra de menus
         '''
         var.ui.actionSalir.triggered.connect(events.Eventos.Salir)  #Slair del programa por la barrita de arriba
+
         '''
         Eventos de la caje de texto
         '''
@@ -67,11 +70,20 @@ class Main(QtWidgets.QMainWindow):
         var.ui.txtApel.editingFinished.connect(clients.Clientes.mayus)
         var.ui.txtNome.editingFinished.connect(clients.Clientes.mayus)
         var.ui.txtDir.editingFinished.connect(clients.Clientes.mayus)
+
         '''
         Eventos  de comboBox
         '''
-
         var.ui.cmbProv.currentIndexChanged.connect(clients.Clientes.cargaMun)
+
+
+        '''
+        Barra de estado
+        '''
+        var.ui.statusbar.addPermanentWidget(var.ui.lblFecha, 1)
+        x = datetime.now()
+        var.ui.lblFecha.setText(x.strftime(('%A, %d de %B de %Y')).title())
+
         '''
         Eventos QTabWidget
         '''

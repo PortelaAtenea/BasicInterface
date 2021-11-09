@@ -243,9 +243,9 @@ background-color: rgb(239, 219, 255);</string>
       <widget class="QWidget" name="layoutWidget">
        <property name="geometry">
         <rect>
-         <x>110</x>
+         <x>200</x>
          <y>230</y>
-         <width>581</width>
+         <width>441</width>
          <height>51</height>
         </rect>
        </property>
@@ -582,7 +582,7 @@ background-color: rgb(239, 219, 255);</string>
        <rect>
         <x>10</x>
         <y>300</y>
-        <width>861</width>
+        <width>871</width>
         <height>251</height>
        </rect>
       </property>
@@ -622,6 +622,25 @@ background-color: rgb(239, 219, 255);</string>
         <string>Formas de Pago</string>
        </property>
       </column>
+     </widget>
+     <widget class="QLabel" name="lblFecha">
+      <property name="geometry">
+       <rect>
+        <x>30</x>
+        <y>550</y>
+        <width>47</width>
+        <height>13</height>
+       </rect>
+      </property>
+      <property name="styleSheet">
+       <string notr="true">font: 8pt &quot;MS Shell Dlg 2&quot;;</string>
+      </property>
+      <property name="text">
+       <string>TextLabel</string>
+      </property>
+      <property name="alignment">
+       <set>Qt::AlignCenter</set>
+      </property>
      </widget>
     </widget>
     <widget class="QWidget" name="tabFacturacion">
@@ -702,11 +721,11 @@ background-color: rgb(239, 219, 255);</string>
  <resources/>
  <connections/>
  <buttongroups>
-  <buttongroup name="rbtGroupSex"/>
   <buttongroup name="chkGroupPago">
    <property name="exclusive">
     <bool>false</bool>
    </property>
   </buttongroup>
+  <buttongroup name="rbtGroupSex"/>
  </buttongroups>
 </ui>

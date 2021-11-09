@@ -253,3 +253,34 @@ class Clientes():
         except Exception as error:
             print('Error en Cargar datos de un cliente', error)
             return None
+
+
+    def modifCli(self):
+        try:
+            modcliente = []
+            cliente = [var.ui.txtDni, var.ui.txtAltaCli, var.ui.txtApel, var.ui.txtNome, var.ui.txtDir]  # para recorrerlo
+            for i in cliente:
+                modcliente.append(i.text())
+            modcliente.append(var.ui.cmbProv.currentText())
+            modcliente.append(var.ui.cmbMuni.currentText())
+            if var.ui.rbtHom.isChecked():
+                modcliente.append('Hombre')
+            elif var.ui.rbtFem.isChecked():
+                modcliente.append('Mujer')
+            else:
+                modcliente.append('No especificado')
+            pagos = []
+            if var.ui.chkCargoCuenta.isChecked():
+                pagos.append('Cargo Cuenta')
+            if var.ui.chkTransfe.isChecked():
+                pagos.append('Transferencia')
+            if var.ui.chkEfectivo.isChecked():
+                pagos.append('Efectivo')
+            if var.ui.chkTargeta.isChecked():
+                pagos.append('Targeta')
+            pagos = set(pagos)  # evita duplicados
+            modcliente.append(' ; '.join(pagos))
+            conexion.Conexion.modifCli(modcliente)
+            conexion.Conexion.cargaTabCli(self)
+        except Exception as error:
+            print('Error en Modificar un cliente', error)
