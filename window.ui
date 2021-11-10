@@ -698,6 +698,8 @@ background-color: rgb(239, 219, 255);</string>
     <property name="title">
      <string>Archivo</string>
     </property>
+    <addaction name="actionAbrir"/>
+    <addaction name="separator"/>
     <addaction name="actionSalir"/>
    </widget>
    <addaction name="menuArchivo"/>
@@ -715,6 +717,11 @@ background-color: rgb(239, 219, 255);</string>
    </property>
    <property name="shortcut">
     <string>Ctrl+S</string>
+   </property>
+  </action>
+  <action name="actionAbrir">
+   <property name="text">
+    <string>Abrir</string>
    </property>
   </action>
  </widget>

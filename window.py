@@ -321,6 +321,10 @@ class Ui_MainWindow(object):
         font.setPointSize(9)
         self.actionSalir.setFont(font)
         self.actionSalir.setObjectName("actionSalir")
+        self.actionAbrir = QtWidgets.QAction(MainWindow)
+        self.actionAbrir.setObjectName("actionAbrir")
+        self.menuArchivo.addAction(self.actionAbrir)
+        self.menuArchivo.addSeparator()
         self.menuArchivo.addAction(self.actionSalir)
         self.menubar.addAction(self.menuArchivo.menuAction())
 
@@ -371,3 +375,4 @@ class Ui_MainWindow(object):
         self.menuArchivo.setTitle(_translate("MainWindow", "Archivo"))
         self.actionSalir.setText(_translate("MainWindow", "Salir"))
         self.actionSalir.setShortcut(_translate("MainWindow", "Ctrl+S"))
+        self.actionAbrir.setText(_translate("MainWindow", "Abrir"))

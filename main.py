@@ -2,15 +2,23 @@ import locale
 import sys, var, events, locale
 from datetime import datetime
 
+from PyQt5.QtWidgets import QFileDialog
+
 import clients
 import conexion
 from windowaviso import *
 from window import *
 from windowcal import *
+
 locale.setlocale(locale.LC_ALL, 'es-ES')
 
-# Press Shift+F10 to execute it or replace it with your code.
-# Press Double Shift to search everywhere for classes, files, tool windows, actions, and settings.
+
+class fileDialogAbrir(QtWidgets.QFileDialog):
+    '''Ventana abrir explorador windows'''
+
+    def __init__(self):
+        super(fileDialogAbrir, self).__init__()
+
 
 class dialogCalendar(QtWidgets.QDialog):
     def __init__(self):
@@ -25,7 +33,6 @@ class dialogCalendar(QtWidgets.QDialog):
         anoactual = datetime.now().year
         var.dlgcalendar.Calendar.setSelectedDate(QtCore.QDate(anoactual, mesactual, diaactual))
         var.dlgcalendar.Calendar.clicked.connect(clients.Clientes.cargarFecha)
-
 
 
 class DialogAviso(QtWidgets.QDialog):
@@ -48,25 +55,24 @@ class Main(QtWidgets.QMainWindow):
         '''
 
         var.ui.btnCalendar.clicked.connect(events.Eventos.abrirCal)
-        var.ui.btnGrabaCli.clicked.connect(clients.Clientes.guardaCli) #Acciones del boton de Aceptar
+        var.ui.btnGrabaCli.clicked.connect(clients.Clientes.guardaCli)  # Acciones del boton de Aceptar
         var.ui.btnLimpiar.clicked.connect(clients.Clientes.limpiaFormcli)
-        var.ui.btnSalir.clicked.connect(events.Eventos.Salir) #SAlir del programa
+        var.ui.btnSalir.clicked.connect(events.Eventos.Salir)  # SAlir del programa
         # var.ui.rbtGroupSex.buttonClicked.connect(clients.Clientes.selSex)   #Seleccion del sexo
         # var.ui.chkGroupPago.buttonClicked.connect(clients.Clientes.selPago)  #Seleccion del metodo de pago
         var.ui.btnBajaCli.clicked.connect(clients.Clientes.bajaCli)
         var.ui.btnModifCli.clicked.connect(clients.Clientes.modifCli)
 
-
-
         '''
         Eventos de la barra de menus
         '''
-        var.ui.actionSalir.triggered.connect(events.Eventos.Salir)  #Slair del programa por la barrita de arriba
+        var.ui.actionSalir.triggered.connect(events.Eventos.Salir)  # Slair del programa por la barrita de arriba
+        var.ui.actionAbrir.triggered.connect(events.Eventos.abrir)
 
         '''
         Eventos de la caje de texto
         '''
-        var.ui.txtDni.editingFinished.connect(clients.Clientes.validarDNI)  #Validar dni
+        var.ui.txtDni.editingFinished.connect(clients.Clientes.validarDNI)  # Validar dni
         var.ui.txtApel.editingFinished.connect(clients.Clientes.mayus)
         var.ui.txtNome.editingFinished.connect(clients.Clientes.mayus)
         var.ui.txtDir.editingFinished.connect(clients.Clientes.mayus)
@@ -75,7 +81,6 @@ class Main(QtWidgets.QMainWindow):
         Eventos  de comboBox
         '''
         var.ui.cmbProv.currentIndexChanged.connect(clients.Clientes.cargaMun)
-
 
         '''
         Barra de estado
@@ -98,16 +103,16 @@ class Main(QtWidgets.QMainWindow):
         conexion.Conexion.cargaTabCli(self)
         clients.Clientes.cargaProv(self)
 
+
 if __name__ == '__main__':
     app = QtWidgets.QApplication([])
     window = Main()
     desktop = QtWidgets.QApplication.desktop()
-    x = (desktop.width() - window.width())//2
-    y = (desktop.height() - window.height())//2
+    x = (desktop.width() - window.width()) // 2
+    y = (desktop.height() - window.height()) // 2
     window.move(x, y)
     var.dlgaviso = DialogAviso()
     var.dlgcalendar = dialogCalendar()
+    var.dlgabrir = fileDialogAbrir()
     window.show()
     sys.exit(app.exec())
-
-# See PyCharm help at https://www.jetbrains.com/help/pycharm/
