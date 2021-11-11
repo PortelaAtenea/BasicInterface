@@ -68,6 +68,8 @@ class Main(QtWidgets.QMainWindow):
         '''
         var.ui.actionSalir.triggered.connect(events.Eventos.Salir)  # Slair del programa por la barrita de arriba
         var.ui.actionAbrir.triggered.connect(events.Eventos.abrir)
+        var.ui.actionCrear_Buckup.triggered.connect(events.Eventos.crearBackup)
+        var.ui.actionRestaurar_Backup.triggered.connect(events.Eventos.restaurarBackup)
 
         '''
         Eventos de la caje de texto

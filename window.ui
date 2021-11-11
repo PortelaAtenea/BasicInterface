@@ -702,7 +702,15 @@ background-color: rgb(239, 219, 255);</string>
     <addaction name="separator"/>
     <addaction name="actionSalir"/>
    </widget>
+   <widget class="QMenu" name="menuHerramientas">
+    <property name="title">
+     <string>Herramientas</string>
+    </property>
+    <addaction name="actionCrear_Buckup"/>
+    <addaction name="actionRestaurar_Backup"/>
+   </widget>
    <addaction name="menuArchivo"/>
+   <addaction name="menuHerramientas"/>
   </widget>
   <widget class="QStatusBar" name="statusbar"/>
   <action name="actionSalir">
@@ -722,6 +730,16 @@ background-color: rgb(239, 219, 255);</string>
   <action name="actionAbrir">
    <property name="text">
     <string>Abrir</string>
+   </property>
+  </action>
+  <action name="actionCrear_Buckup">
+   <property name="text">
+    <string>Crear Backup</string>
+   </property>
+  </action>
+  <action name="actionRestaurar_Backup">
+   <property name="text">
+    <string>Restaurar Backup</string>
    </property>
   </action>
  </widget>
