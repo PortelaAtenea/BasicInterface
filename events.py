@@ -11,6 +11,8 @@ import zipfile
 from datetime import datetime
 from zipfile import ZipFile
 
+from PyQt5 import QtPrintSupport
+
 import conexion
 from window import *
 
@@ -62,6 +64,8 @@ class Eventos():
             if var.dlgabrir.Accepted and filename != '':
                 fichzip = zipfile.ZipFile(var.copia, 'w')
                 fichzip.write(var.filedb, os.path.basename(var.filedb), zipfile.ZIP_DEFLATED)
+                #Enviar var.copia al drive
+
                 fichzip.close()
                 shutil.move(str(var.copia), str(directorio))
                 msg = QtWidgets.QMessageBox()
@@ -74,24 +78,28 @@ class Eventos():
 
     def restaurarBackup(self):
         try:
-            dirpro = os.getcwd()
-            print(dirpro)
             option = QtWidgets.QFileDialog.Options()
             filename=var.dlgabrir.getOpenFileName(None, 'Restaurar copia de seguridad', '', '*.zip', options=option )
 
             if var.dlgabrir.Accepted and filename != '':
                 file = filename[0]
+                print(file)
                 with zipfile.ZipFile(str(file), 'r') as bbdd:
-                    bbdd.extractall()
+                    bbdd.extractall(pwd=None)
                 bbdd.close()
-                shutil.move('bbdd.sqlite', str(dirpro))
-                conexion.Conexion.db_connect(var.filedb)
-                conexion.Conexion.listaProvincias()
-                msg = QtWidgets.QMessageBox()
-                msg.setWindowTitle('EXITO!!!')
-                msg.setIcon(QtWidgets.QMessageBox.Warning)
-                msg.setText('La base de datos ha sido Exportada con exito!!')
-                msg.exec()
+            conexion.Conexion.db_connect(var.filedb)
+            conexion.Conexion.listaProvincias()
+            msg = QtWidgets.QMessageBox()
+            msg.setWindowTitle('EXITO!!!')
+            msg.setIcon(QtWidgets.QMessageBox.Warning)
+            msg.setText('La base de datos ha sido Exportada con exito!!')
+            msg.exec()
         except Exception as error:
             print('Error al restaurar backup de la bbdd ', error)
-
+    def imprimir(self):
+        try:
+            printDialgo = QtPrintSupport.QPrintDialog()
+            if printDialgo.exec():
+                printDialgo.show()
+        except Exception as error:
+            print('Error al imprimir ', error)

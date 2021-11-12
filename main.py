@@ -12,7 +12,7 @@ from windowcal import *
 
 locale.setlocale(locale.LC_ALL, 'es-ES')
 
-
+#hasta lo del dia anterior tiene que funcionar tal cual para que se corrija el examen
 class fileDialogAbrir(QtWidgets.QFileDialog):
     '''Ventana abrir explorador windows'''
 
@@ -70,6 +70,7 @@ class Main(QtWidgets.QMainWindow):
         var.ui.actionAbrir.triggered.connect(events.Eventos.abrir)
         var.ui.actionCrear_Buckup.triggered.connect(events.Eventos.crearBackup)
         var.ui.actionRestaurar_Backup.triggered.connect(events.Eventos.restaurarBackup)
+        var.ui.actionImprimir.triggered.connect(events.Eventos.imprimir)
 
         '''
         Eventos de la caje de texto
@@ -104,8 +105,13 @@ class Main(QtWidgets.QMainWindow):
         conexion.Conexion.db_connect(var.filedb)
         conexion.Conexion.cargaTabCli(self)
         clients.Clientes.cargaProv(self)
+        '''Eventos del menu de herramientas'''
 
-
+        var.ui.actionbarSalir.triggered.connect(events.Eventos.Salir)
+        var.ui.actionbarAbrirCarpeta.triggered.connect(events.Eventos.abrir)
+        var.ui.actionvarBackupCrear.triggered.connect(events.Eventos.crearBackup)
+        var.ui.actionvarBackupRestaurar.triggered.connect(events.Eventos.restaurarBackup)
+        var.ui.actionbarImprimir.triggered.connect(events.Eventos.imprimir)
 if __name__ == '__main__':
     app = QtWidgets.QApplication([])
     window = Main()
