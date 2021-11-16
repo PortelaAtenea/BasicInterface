@@ -10,3 +10,4 @@ global dlgcalendar
 global dlgabrir
 global copia
 filedb = 'bbdd.sqlite'
+filexlsx = 'DATOSCLIENTES.xls'

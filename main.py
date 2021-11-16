@@ -4,6 +4,7 @@ from datetime import datetime
 
 from PyQt5.QtWidgets import QFileDialog
 
+import archivo
 import clients
 import conexion
 from windowaviso import *
@@ -66,11 +67,12 @@ class Main(QtWidgets.QMainWindow):
         '''
         Eventos de la barra de menus
         '''
-        var.ui.actionSalir.triggered.connect(events.Eventos.Salir)  # Slair del programa por la barrita de arriba
+        var.ui.actionSalir.triggered.connect(events.Eventos.Salir)  # Salir del programa por la barrita de arriba
         var.ui.actionAbrir.triggered.connect(events.Eventos.abrir)
         var.ui.actionCrear_Buckup.triggered.connect(events.Eventos.crearBackup)
         var.ui.actionRestaurar_Backup.triggered.connect(events.Eventos.restaurarBackup)
         var.ui.actionImprimir.triggered.connect(events.Eventos.imprimir)
+        var.ui.actionImportar_Datos.triggered.connect(archivo.Archivo.abrirArch)
 
         '''
         Eventos de la caje de texto

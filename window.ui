@@ -700,6 +700,9 @@ background-color: rgb(239, 219, 255);</string>
     </property>
     <addaction name="actionAbrir"/>
     <addaction name="separator"/>
+    <addaction name="actionImportar_Datos"/>
+    <addaction name="actionExportar_Datos"/>
+    <addaction name="separator"/>
     <addaction name="actionImprimir"/>
     <addaction name="separator"/>
     <addaction name="actionSalir"/>
@@ -816,15 +819,25 @@ background-color: rgb(239, 219, 255);</string>
     <string>Imprimir</string>
    </property>
   </action>
+  <action name="actionImportar_Datos">
+   <property name="text">
+    <string>Importar Datos</string>
+   </property>
+  </action>
+  <action name="actionExportar_Datos">
+   <property name="text">
+    <string>Exportar Datos</string>
+   </property>
+  </action>
  </widget>
  <resources/>
  <connections/>
  <buttongroups>
+  <buttongroup name="rbtGroupSex"/>
   <buttongroup name="chkGroupPago">
    <property name="exclusive">
     <bool>false</bool>
    </property>
   </buttongroup>
-  <buttongroup name="rbtGroupSex"/>
  </buttongroups>
 </ui>
