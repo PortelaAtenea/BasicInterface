@@ -1,0 +1,51 @@
+----En conexion----
+        def exportExcel(self):
+        try:
+            fecha = datetime.today()
+            fecha = fecha.strftime('%Y.%m.%d.%H.%M.%S')
+            var.copia = (str(fecha) + '_dataExport.xls')
+            option = QtWidgets.QFileDialog.Options()
+            directorio, filename = var.dlgabrir.getSaveFileName(None, 'Exportar datos', var.copia, '.xls',
+                                                                options=option)
+            wb = xlwt.Workbook()
+            sheet1 = wb.add_sheet('Hoja 1')
+
+            # Cabeceras
+            sheet1.write(0, 0, 'DNI')
+            sheet1.write(0, 1, 'ALTA')
+            sheet1.write(0, 2, 'APELIDOS')
+            sheet1.write(0, 3, 'NOME')
+            sheet1.write(0, 4, 'DIRECCION')
+            sheet1.write(0, 5, 'PROVINCIA')
+            sheet1.write(0, 6, 'MUNICIPIO')
+            sheet1.write(0, 7, 'SEXO')
+            sheet1.write(0, 8, 'PAGO')
+            f = 1
+            query = QtSql.QSqlQuery()
+            query.prepare('SELECT *  FROM clientes')
+            if query.exec_():
+                while query.next():
+                    for c in range(9):
+                        sheet1.write(f, c, query.value(c))
+                    f+=1
+            wb.save(directorio)
+
+        except Exception as error:
+            print('Error en conexion para exportar excel ',error)
+
+-- Se lanza desde eventos -- 
+
+    def ExportarDatos(self):
+        try:
+            conexion.Conexion.exportExcel(self)
+            try:
+                msgBox = QMessageBox()
+                msgBox.setIcon(QtWidgets.QMessageBox.Information)
+                msgBox.setText("Datos exportados con éxito.")
+                msgBox.setWindowTitle("Operación completada")
+                msgBox.setStandardButtons(QMessageBox.Ok)
+                msgBox.exec()
+            except Exception as error:
+                print('Error en mensaje generado exportar datos ', error)
+        except Exception as error:
+            print('Error en evento exportar datos ',error)

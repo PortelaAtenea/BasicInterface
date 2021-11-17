@@ -1,7 +1,11 @@
+from datetime import datetime
+
+import xlwt
 from PyQt5 import QtSql
 from PyQt5 import QtCore, QtGui, QtWidgets
 from PyQt5.QtWidgets import QTableWidgetItem
 
+import archivo
 import var
 
 
@@ -182,3 +186,123 @@ class Conexion():
                 msg.exec()
         except Exception as error:
             print('Error en modificar clientes (conexión) ', error)
+
+    def altaCliEx(newcli):
+        try:
+            query = QtSql.QSqlQuery()
+            query.prepare('insert into clientes (dni, apellidos, nombre, direccion, provincia, sexo) VALUES '
+                          '(:dni, :apellidos, :nombre, :direccion, :provincia, :sexo)')
+            query.bindValue(':dni', str(newcli[0]))
+            query.bindValue(':apellidos', str(newcli[1]))
+            query.bindValue(':nombre', str(newcli[2]))
+            query.bindValue(':direccion', str(newcli[3]))
+            query.bindValue(':provincia', str(newcli[4]))
+            query.bindValue(':sexo', str(newcli[5]))
+
+            if query.exec_():
+                print('Inserción correcta')
+
+            else:
+                print('Inserción No correcta')
+        except Exception as error:
+            print('Problemas alta cliente',error)
+
+    def exportEx(self):
+        try:
+            fecha = datetime.today()
+            fecha = fecha.strftime('%Y.%m.%d.%H.%M.%S')
+            var.copia = (str(fecha) + '_dataExport.xls')
+            option = QtWidgets.QFileDialog.Options()
+            directorio, filename = var.dlgabrir.getSaveFileName(None, 'Exportar datos', var.copia, '.xls',
+                                                                options=option)
+            wb = xlwt.Workbook()
+            sheet1 = wb.add_sheet('Hoja 1')
+
+            # Cabeceras
+            sheet1.write(0, 0, 'DNI')
+            sheet1.write(0, 1, 'ALTA')
+            sheet1.write(0, 2, 'APELIDOS')
+            sheet1.write(0, 3, 'NOME')
+            sheet1.write(0, 4, 'DIRECCION')
+            sheet1.write(0, 5, 'PROVINCIA')
+            sheet1.write(0, 6, 'MUNICIPIO')
+            sheet1.write(0, 7, 'SEXO')
+            sheet1.write(0, 8, 'PAGO')
+            f = 1
+            query = QtSql.QSqlQuery()
+            query.prepare('SELECT *  FROM clientes')
+            if query.exec_():
+                while query.next():
+                    for c in range(9):
+                        sheet1.write(f, c, query.value(c))
+                    f += 1
+            wb.save(directorio)
+
+        except Exception as error:
+            print('Error en conexion para exportar excel ', error)
+'''
+    def altaCliFichero(newcli):
+        try:
+
+            query = QtSql.QSqlQuery()
+            query.prepare(
+                'insert into clientes (dni, apellidos, nombre, direccion, provincia, sexo) '
+                'VALUES (:dni, :apellidos, :nombre, :direcion, :provincia, :sexo)')
+
+            query.bindValue(':dni', str(newcli[0]))
+            query.bindValue(':apellidos', str(newcli[1]))
+            query.bindValue(':nombre', str(newcli[2]))
+            query.bindValue(':direcion', str(newcli[3]))
+            query.bindValue(':provincia', str(newcli[4]))
+            query.bindValue(':sexo', str(newcli[5]))
+
+            if query.exec_():
+                print("Cliente insertado")
+            else:
+               print('Error al insertar el cliente: '+query.lastError().text())
+        except Exception as error:
+            print('Problemas con el nuevo cliente ', error)
+
+    def listaCli(i, hoja):
+
+        try:
+            record = []
+            index = 0
+            query = QtSql.QSqlQuery()
+            print('1')
+            query.prepare("select dni, alta, apellidos, nombre, direccion, provincia, municipio, sexo, pagos from clientes")
+            print(query.exec_())
+            if query.exec_():
+                print('1')
+                while query.next():
+                    print('1')
+                    dni = query.value(0)
+                    record.append(dni)
+                    alta = query.value(1)
+                    record.append(alta)
+                    apellidos = query.value(2)
+                    record.append(apellidos)
+                    nombre = query.value(3)
+                    record.append(nombre)
+                    direccion = query.value(4)
+                    record.append(direccion)
+                    provincia = query.value(5)
+                    record.append(provincia)
+                    municipio = query.value(6)
+                    record.append(municipio)
+                    sexo = query.value(7)
+                    record.append(sexo)
+                    pago = query.value(8)
+                    record.append(pago)
+                    archivo.Archivo.enviarCliente(record, i, hoja)
+                    # cargamos datos
+                    index += 1
+            if query.exec_():
+                while query.next():
+                    for i in range(6):
+                        record.append(query.value(i))
+            return record
+
+        except Exception as error:
+            print('Error en Cargar datos de un cliente de la bd  ', error)'''
+''' return None'''
