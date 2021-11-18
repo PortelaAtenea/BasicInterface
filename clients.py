@@ -165,7 +165,8 @@ class Clientes():
             pagos = set(pagos)  # evita duplicados
             newcli.append(' ; '.join(pagos))
             tabClie.append(' ; '.join(pagos))
-
+            newcli.append(var.ui.spinEnvio.value)
+            tabClie.append(var.ui.spinEnvio.value)
             # Cargamos en la tabla
 
             if validodni:  # la global
@@ -242,6 +243,7 @@ class Clientes():
                 var.ui.chkTransfe.setChecked(True)
             if 'Cargo' in row[4]:
                 var.ui.chkCargoCuenta.setChecked(True)
+
             registro = conexion.Conexion.oneClie(row[0])  # row[0] es el dni
             var.ui.txtDir.setText(str(registro[0]))
             var.ui.cmbProv.setCurrentText(str(registro[1]))
@@ -250,6 +252,7 @@ class Clientes():
                 var.ui.rbtFem.setChecked(True)
             elif str(registro[3]) == 'Hombre':
                 var.ui.rbtHom.setChecked(True)
+            var.ui.spinEnvio.setValue(registro[4])
         except Exception as error:
             print('Error en Cargar datos de un cliente', error)
             return None
@@ -280,7 +283,23 @@ class Clientes():
                 pagos.append('Targeta')
             pagos = set(pagos)  # evita duplicados
             modcliente.append(' ; '.join(pagos))
+            modcliente.append(var.ui.spinEnvio.value)
             conexion.Conexion.modifCli(modcliente)
             conexion.Conexion.cargaTabCli(self)
         except Exception as error:
             print('Error en Modificar un cliente', error)
+    def envio(self):
+        try:
+          print("hola")
+          valor = var.ui.spinEnvio.value()
+          if valor == 0:
+              var.ui.lblEnvio.setText('Recojida por cliente')
+          if valor == 1:
+              var.ui.lblEnvio.setText('Envio nacional Paqueteria Expres urgente')
+          if valor == 2:
+            var.ui.lblEnvio.setText('Envio nacional con paqueteria ordinario')
+          if valor == 3:
+            var.ui.lblEnvio.setText('Envio internacional')
+
+        except Exception as error:
+            print('Error al imprimir ', error)

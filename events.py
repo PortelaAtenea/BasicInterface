@@ -12,6 +12,7 @@ from datetime import datetime
 from zipfile import ZipFile
 
 from PyQt5 import QtPrintSupport
+from PyQt5.QtWidgets import QMessageBox
 
 import conexion
 from window import *
@@ -103,3 +104,18 @@ class Eventos():
                 printDialgo.show()
         except Exception as error:
             print('Error al imprimir ', error)
+
+    def ExportarDatos(self):
+        try:
+            conexion.Conexion.exportExcel(self)
+            try:
+                msgBox = QMessageBox()
+                msgBox.setIcon(QtWidgets.QMessageBox.Information)
+                msgBox.setText("Datos exportados con éxito.")
+                msgBox.setWindowTitle("Operación completada")
+                msgBox.setStandardButtons(QMessageBox.Ok)
+                msgBox.exec()
+            except Exception as error:
+                print('Error en mensaje generado exportar datos ', error)
+        except Exception as error:
+            print('Error en evento exportar datos ',error)
