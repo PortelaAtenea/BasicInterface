@@ -89,12 +89,13 @@ class Eventos():
                     bbdd.extractall(pwd=None)
                 bbdd.close()
             conexion.Conexion.db_connect(var.filedb)
-            conexion.Conexion.listaProvincias()
+            conexion.Conexion.listaProvincias(self)
             msg = QtWidgets.QMessageBox()
             msg.setWindowTitle('EXITO!!!')
             msg.setIcon(QtWidgets.QMessageBox.Warning)
             msg.setText('La base de datos ha sido Exportada con exito!!')
             msg.exec()
+            conexion.Conexion.cargaTabCli(self)
         except Exception as error:
             print('Error al restaurar backup de la bbdd ', error)
     def imprimir(self):

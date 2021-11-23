@@ -24,9 +24,11 @@ class Archivo():
                 for i in range(6):
                     newcli.append(hoja.cell_value(contador + 1, i))
                 conexion.Conexion.altaCliEx(newcli)
-                conexion.Conexion.cargaTabCli(newcli)
+                conexion.Conexion.cargaTabCli(self)
                 newcli.clear()
                 contador = contador + 1
+
+
         except Exception as error:
             print('Error al importar ', error)
 
