@@ -29,7 +29,7 @@ class Clientes():
                 dig_control = dni[8]  #
                 dni = dni[:8]  # Tomo elnumero de los 8 primeros
                 if dni[0] in dig_ext:
-                    dni = dni.remplace(dni[0], reemp_dig_ext[dni[0]])
+                    dni = dni.replace(dni[0], reemp_dig_ext[dni[0]])
                     print('Correcto')
                     validodni = True  # lo pongo a true
 
@@ -165,8 +165,19 @@ class Clientes():
             pagos = set(pagos)  # evita duplicados
             newcli.append(' ; '.join(pagos))
             tabClie.append(' ; '.join(pagos))
-            newcli.append(var.ui.spinEnvio.value)
-            tabClie.append(var.ui.spinEnvio.value)
+            valor = var.ui.spinEnvio.value()
+            if valor == 0:
+                newcli.append('Recojida por cliente')
+                tabClie.append('Recojida por cliente')
+            if valor == 1:
+                newcli.append('Envio nacional Paqueteria Expres urgente')
+                tabClie.append('Envio nacional Paqueteria Expres urgente')
+            if valor == 2:
+                newcli.append('Envio nacional con paqueteria ordinario')
+                tabClie.append('Envio nacional con paqueteria ordinario')
+            if valor == 3:
+                newcli.append('Envio internacional')
+                tabClie.append('Envio internacional')
             # Cargamos en la tabla
 
             if validodni:  # la global
@@ -228,6 +239,7 @@ class Clientes():
 
         # carga los datos dfel cliente al selecionar uno en la tabla
         try:
+            valor = 0
             Clientes.limpiaFormcli(self)
             fila = var.ui.tabClientes.selectedItems()  # seleciona la fila
             datos = [var.ui.txtDni, var.ui.txtApel, var.ui.txtNome, var.ui.txtAltaCli]
@@ -252,7 +264,17 @@ class Clientes():
                 var.ui.rbtFem.setChecked(True)
             elif str(registro[3]) == 'Hombre':
                 var.ui.rbtHom.setChecked(True)
-            var.ui.spinEnvio.setValue(registro[4])
+
+
+            if str(registro[4]) == 'Envio nacional Paqueteria Expres urgente':
+                valor = 1
+            if str(registro[4]) == 'Recojida por cliente':
+                valor = 0
+            if str(registro[4]) == 'Envio nacional con paqueteria ordinario':
+                valor = 2
+            if str(registro[4]) == 'Envio internacional':
+                valor = 3
+            var.ui.spinEnvio.setValue(valor)
         except Exception as error:
             print('Error en Cargar datos de un cliente', error)
             return None
@@ -283,14 +305,21 @@ class Clientes():
                 pagos.append('Targeta')
             pagos = set(pagos)  # evita duplicados
             modcliente.append(' ; '.join(pagos))
-            modcliente.append(var.ui.spinEnvio.value)
+            valor = var.ui.spinEnvio.value()
+            if valor == 0:
+                modcliente.append('Recojida por cliente')
+            if valor == 1:
+                modcliente.append('Envio nacional Paqueteria Expres urgente')
+            if valor == 2:
+                modcliente.append('Envio nacional con paqueteria ordinario')
+            if valor == 3:
+                modcliente.append('Envio internacional')
             conexion.Conexion.modifCli(modcliente)
             conexion.Conexion.cargaTabCli(self)
         except Exception as error:
             print('Error en Modificar un cliente', error)
     def envio(self):
         try:
-          print("hola")
           valor = var.ui.spinEnvio.value()
           if valor == 0:
               var.ui.lblEnvio.setText('Recojida por cliente')

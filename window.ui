@@ -198,7 +198,9 @@ background-color: rgb(239, 219, 255);</string>
        </property>
        <property name="icon">
         <iconset>
-         <normaloff>../../.designer/backup/img/calendario.png</normaloff>../../.designer/backup/img/calendario.png</iconset>
+         <normaloff>img/calendario.png</normaloff>
+         <disabledoff>img/calendario.png</disabledoff>
+         <selectedoff>img/calendario.png</selectedoff>img/calendario.png</iconset>
        </property>
        <property name="iconSize">
         <size>
@@ -307,7 +309,7 @@ background-color: rgb(239, 219, 255);</string>
        </property>
        <property name="icon">
         <iconset>
-         <normaloff>../../.designer/backup/img/recargar.png</normaloff>../../.designer/backup/img/recargar.png</iconset>
+         <normaloff>img/recargar.png</normaloff>img/recargar.png</iconset>
        </property>
        <property name="iconSize">
         <size>
@@ -789,8 +791,8 @@ background-color: rgb(239, 219, 255);</string>
    <addaction name="actionbarSalir"/>
    <addaction name="separator"/>
    <addaction name="actionvarBackupRestaurar"/>
-   <addaction name="actionvarBackupCrear"/>
    <addaction name="separator"/>
+   <addaction name="actionvarBackupCrear"/>
    <addaction name="actionbarImprimir"/>
   </widget>
   <action name="actionSalir">
@@ -825,7 +827,7 @@ background-color: rgb(239, 219, 255);</string>
   <action name="actionbarSalir">
    <property name="icon">
     <iconset>
-     <normaloff>../../.designer/backup/img/salir.png</normaloff>../../.designer/backup/img/salir.png</iconset>
+     <normaloff>img/salir.png</normaloff>img/salir.png</iconset>
    </property>
    <property name="text">
     <string>barSalir</string>
@@ -834,7 +836,7 @@ background-color: rgb(239, 219, 255);</string>
   <action name="actionbarAbrirCarpeta">
    <property name="icon">
     <iconset>
-     <normaloff>../../.designer/backup/img/abrirCarpeta.jpg</normaloff>../../.designer/backup/img/abrirCarpeta.jpg</iconset>
+     <normaloff>img/abrirCarpeta.jpg</normaloff>img/abrirCarpeta.jpg</iconset>
    </property>
    <property name="text">
     <string>barAbrirCarpeta</string>
@@ -843,7 +845,7 @@ background-color: rgb(239, 219, 255);</string>
   <action name="actionvarBackupRestaurar">
    <property name="icon">
     <iconset>
-     <normaloff>../../.designer/backup/img/restaurarBackup.jpg</normaloff>../../.designer/backup/img/restaurarBackup.jpg</iconset>
+     <normaloff>img/restaurarBackup.jpg</normaloff>img/restaurarBackup.jpg</iconset>
    </property>
    <property name="text">
     <string>varBackupRestaurar</string>
@@ -852,7 +854,7 @@ background-color: rgb(239, 219, 255);</string>
   <action name="actionvarBackupCrear">
    <property name="icon">
     <iconset>
-     <normaloff>../../.designer/backup/img/crearBackup.jpg</normaloff>../../.designer/backup/img/crearBackup.jpg</iconset>
+     <normaloff>img/crearBackup.jpg</normaloff>img/crearBackup.jpg</iconset>
    </property>
    <property name="text">
     <string>varBackupCrear</string>
@@ -861,7 +863,7 @@ background-color: rgb(239, 219, 255);</string>
   <action name="actionbarImprimir">
    <property name="icon">
     <iconset>
-     <normaloff>../../.designer/backup/img/impresion.png</normaloff>../../.designer/backup/img/impresion.png</iconset>
+     <normaloff>img/impresion.png</normaloff>img/impresion.png</iconset>
    </property>
    <property name="text">
     <string>barImpresion</string>
