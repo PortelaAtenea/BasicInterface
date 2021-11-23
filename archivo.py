@@ -13,7 +13,7 @@ class Archivo():
     def ImportarExcel(self):
         try:
             newcli = []
-            contador = 0
+            contador = 1
             option = QtWidgets.QFileDialog.Options()
             ruta_excel = var.dlgabrir.getOpenFileName(None, 'Elija archivo para importar Excel', '', '*.xls', options=option)
             if var.dlgabrir.Accepted and ruta_excel != '':
@@ -22,7 +22,9 @@ class Archivo():
             hoja = workbook.sheet_by_index(0)
             while contador < hoja.nrows:
                 for i in range(6):
-                    newcli.append(hoja.cell_value(contador + 1, i))
+
+                    newcli.append(hoja.cell_value(contador, i))
+
                 conexion.Conexion.altaCliEx(newcli)
                 conexion.Conexion.cargaTabCli(self)
                 newcli.clear()
