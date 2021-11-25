@@ -48,6 +48,15 @@ class Eventos():
         except Exception as error:
             print('Error en al redimensionar la tabla ', error)
 
+    def resizeTablaArti(self):
+        try:
+            header = var.ui.tabArti.horizontalHeader()
+            for i in range(3):
+                header.setSectionResizeMode(i, QtWidgets.QHeaderView.Stretch)
+                if i == 0 :
+                    header.setSectionResizeMode(i, QtWidgets.QHeaderView.ResizeToContents)
+        except Exception as error:
+            print('Error en al redimensionar la tabla ', error)
 
     def abrir(self):
         try:

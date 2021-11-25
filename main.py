@@ -5,8 +5,10 @@ from datetime import datetime
 from PyQt5.QtWidgets import QFileDialog
 
 import archivo
+import articulos
 import clients
 import conexion
+import informes
 from windowaviso import *
 from window import *
 from windowcal import *
@@ -74,6 +76,8 @@ class Main(QtWidgets.QMainWindow):
         var.ui.actionImprimir.triggered.connect(events.Eventos.imprimir)
         var.ui.actionImportar_Datos.triggered.connect(archivo.Archivo.ImportarExcel)
         var.ui.actionExportar_Datos.triggered.connect(archivo.Archivo.exportExcel)
+        var.ui.actionListado_Clientes.triggered.connect(informes.Informes.listadoClientes)
+
 
         '''
         Eventos de la caje de texto
@@ -116,8 +120,36 @@ class Main(QtWidgets.QMainWindow):
         var.ui.actionvarBackupRestaurar.triggered.connect(events.Eventos.restaurarBackup)
         var.ui.actionbarImprimir.triggered.connect(events.Eventos.imprimir)
 
+
         '''Eventos del Spinbox'''
         var.ui.spinEnvio.valueChanged.connect(clients.Clientes.envio)
+
+        '''                         Eventos Gastion de Articulos                        '''
+
+        '''Eventos de boton'''
+        var.ui.btnSalirArti.clicked.connect(events.Eventos.Salir)# botton de salir
+        var.ui.btnGrabaArti.clicked.connect(articulos.Articulos.guardaArti)  # Acciones del boton de Aceptar
+        var.ui.btnBajaArti.clicked.connect(articulos.Articulos.bajaArti)
+        var.ui.btnModifArti.clicked.connect(articulos.Articulos.modifArti)
+        var.ui.btnBuscar.clicked.connect(articulos.Articulos.buscarArti)
+        var.ui.btnRecargar.clicked.connect(conexion.Conexion.cargaTabArti)
+        var.ui.btnLimpiaArti.clicked.connect(articulos.Articulos.limpiaFormArti)
+
+        '''Eventos de la caje de texto'''
+        var.ui.txtNombreArti.editingFinished.connect(articulos.Articulos.mayus)
+
+        '''Eventos QTabWidget'''
+        events.Eventos.resizeTablaArti(self)
+        var.ui.tabArti.clicked.connect(articulos.Articulos.cargaArti)
+
+        var.ui.tabArti.setSelectionBehavior(QtWidgets.QTableWidget.SelectRows)
+
+        '''Eventos del Spinbox'''
+        var.ui.spinPrecio.valueChanged.connect(clients.Clientes.envio)
+
+        '''Eventos de la bbdd'''
+        conexion.Conexion.cargaTabArti(self)
+
 if __name__ == '__main__':
     app = QtWidgets.QApplication([])
     window = Main()
