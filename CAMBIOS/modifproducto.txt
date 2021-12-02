@@ -1,0 +1,28 @@
+ def modifPro(modpro):
+        try:
+            query = QtSql.QSqlQuery()
+            query.prepare('update productos set producto =:producto, precio = :precio where codigo = :cod')
+            query.bindValue(':cod',  int(modpro[0]))
+            query.bindValue(':producto', str(modpro[1]))
+            modpro[2] = modpro[2].replace('€','')
+            modpro[2] = modpro[2].replace(',','.')
+            modpro[2] = float(modpro[2])
+            modpro[2] = round(modpro[2], 2)
+            modpro[2] = str(modpro[2])
+            modpro[2] = locale.currency(float(modpro[2]))
+            query.bindValue(':precio', str(modpro[2]))
+
+            if query.exec_():
+                msg = QtWidgets.QMessageBox()
+                msg.setWindowTitle('Aviso')
+                msg.setIcon(QtWidgets.QMessageBox.Information)
+                msg.setText('Datos modificados de Producto')
+                msg.exec()
+            else:
+                msg = QtWidgets.QMessageBox()
+                msg.setWindowTitle('Aviso')
+                msg.setIcon(QtWidgets.QMessageBox.Warning)
+                msg.setText(query.lastError().text())
+                msg.exec()
+        except Exception as error:
+            print('Error modificar producto en conexion: ', error)

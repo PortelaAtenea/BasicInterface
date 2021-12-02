@@ -1,0 +1,19 @@
+ def cargarTabPro(self):
+        try:
+            index = 0
+            query = QtSql.QSqlQuery()
+            query.prepare('select codigo, producto, precio from productos order by producto')
+            if query.exec_():
+                while query.next():
+                    codigo = query.value(0)
+                    producto = query.value(1)
+                    precio = query.value(2)
+                    var.ui.tabProd.setRowCount(index + 1)  # creamos la fila y luego cargamos datos
+                    var.ui.tabProd.setItem(index, 0, QtWidgets.QTableWidgetItem(str(codigo)))
+                    var.ui.tabProd.setItem(index, 1, QtWidgets.QTableWidgetItem(producto))
+                    var.ui.tabProd.setItem(index, 2, QtWidgets.QTableWidgetItem(precio))
+                    var.ui.tabProd.item(index,2).setTextAlignment(QtCore.Qt.AlignRight)
+                    var.ui.tabProd.item(index, 0).setTextAlignment(QtCore.Qt.AlignCenter)
+                    index += 1
+        except Exception as error:
+            print('Problemas mostrar tabla productos', error)

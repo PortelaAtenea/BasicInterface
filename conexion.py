@@ -242,69 +242,148 @@ class Conexion():
 
         except Exception as error:
             print('Error en conexion para exportar excel ', error)
-'''
-    def altaCliFichero(newcli):
+
+    def altaArti(newArti):
         try:
 
             query = QtSql.QSqlQuery()
             query.prepare(
-                'insert into clientes (dni, apellidos, nombre, direccion, provincia, sexo) '
-                'VALUES (:dni, :apellidos, :nombre, :direcion, :provincia, :sexo)')
+                'insert into articulos (nombre, precio) '
+                'VALUES (:nombre, :precio)')
 
-            query.bindValue(':dni', str(newcli[0]))
-            query.bindValue(':apellidos', str(newcli[1]))
-            query.bindValue(':nombre', str(newcli[2]))
-            query.bindValue(':direcion', str(newcli[3]))
-            query.bindValue(':provincia', str(newcli[4]))
-            query.bindValue(':sexo', str(newcli[5]))
+            query.bindValue(':nombre', str(newArti[0]))
+            query.bindValue(':precio', str(newArti[1]))
 
             if query.exec_():
-                print("Cliente insertado")
+                msg = QtWidgets.QMessageBox()
+                msg.setWindowTitle('AVISO')
+                msg.setIcon(QtWidgets.QMessageBox.Warning)
+                msg.setText('ARTICULO INSERTADO EN LA BBDD CON EXITO')
+                msg.exec()
             else:
-               print('Error al insertar el cliente: '+query.lastError().text())
+                msg = QtWidgets.QMessageBox()
+                msg.setWindowTitle('ERROR!!!')
+                msg.setIcon(QtWidgets.QMessageBox.Warning)
+                msg.setText(query.lastError().text())
+                msg.exec()
+
         except Exception as error:
             print('Problemas con el nuevo cliente ', error)
 
-    def listaCli(i, hoja):
+    def cargaTabArti(self):
+        try:
+            index = 0
+            query = QtSql.QSqlQuery()
+            query.prepare('select codigo, nombre, precio from articulos order by codigo')
+            if query.exec_():
+                while query.next():
+                    codigo = str(query.value(0))
+                    nombre = query.value(1)
+                    precio = query.value(2)
+                    var.ui.tabArti.setRowCount(index + 1)  # creamos la fila
+                    # cargamos datos
+                    var.ui.tabArti.setItem(index, 0, QTableWidgetItem(codigo))
+                    var.ui.tabArti.setItem(index, 1, QTableWidgetItem(nombre))
+                    var.ui.tabArti.setItem(index, 2, QTableWidgetItem(precio))
+                    index += 1
+
+        except Exception as error:
+            print('Problemas al mostrar table clientes :(  ', error)
+    def bajaArti( codigo):
+        try:
+            query = QtSql.QSqlQuery()
+            query.prepare('delete from articulos where codigo = :codigo')
+            query.bindValue(':codigo', str(codigo))
+            if query.exec_():
+                msg = QtWidgets.QMessageBox()
+                msg.setWindowTitle('AVISO')
+                msg.setIcon(QtWidgets.QMessageBox.Warning)
+                msg.setText('ARTICULO DADO DE BAJA DE LA BBDD CON EXITO')
+                msg.exec()
+            else:
+                msg = QtWidgets.QMessageBox()
+                msg.setWindowTitle('ERROR!!!')
+                msg.setIcon(QtWidgets.QMessageBox.Warning)
+                msg.setText(query.lastError().text())
+                msg.exec()
+
+        except Exception as error:
+            print('Error en baja de un articulo de la bd  ', error)
+            return None
+
+    def buscaArti(nombre):
+        try:
+            index = 0
+            record = []
+            query = QtSql.QSqlQuery()
+            query.prepare('select codigo, nombre, precio from articulos where nombre = :nombre')
+            query.bindValue(':nombre', str(nombre))
+            #Limpiar la tabla
+            #Colocar el articulo en la labla
+
+
+            if query.exec_():
+                while query.next():
+                    codigo = str(query.value(0))
+                    nombre = query.value(1)
+                    precio = query.value(2)
+                    var.ui.tabArti.setRowCount(index + 1)  # creamos la fila
+                    # cargamos datos
+                    var.ui.tabArti.setItem(index, 0, QTableWidgetItem(codigo))
+                    var.ui.tabArti.setItem(index, 1, QTableWidgetItem(nombre))
+                    var.ui.tabArti.setItem(index, 2, QTableWidgetItem(precio))
+                    index += 1
+
+
+            else:
+                msg = QtWidgets.QMessageBox()
+                msg.setWindowTitle('ERROR!!!')
+                msg.setIcon(QtWidgets.QMessageBox.Warning)
+                msg.setText(query.lastError().text())
+                msg.exec()
+            return record
+        except Exception as error:
+            print('Error en baja de un articulo de la bd  ', error)
+    def oneArti(codigo):
 
         try:
             record = []
-            index = 0
+
             query = QtSql.QSqlQuery()
-            print('1')
-            query.prepare("select dni, alta, apellidos, nombre, direccion, provincia, municipio, sexo, pagos from clientes")
-            print(query.exec_())
-            if query.exec_():
-                print('1')
-                while query.next():
-                    print('1')
-                    dni = query.value(0)
-                    record.append(dni)
-                    alta = query.value(1)
-                    record.append(alta)
-                    apellidos = query.value(2)
-                    record.append(apellidos)
-                    nombre = query.value(3)
-                    record.append(nombre)
-                    direccion = query.value(4)
-                    record.append(direccion)
-                    provincia = query.value(5)
-                    record.append(provincia)
-                    municipio = query.value(6)
-                    record.append(municipio)
-                    sexo = query.value(7)
-                    record.append(sexo)
-                    pago = query.value(8)
-                    record.append(pago)
-                    archivo.Archivo.enviarCliente(record, i, hoja)
-                    # cargamos datos
-                    index += 1
+
+            query.prepare("select nombre, provincia,municipio, sexo, envio from clientes where dni = :dni")
+            query.bindValue(':dni', codigo)
+
             if query.exec_():
                 while query.next():
-                    for i in range(6):
+                    for i in range(5):
                         record.append(query.value(i))
             return record
 
         except Exception as error:
-            print('Error en Cargar datos de un cliente de la bd  ', error)'''
-''' return None'''
+            print('Error en Cargar datos de un cliente de la bd  ', error)
+            return None
+
+    def modifArti(modcliente):
+        try:
+            query = QtSql.QSqlQuery()
+            query.prepare(
+                'UPDATE articulos SET nombre =:nombre, precio =:precio '
+                ' WHERE codigo =:codigo')
+            query.bindValue(':codigo', str(modcliente[0]))
+            query.bindValue(':nombre', str(modcliente[1]))
+            query.bindValue(':precio', str(modcliente[2]))
+            if query.exec_():
+                msg = QtWidgets.QMessageBox()
+                msg.setWindowTitle('AVISO')
+                msg.setIcon(QtWidgets.QMessageBox.Warning)
+                msg.setText('ARTICULO MODIFICADO EN LA BBDD CON EXITO')
+                msg.exec()
+            else:
+                msg = QtWidgets.QMessageBox()
+                msg.setWindowTitle('ERROR!!!')
+                msg.setIcon(QtWidgets.QMessageBox.Warning)
+                msg.setText(query.lastError().text())
+                msg.exec()
+        except Exception as error:
+            print('Error en modificar clientes (conexión) ', error)
