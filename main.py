@@ -7,6 +7,7 @@ from PyQt5.QtWidgets import QFileDialog
 import archivo
 import clients
 import conexion
+import invoice
 from windowaviso import *
 from window import *
 from windowcal import *
@@ -58,7 +59,7 @@ class Main(QtWidgets.QMainWindow):
         var.ui.btnCalendar.clicked.connect(events.Eventos.abrirCal)
         var.ui.btnGrabaCli.clicked.connect(clients.Clientes.guardaCli)  # Acciones del boton de Aceptar
         var.ui.btnLimpiar.clicked.connect(clients.Clientes.limpiaFormcli)
-        var.ui.btnSalir.clicked.connect(events.Eventos.Salir)  # SAlir del programa
+        #var.ui.btnSalir.clicked.connect(events.Eventos.Salir)  # SAlir del programa
         # var.ui.rbtGroupSex.buttonClicked.connect(clients.Clientes.selSex)   #Seleccion del sexo
         # var.ui.chkGroupPago.buttonClicked.connect(clients.Clientes.selPago)  #Seleccion del metodo de pago
         var.ui.btnBajaCli.clicked.connect(clients.Clientes.bajaCli)
@@ -118,6 +119,16 @@ class Main(QtWidgets.QMainWindow):
 
         '''Eventos del Spinbox'''
         var.ui.spinEnvio.valueChanged.connect(clients.Clientes.envio)
+
+        '''FACTURACION'''
+
+        var.ui.btnBuscaCliFac.clicked.connect(invoice.Facturas.buscaCli)
+
+        '''botones'''
+        var.ui.btnFechaFac.clicked.connect(events.Eventos.abrirCal)
+        var.ui.btnFacturar.clicked.connect(invoice.Facturas.altaFac)
+
+
 if __name__ == '__main__':
     app = QtWidgets.QApplication([])
     window = Main()

@@ -387,3 +387,48 @@ class Conexion():
                 msg.exec()
         except Exception as error:
             print('Error en modificar clientes (conexión) ', error)
+
+    '''GESTION DE LA FACTURACION'''
+
+
+    def BuscaCliFac(dni):
+        try:
+            registro = []
+            query = QtSql.QSqlQuery()
+            query.prepare("select apellidos, nombre from clientes where dni = :dni")
+            query.bindValue(':dni', dni)
+            if query.exec_():
+                while query.next():
+                    for i in range(2):
+                        registro.append(query.value(i))
+            print(registro)
+            return registro
+        except Exception as error:
+            print('Error en BUSCAR CLIENTE PARA FACTURAS(conexión) ', error)
+
+
+    def AltaFac(registro):
+        try:
+
+            query = QtSql.QSqlQuery()
+            query.prepare(
+                'insert into facturas (dni, fecha) '
+                'VALUES (:dni, :fecha)')
+            query.bindValue(':dni', str(registro[0]))
+            query.bindValue(':fecha', str(registro[1]))
+            if query.exec_():
+                msg = QtWidgets.QMessageBox()
+                msg.setWindowTitle('AVISO')
+                msg.setIcon(QtWidgets.QMessageBox.Warning)
+                msg.setText('FACTURA CREADA CON EXISTO')
+                msg.exec()
+            else:
+                msg = QtWidgets.QMessageBox()
+                msg.setWindowTitle('ERROR!!!')
+                msg.setIcon(QtWidgets.QMessageBox.Warning)
+                msg.setText(query.lastError().text())
+                msg.exec()
+        except Exception as error:
+            print('Error en BUSCAR CLIENTE PARA FACTURAS(conexión) ', error)
+
+
