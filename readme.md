@@ -1,3 +1,5 @@
+No se que qeu mierda hice ahora o me va nada de articulos 
+- 
 - Eliminar el boton salir de la pantalla principla
 - crear un boton(imaghen) para buscar al lado del reecargar en ambor modulos
 - la tabla tien  que ser amplia para poder verla bien pero con ceherenca  con el resto

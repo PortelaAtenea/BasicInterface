@@ -10,7 +10,7 @@ class Facturas:
             registro = conexion.Conexion.BuscaCliFac(dni)
 
             nombre = registro[0] + ', ' +registro[1]
-            var.ui.txtCliFac.setText(nombre)
+            var.ui.lblNombreApel.setText(nombre)
             var.ui.txtDniFac.setText(dni)
         except Exception as e:
             print('Eror en Buascar cliente en facturas.:    ',e)
@@ -33,5 +33,22 @@ class Facturas:
             registro.append(str(fecha))
             print(registro)
             registro = conexion.Conexion.AltaFac(registro)
+
+
         except Exception as error:
-            print('Error al abrir el calendario ', error)
+            print('Error al dar de alta un calendario ', error)
+
+
+    def cargaFac(self):
+        try:
+            valor = 0
+            #Facturas.limpiaFormFac(self)
+            fila = var.ui.tabFac.selectedItems()  # seleciona la fila
+            datos = [var.ui.lblNumFac, var.ui.txtFechaFac]
+            if fila:
+                row = [dato.text() for dato in fila]
+            var.ui.lblNumFac.setText(row[0])
+            var.ui.txtFechaFac.setText(row[1])
+        except Exception as error:
+            print('Error en Cargar datos de Facturas', error)
+            return None

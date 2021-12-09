@@ -280,6 +280,13 @@ class Clientes():
             if str(registro[4]) == 'Envio internacional':
                 valor = 3
             var.ui.spinEnvio.setValue(valor)
+
+            #En el modulo Facturacion
+
+            nombre = row[1] + ', ' + row[2]
+            print(nombre)
+            var.ui.lblNombreApel.setText(nombre)
+            var.ui.txtDniFac.setText(row[0])
         except Exception as error:
             print('Error en Cargar datos de un cliente', error)
             return None

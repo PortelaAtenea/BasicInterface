@@ -198,9 +198,9 @@ background-color: rgb(239, 219, 255);</string>
        </property>
        <property name="icon">
         <iconset>
-         <normaloff>img/calendario.png</normaloff>
+         <normaloff>../../.designer/backup/img/calendario.png</normaloff>
          <disabledoff>../../.designer/backup/img/calendario.png</disabledoff>
-         <selectedoff>../../.designer/backup/img/calendario.png</selectedoff>img/calendario.png</iconset>
+         <selectedoff>../../.designer/backup/img/calendario.png</selectedoff>../../.designer/backup/img/calendario.png</iconset>
        </property>
        <property name="iconSize">
         <size>
@@ -302,7 +302,7 @@ background-color: rgb(239, 219, 255);</string>
        </property>
        <property name="icon">
         <iconset>
-         <normaloff>img/recargar.png</normaloff>img/recargar.png</iconset>
+         <normaloff>../../.designer/backup/img/recargar.png</normaloff>../../.designer/backup/img/recargar.png</iconset>
        </property>
        <property name="iconSize">
         <size>
@@ -707,16 +707,20 @@ background-color: rgb(239, 219, 255);</string>
         <height>101</height>
        </rect>
       </property>
+      <property name="styleSheet">
+       <string notr="true">background-color: rgb(231, 231, 231);
+background-color: rgb(249, 249, 249);</string>
+      </property>
       <property name="frameShape">
-       <enum>QFrame::StyledPanel</enum>
+       <enum>QFrame::Box</enum>
       </property>
       <property name="frameShadow">
-       <enum>QFrame::Raised</enum>
+       <enum>QFrame::Sunken</enum>
       </property>
       <widget class="QPushButton" name="btnFacturar">
        <property name="geometry">
         <rect>
-         <x>450</x>
+         <x>550</x>
          <y>60</y>
          <width>101</width>
          <height>23</height>
@@ -732,7 +736,7 @@ background-color: rgb(239, 219, 255);</string>
         <string>Facturar</string>
        </property>
       </widget>
-      <widget class="QWidget" name="">
+      <widget class="QWidget" name="layoutWidget">
        <property name="geometry">
         <rect>
          <x>20</x>
@@ -779,7 +783,7 @@ background-color: rgb(239, 219, 255);</string>
           </property>
           <property name="icon">
            <iconset>
-            <normaloff>img/buscar.png</normaloff>img/buscar.png</iconset>
+            <normaloff>../../.designer/backup/img/buscar.png</normaloff>../../.designer/backup/img/buscar.png</iconset>
           </property>
           <property name="iconSize">
            <size>
@@ -791,10 +795,10 @@ background-color: rgb(239, 219, 255);</string>
         </item>
        </layout>
       </widget>
-      <widget class="QWidget" name="">
+      <widget class="QWidget" name="layoutWidget">
        <property name="geometry">
         <rect>
-         <x>450</x>
+         <x>550</x>
          <y>10</y>
          <width>281</width>
          <height>34</height>
@@ -838,7 +842,7 @@ background-color: rgb(239, 219, 255);</string>
           </property>
           <property name="icon">
            <iconset>
-            <normaloff>img/calendario.png</normaloff>img/calendario.png</iconset>
+            <normaloff>../../.designer/backup/img/calendario.png</normaloff>../../.designer/backup/img/calendario.png</iconset>
           </property>
           <property name="iconSize">
            <size>
@@ -850,35 +854,141 @@ background-color: rgb(239, 219, 255);</string>
         </item>
        </layout>
       </widget>
-      <widget class="QWidget" name="">
+      <widget class="QLabel" name="lblNombreApel">
        <property name="geometry">
         <rect>
-         <x>20</x>
+         <x>80</x>
          <y>60</y>
-         <width>291</width>
-         <height>22</height>
+         <width>271</width>
+         <height>20</height>
         </rect>
        </property>
-       <layout class="QHBoxLayout" name="horizontalLayout_4">
-        <item>
-         <widget class="QLabel" name="lblApel_2">
-          <property name="font">
-           <font>
-            <pointsize>10</pointsize>
-            <weight>75</weight>
-            <bold>true</bold>
-           </font>
-          </property>
-          <property name="text">
-           <string>Cliente</string>
-          </property>
-         </widget>
-        </item>
-        <item>
-         <widget class="QLineEdit" name="txtCliFac"/>
-        </item>
-       </layout>
+       <property name="font">
+        <font>
+         <pointsize>10</pointsize>
+         <weight>50</weight>
+         <bold>false</bold>
+        </font>
+       </property>
+       <property name="styleSheet">
+        <string notr="true">background-color: rgb(240, 240, 240);
+background-color: rgb(252, 255, 235);</string>
+       </property>
+       <property name="text">
+        <string/>
+       </property>
       </widget>
+      <widget class="QLabel" name="lblApel_2">
+       <property name="geometry">
+        <rect>
+         <x>22</x>
+         <y>61</y>
+         <width>44</width>
+         <height>16</height>
+        </rect>
+       </property>
+       <property name="font">
+        <font>
+         <pointsize>10</pointsize>
+         <weight>75</weight>
+         <bold>true</bold>
+        </font>
+       </property>
+       <property name="text">
+        <string>Cliente</string>
+       </property>
+      </widget>
+      <widget class="QLabel" name="lblApel_4">
+       <property name="geometry">
+        <rect>
+         <x>251</x>
+         <y>21</y>
+         <width>106</width>
+         <height>16</height>
+        </rect>
+       </property>
+       <property name="font">
+        <font>
+         <pointsize>10</pointsize>
+         <weight>75</weight>
+         <bold>true</bold>
+        </font>
+       </property>
+       <property name="text">
+        <string>Numero factura:</string>
+       </property>
+      </widget>
+      <widget class="QLabel" name="lblNumFac">
+       <property name="enabled">
+        <bool>true</bool>
+       </property>
+       <property name="geometry">
+        <rect>
+         <x>363</x>
+         <y>21</y>
+         <width>141</width>
+         <height>20</height>
+        </rect>
+       </property>
+       <property name="font">
+        <font>
+         <pointsize>10</pointsize>
+         <weight>50</weight>
+         <bold>false</bold>
+        </font>
+       </property>
+       <property name="styleSheet">
+        <string notr="true">background-color: rgb(240, 240, 240);
+background-color: rgb(252, 255, 235);</string>
+       </property>
+       <property name="text">
+        <string/>
+       </property>
+      </widget>
+     </widget>
+     <widget class="Line" name="line_3">
+      <property name="geometry">
+       <rect>
+        <x>0</x>
+        <y>110</y>
+        <width>891</width>
+        <height>20</height>
+       </rect>
+      </property>
+      <property name="orientation">
+       <enum>Qt::Horizontal</enum>
+      </property>
+     </widget>
+     <widget class="QTableWidget" name="tabFac">
+      <property name="geometry">
+       <rect>
+        <x>10</x>
+        <y>130</y>
+        <width>211</width>
+        <height>441</height>
+       </rect>
+      </property>
+      <property name="font">
+       <font>
+        <pointsize>9</pointsize>
+       </font>
+      </property>
+      <property name="alternatingRowColors">
+       <bool>true</bool>
+      </property>
+      <attribute name="verticalHeaderDefaultSectionSize">
+       <number>40</number>
+      </attribute>
+      <column>
+       <property name="text">
+        <string>Num. Factura</string>
+       </property>
+      </column>
+      <column>
+       <property name="text">
+        <string>Fecha</string>
+       </property>
+      </column>
      </widget>
     </widget>
     <widget class="QWidget" name="tabArticulos">
@@ -1075,7 +1185,7 @@ background-color: rgb(239, 219, 255);</string>
        </property>
        <property name="icon">
         <iconset>
-         <normaloff>img/recargar.png</normaloff>img/recargar.png</iconset>
+         <normaloff>../../.designer/backup/img/recargar.png</normaloff>../../.designer/backup/img/recargar.png</iconset>
        </property>
        <property name="iconSize">
         <size>
@@ -1181,7 +1291,7 @@ background-color: rgb(239, 219, 255);</string>
       </property>
       <property name="icon">
        <iconset>
-        <normaloff>img/recargar.png</normaloff>img/recargar.png</iconset>
+        <normaloff>../../.designer/backup/img/recargar.png</normaloff>../../.designer/backup/img/recargar.png</iconset>
       </property>
       <property name="iconSize">
        <size>
@@ -1281,7 +1391,7 @@ background-color: rgb(239, 219, 255);</string>
   <action name="actionbarSalir">
    <property name="icon">
     <iconset>
-     <normaloff>img/salir.png</normaloff>img/salir.png</iconset>
+     <normaloff>../../.designer/backup/img/salir.png</normaloff>../../.designer/backup/img/salir.png</iconset>
    </property>
    <property name="text">
     <string>barSalir</string>
@@ -1290,7 +1400,7 @@ background-color: rgb(239, 219, 255);</string>
   <action name="actionbarAbrirCarpeta">
    <property name="icon">
     <iconset>
-     <normaloff>img/abrirCarpeta.jpg</normaloff>img/abrirCarpeta.jpg</iconset>
+     <normaloff>../../.designer/backup/img/abrirCarpeta.jpg</normaloff>../../.designer/backup/img/abrirCarpeta.jpg</iconset>
    </property>
    <property name="text">
     <string>barAbrirCarpeta</string>
@@ -1299,7 +1409,7 @@ background-color: rgb(239, 219, 255);</string>
   <action name="actionvarBackupRestaurar">
    <property name="icon">
     <iconset>
-     <normaloff>img/restaurarBackup.jpg</normaloff>img/restaurarBackup.jpg</iconset>
+     <normaloff>../../.designer/backup/img/restaurarBackup.jpg</normaloff>../../.designer/backup/img/restaurarBackup.jpg</iconset>
    </property>
    <property name="text">
     <string>varBackupRestaurar</string>
@@ -1308,7 +1418,7 @@ background-color: rgb(239, 219, 255);</string>
   <action name="actionvarBackupCrear">
    <property name="icon">
     <iconset>
-     <normaloff>img/crearBackup.jpg</normaloff>img/crearBackup.jpg</iconset>
+     <normaloff>../../.designer/backup/img/crearBackup.jpg</normaloff>../../.designer/backup/img/crearBackup.jpg</iconset>
    </property>
    <property name="text">
     <string>varBackupCrear</string>
@@ -1317,7 +1427,7 @@ background-color: rgb(239, 219, 255);</string>
   <action name="actionbarImprimir">
    <property name="icon">
     <iconset>
-     <normaloff>img/impresion.png</normaloff>img/impresion.png</iconset>
+     <normaloff>../../.designer/backup/img/impresion.png</normaloff>../../.designer/backup/img/impresion.png</iconset>
    </property>
    <property name="text">
     <string>barImpresion</string>
@@ -1345,11 +1455,11 @@ background-color: rgb(239, 219, 255);</string>
  <resources/>
  <connections/>
  <buttongroups>
+  <buttongroup name="rbtGroupSex"/>
   <buttongroup name="chkGroupPago">
    <property name="exclusive">
     <bool>false</bool>
    </property>
   </buttongroup>
-  <buttongroup name="rbtGroupSex"/>
  </buttongroups>
 </ui>

@@ -5,6 +5,7 @@ from datetime import datetime
 from PyQt5.QtWidgets import QFileDialog
 
 import archivo
+import articulos
 import clients
 import conexion
 import invoice
@@ -109,6 +110,8 @@ class Main(QtWidgets.QMainWindow):
         conexion.Conexion.db_connect(var.filedb)
         conexion.Conexion.cargaTabCli(self)
         clients.Clientes.cargaProv(self)
+        conexion.Conexion.cargaTabFac(self)
+        var.ui.tabFac.setSelectionBehavior(QtWidgets.QTableWidget.SelectRows)
         '''Eventos del menu de herramientas'''
 
         var.ui.actionbarSalir.triggered.connect(events.Eventos.Salir)
@@ -120,6 +123,30 @@ class Main(QtWidgets.QMainWindow):
         '''Eventos del Spinbox'''
         var.ui.spinEnvio.valueChanged.connect(clients.Clientes.envio)
 
+        '''                         Eventos Gastion de Articulos                        '''
+
+        '''Eventos de boton'''
+        #var.ui.btnSalirArti.clicked.connect(events.Eventos.Salir)  # botton de salir
+        var.ui.btnGrabaArti.clicked.connect(articulos.Articulos.guardaArti)  # Acciones del boton de Aceptar
+        var.ui.btnBajaArti.clicked.connect(articulos.Articulos.bajaArti)
+        var.ui.btnModifArti.clicked.connect(articulos.Articulos.modifArti)
+        var.ui.btnBuscar.clicked.connect(articulos.Articulos.buscarArti)
+        var.ui.btnRecargar.clicked.connect(conexion.Conexion.cargaTabArti)
+        var.ui.btnLimpiaArti.clicked.connect(articulos.Articulos.limpiaFormArti)
+
+        '''Eventos de la caje de texto'''
+        var.ui.txtNombreArti.editingFinished.connect(articulos.Articulos.mayus)
+
+        '''Eventos QTabWidget'''
+        events.Eventos.resizeTablaArti(self)
+        var.ui.tabArti.clicked.connect(articulos.Articulos.cargaArti)
+
+        var.ui.tabArti.setSelectionBehavior(QtWidgets.QTableWidget.SelectRows)
+
+
+
+        '''Eventos de la bbdd'''
+        conexion.Conexion.cargaTabArti(self)
         '''FACTURACION'''
 
         var.ui.btnBuscaCliFac.clicked.connect(invoice.Facturas.buscaCli)
@@ -128,6 +155,7 @@ class Main(QtWidgets.QMainWindow):
         var.ui.btnFechaFac.clicked.connect(events.Eventos.abrirCal)
         var.ui.btnFacturar.clicked.connect(invoice.Facturas.altaFac)
 
+        '''Tabla lateral facturas'''
 
 if __name__ == '__main__':
     app = QtWidgets.QApplication([])
