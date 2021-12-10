@@ -35,7 +35,7 @@ class Eventos():
         try:
             var.dlgcalendar.show()
         except Exception as error:
-            print('Error al abrir el calendario ', error)
+            print('Error al abrir el calendario', error)
 
 
     def resizeTablaCli(self):

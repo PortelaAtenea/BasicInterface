@@ -1,6 +1,4 @@
-No se que qeu mierda hice ahora o me va nada de articulos 
-- 
-- Eliminar el boton salir de la pantalla principla
+
 - crear un boton(imaghen) para buscar al lado del reecargar en ambor modulos
 - la tabla tien  que ser amplia para poder verla bien pero con ceherenca  con el resto
 
@@ -20,8 +18,16 @@ No se que qeu mierda hice ahora o me va nada de articulos
 ##Informes
 
 * poner imagen
+* no me va el forma de pagos
 
-
+##Tabla Facturas
+* Poner cosas en la tabla
+* Que al 
 
 ##BBDD
 * falta poner los delete on cascade en codFactura y dni cleinte
+
+##Ejemplo de examen posible:
+  * adaptacion de codigo a cosas DIFERENTES
+  * Eleccion de campos que quieres incluir en el informe
+  * nuevos campos de busqueda

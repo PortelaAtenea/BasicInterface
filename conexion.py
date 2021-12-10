@@ -440,12 +440,12 @@ class Conexion():
                 while query.next():
                     codFac = query.value(0)
                     fecha = query.value(1)
-                    var.ui.tabArti.setRowCount(index + 1)  # creamos la fila
+                    var.ui.tabFac.setRowCount(index + 1)  # creamos la fila
                     # cargamos datos
-                    var.ui.tabArti.setItem(index, 0, QTableWidgetItem(codFac))
-                    var.ui.tabArti.setItem(index, 1, QTableWidgetItem(fecha))
-                    var.ui.tabArti.takeItem(index, 0).setTextAligment(QtCore.Qt.AlignCenter)
-                    var.ui.tabArti.takeItem(index, 1).setTextAligment(QtCore.Qt.AlignCenter)
+                    var.ui.tabFac.setItem(index, 0, QTableWidgetItem(codFac))
+                    var.ui.tabFac.setItem(index, 1, QTableWidgetItem(fecha))
+                    #var.ui.tabArti.takeItem(index, 0).setTextAligment(QtCore.Qt.AlignCenter)
+                    #var.ui.tabArti.takeItem(index, 1).setTextAligment(QtCore.Qt.AlignCenter)
                     index += 1
 
         except Exception as error:

@@ -8,6 +8,7 @@ import archivo
 import articulos
 import clients
 import conexion
+import informes
 import invoice
 from windowaviso import *
 from window import *
@@ -133,6 +134,7 @@ class Main(QtWidgets.QMainWindow):
         var.ui.btnBuscar.clicked.connect(articulos.Articulos.buscarArti)
         var.ui.btnRecargar.clicked.connect(conexion.Conexion.cargaTabArti)
         var.ui.btnLimpiaArti.clicked.connect(articulos.Articulos.limpiaFormArti)
+        var.ui.btnVerReportcli.clicked.connect(informes.Informes.listadoClientes)
 
         '''Eventos de la caje de texto'''
         var.ui.txtNombreArti.editingFinished.connect(articulos.Articulos.mayus)
@@ -155,7 +157,9 @@ class Main(QtWidgets.QMainWindow):
         var.ui.btnFechaFac.clicked.connect(events.Eventos.abrirCal)
         var.ui.btnFacturar.clicked.connect(invoice.Facturas.altaFac)
 
-        '''Tabla lateral facturas'''
+        '''Eventos QTabWidget'''
+
+        var.ui.tabFac.setSelectionBehavior(QtWidgets.QTableWidget.SelectRows)
 
 if __name__ == '__main__':
     app = QtWidgets.QApplication([])
