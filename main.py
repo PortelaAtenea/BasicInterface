@@ -161,6 +161,8 @@ class Main(QtWidgets.QMainWindow):
 
         var.ui.tabFac.setSelectionBehavior(QtWidgets.QTableWidget.SelectRows)
 
+        var.ui.tabFac.clicked.connect(articulos.Articulos.cargaArti)
+
 if __name__ == '__main__':
     app = QtWidgets.QApplication([])
     window = Main()

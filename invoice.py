@@ -44,11 +44,7 @@ class Facturas:
             valor = 0
             #Facturas.limpiaFormFac(self)
             fila = var.ui.tabFac.selectedItems()  # seleciona la fila
-            datos = [var.ui.lblNumFac, var.ui.txtFechaFac]
-            if fila:
-                row = [dato.text() for dato in fila]
-            var.ui.lblNumFac.setText(row[0])
-            var.ui.txtFechaFac.setText(row[1])
+            print(fila) #Busca el resto de los datos de la factura
         except Exception as error:
             print('Error en Cargar datos de Facturas', error)
             return None
