@@ -55,7 +55,7 @@ background-color: rgb(239, 219, 255);</string>
     <property name="geometry">
      <rect>
       <x>0</x>
-      <y>40</y>
+      <y>30</y>
       <width>901</width>
       <height>621</height>
      </rect>
@@ -1009,9 +1009,9 @@ background-color: rgb(252, 255, 235);</string>
       <property name="geometry">
        <rect>
         <x>10</x>
-        <y>140</y>
+        <y>180</y>
         <width>271</width>
-        <height>441</height>
+        <height>401</height>
        </rect>
       </property>
       <property name="font">
@@ -1040,6 +1040,144 @@ background-color: rgb(252, 255, 235);</string>
         <string/>
        </property>
       </column>
+     </widget>
+     <widget class="QLabel" name="lblNumFac_4">
+      <property name="enabled">
+       <bool>true</bool>
+      </property>
+      <property name="geometry">
+       <rect>
+        <x>10</x>
+        <y>150</y>
+        <width>141</width>
+        <height>20</height>
+       </rect>
+      </property>
+      <property name="font">
+       <font>
+        <pointsize>10</pointsize>
+        <weight>50</weight>
+        <bold>false</bold>
+       </font>
+      </property>
+      <property name="styleSheet">
+       <string notr="true">background-color: rgb(240, 240, 240);
+background-color: rgb(252, 255, 235);</string>
+      </property>
+      <property name="text">
+       <string>NP</string>
+      </property>
+     </widget>
+     <widget class="QFrame" name="frame_2">
+      <property name="geometry">
+       <rect>
+        <x>420</x>
+        <y>140</y>
+        <width>331</width>
+        <height>31</height>
+       </rect>
+      </property>
+      <property name="frameShape">
+       <enum>QFrame::StyledPanel</enum>
+      </property>
+      <property name="frameShadow">
+       <enum>QFrame::Raised</enum>
+      </property>
+      <widget class="QLabel" name="lblNumFac_2">
+       <property name="enabled">
+        <bool>true</bool>
+       </property>
+       <property name="geometry">
+        <rect>
+         <x>90</x>
+         <y>10</y>
+         <width>141</width>
+         <height>20</height>
+        </rect>
+       </property>
+       <property name="font">
+        <font>
+         <pointsize>10</pointsize>
+         <weight>50</weight>
+         <bold>false</bold>
+        </font>
+       </property>
+       <property name="styleSheet">
+        <string notr="true">background-color: rgb(240, 240, 240);
+background-color: rgb(252, 255, 235);</string>
+       </property>
+       <property name="text">
+        <string>Ventas</string>
+       </property>
+      </widget>
+     </widget>
+     <widget class="QTableWidget" name="tabVentas">
+      <property name="geometry">
+       <rect>
+        <x>290</x>
+        <y>180</y>
+        <width>601</width>
+        <height>271</height>
+       </rect>
+      </property>
+      <property name="horizontalScrollBarPolicy">
+       <enum>Qt::ScrollBarAlwaysOff</enum>
+      </property>
+      <property name="alternatingRowColors">
+       <bool>true</bool>
+      </property>
+      <column>
+       <property name="text">
+        <string>codVentas</string>
+       </property>
+      </column>
+      <column>
+       <property name="text">
+        <string>producto</string>
+       </property>
+      </column>
+      <column>
+       <property name="text">
+        <string>precio</string>
+       </property>
+      </column>
+      <column>
+       <property name="text">
+        <string>cantidad</string>
+       </property>
+      </column>
+      <column>
+       <property name="text">
+        <string>total Venta</string>
+       </property>
+      </column>
+     </widget>
+     <widget class="QLabel" name="lblNumFac_5">
+      <property name="enabled">
+       <bool>true</bool>
+      </property>
+      <property name="geometry">
+       <rect>
+        <x>160</x>
+        <y>150</y>
+        <width>141</width>
+        <height>20</height>
+       </rect>
+      </property>
+      <property name="font">
+       <font>
+        <pointsize>10</pointsize>
+        <weight>50</weight>
+        <bold>false</bold>
+       </font>
+      </property>
+      <property name="styleSheet">
+       <string notr="true">background-color: rgb(240, 240, 240);
+background-color: rgb(252, 255, 235);</string>
+      </property>
+      <property name="text">
+       <string>fecha</string>
+      </property>
      </widget>
     </widget>
     <widget class="QWidget" name="tabArticulos">

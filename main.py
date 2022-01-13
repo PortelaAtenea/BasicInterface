@@ -159,6 +159,13 @@ class Main(QtWidgets.QMainWindow):
 
         '''Eventos QTabWidget'''
 
+
+
+        invoice.Facturas.cargarLineaVenta(self)
+        #invoice.Facturas.prepararTabFac(self)
+        var.ui.tabVentas.setSelectionBehavior(QtWidgets.QTableWidget.SelectRows)
+        events.Eventos.resizeTablaVentas(self)
+
         var.ui.tabFac.setSelectionBehavior(QtWidgets.QTableWidget.SelectRows)
 
         var.ui.tabFac.clicked.connect(articulos.Articulos.cargaArti)
