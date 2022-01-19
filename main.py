@@ -85,7 +85,8 @@ class Main(QtWidgets.QMainWindow):
         var.ui.txtApel.editingFinished.connect(clients.Clientes.mayus)
         var.ui.txtNome.editingFinished.connect(clients.Clientes.mayus)
         var.ui.txtDir.editingFinished.connect(clients.Clientes.mayus)
-
+        var.txtCantidad = QtWidgets.QLineEdit()
+        var.txtCantidad.editingFinished.connect(invoice.Facturas.totalLineaVenta)
         '''
         Eventos  de comboBox
         '''
@@ -153,6 +154,7 @@ class Main(QtWidgets.QMainWindow):
 
         var.ui.btnBuscaCliFac.clicked.connect(invoice.Facturas.buscaCli)
 
+
         '''botones'''
         var.ui.btnFechaFac.clicked.connect(events.Eventos.abrirCal)
         var.ui.btnFacturar.clicked.connect(invoice.Facturas.altaFac)
@@ -168,7 +170,10 @@ class Main(QtWidgets.QMainWindow):
 
         var.ui.tabFac.setSelectionBehavior(QtWidgets.QTableWidget.SelectRows)
 
-        var.ui.tabFac.clicked.connect(articulos.Articulos.cargaArti)
+        var.ui.tabFac.clicked.connect(invoice.Facturas.cargaFac)
+
+
+
 
 if __name__ == '__main__':
     app = QtWidgets.QApplication([])

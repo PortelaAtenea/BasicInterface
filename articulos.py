@@ -101,7 +101,7 @@ class Articulos():
             var.ui.txtNombreArti.setText(row[1])
             var.ui.spinPrecio.setValue(float(row[2]))
         except Exception as error:
-            print('Error en Cargar datos de un Articulo', error)
+            print('Error en Cargar datos de un Articulo- Articulos', error)
             return None
 
 

@@ -496,8 +496,47 @@ class Conexion():
                         record.append(query.value(i))
             query.prepare("select nombre , apellidos from clientes where dni = :dni")
             query.bindValue(':dni', query.value(2))
-            nombre = query.value(0) +' '+query.value(1)
+            nombre = query.value(0) ,' ',query.value(1)
             record.append(nombre)
             return record
         except Exception as error:
             print('Error en facturas en su sitio: :(  ', error)
+
+
+    def obtenerCodPrecio(articulo):
+
+
+        try:
+            record = []
+
+            query = QtSql.QSqlQuery()
+
+            query.prepare("select codigo, fecha ,dni from facturas where codFac = :codigo")
+            query.bindValue(':codigo', codigo)
+            if query.exec_():
+                while query.next():
+                    for i in range(3):
+                        record.append(query.value(i))
+            query.prepare("select nombre , apellidos from clientes where dni = :dni")
+            query.bindValue(':dni', query.value(2))
+            nombre = query.value(0), ' ', query.value(1)
+            record.append(nombre)
+            return record
+        except Exception as error:
+            print('Error en facturas en su sitio: :(  ', error)
+
+    def cargarCmbproducto(self):
+        prductos = []
+        precios = []
+        try:
+            query = QtSql.QSqlQuery()
+            query.prepare('SELECT nombre, precio FROM articulos')
+            if query.exec_():
+                while query.next():
+                    prductos.append(query.value(0))
+                    precios.append(query.value(0))
+                for i in prductos:
+                    var.cmbProducto.addItem(i)
+        except Exception as error:
+            print('Error en lista articulos (conexión) ', error)
+        return prductos
