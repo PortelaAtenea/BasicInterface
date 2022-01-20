@@ -577,7 +577,7 @@ class Conexion():
 
     def buscaCodFac(self):
         try:
-            dato =[]
+            dato =''
             query = QtSql.QSqlQuery()
             query.prepare('select codigo from facturas order by codigo desc limit 1')
             if query.exec_():

@@ -35,7 +35,7 @@ class Facturas:
             print(registro)
             registro = conexion.Conexion.AltaFac(registro)
             codfac = conexion.Conexion.buscaCodFac(self)
-            var.ui.lblNumFac.setText(codfac[0])
+            var.ui.lblNumFac.setText(codfac)
 
 
         except Exception as error:
