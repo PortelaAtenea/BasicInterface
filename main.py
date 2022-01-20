@@ -86,7 +86,7 @@ class Main(QtWidgets.QMainWindow):
         var.ui.txtNome.editingFinished.connect(clients.Clientes.mayus)
         var.ui.txtDir.editingFinished.connect(clients.Clientes.mayus)
         var.txtCantidad = QtWidgets.QLineEdit()
-        var.txtCantidad.editingFinished.connect(invoice.Facturas.totalLineaVenta)
+        var.txtCantidad.textEdited.connect(invoice.Facturas.totalLineaVenta)
         '''
         Eventos  de comboBox
         '''
@@ -112,7 +112,7 @@ class Main(QtWidgets.QMainWindow):
         conexion.Conexion.db_connect(var.filedb)
         conexion.Conexion.cargaTabCli(self)
         clients.Clientes.cargaProv(self)
-        conexion.Conexion.cargaTabFac(self)
+        conexion.Conexion.cargaTabFac()
         var.ui.tabFac.setSelectionBehavior(QtWidgets.QTableWidget.SelectRows)
         '''Eventos del menu de herramientas'''
 
@@ -171,6 +171,7 @@ class Main(QtWidgets.QMainWindow):
         var.ui.tabFac.setSelectionBehavior(QtWidgets.QTableWidget.SelectRows)
 
         var.ui.tabFac.clicked.connect(invoice.Facturas.cargaFac)
+
 
 
 

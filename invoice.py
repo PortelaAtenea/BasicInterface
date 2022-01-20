@@ -34,10 +34,12 @@ class Facturas:
             registro.append(str(fecha))
             print(registro)
             registro = conexion.Conexion.AltaFac(registro)
+            codfac = conexion.Conexion.buscaCodFac(self)
+            var.ui.lblNumFac.setText(codfac[0])
 
 
         except Exception as error:
-            print('Error al dar de alta un calendario ', error)
+            print('Error al dar de alta un factura(invoice.altaFac) ', error)
 
 
     def cargaFac(self):
@@ -63,33 +65,42 @@ class Facturas:
 
     def cargarLineaVenta(self):
         try:
-            print('cargar linea de venta')
+
             index = 0
-            var.cmbProducto = QtWidgets.QComboBox()
-            var.cmbProducto.setFixedSize(180,25)
-            conexion.Conexion.cargarCmbproducto(self)
-            #productos = (conexion.Conexion.cargarProductos)¡
-            #for i in productos:
-            #    var.ui.cmbProducto.addItem(i)
-            #var.txtCantidad = QtWidgets.QLineEdit()
-            var.txtCantidad.setFixedSize(70,25)
+            var.cmbProducto=QtWidgets.QComboBox()
+            var.cmbProducto.setFixedSize(150, 25)
+            # Hay que cargar el combo
+            conexion.Conexion.cargarCmbProducto(self)
+            # var.txtCantidad=QtWidgets.QLineEdit()
+            var.txtCantidad.setFixedSize(60, 25)
             var.txtCantidad.setAlignment(QtCore.Qt.AlignCenter)
-            var.ui.tabVentas.setRowCount(index +1)
-            var.ui.tabVentas.setCellWidget(index,1, var.cmbProducto)
-            var.ui.tabVentas.setCellWidget(index,3, var.txtCantidad)
+            var.ui.tabVentas.setRowCount(index + 1)
+            var.ui.tabVentas.setCellWidget(index, 1, var.cmbProducto)
+            var.ui.tabVentas.setCellWidget(index, 3, var.txtCantidad)
         except Exception as error:
             print('Error en Cargar la linea de venta(Invoice.Facturas.CargarLineaVenta):   ', error)
             return None
 
+
     def processVenta(self):
         try:
             row = var.ui.tabVentas.currentRow()
-            nombrearticulo = var.cmbProducto.currentText()
-            dato = conexion.Conexion.obtenerCodPrecio(nombrearticulo)
+            articulo = var.cmbProducto.currentText()
+            dato = conexion.Conexion.obtenerCodPrecio(articulo)
+
+            print(dato)
             var.ui.tabVentas.setItem(row, 2, QtWidgets.QTableWidgetItem(str(dato[1])))
-            var.ui.tabVentas.item(row, 2).setTextAligment(QtCore.Qt.AlignCenter)
-            precio = dato[1].replace('€','')
-            var.precio = precio.replace(',','.')
+            var.ui.tabVentas.item(row, 2).setTextAlignment(QtCore.Qt.AlignCenter)
+            # Adecuamos el campo de precio para pasarlo a float y operar con el
+            var.precio = dato[1].replace('€', '')
+            var.precio = var.precio.replace(',', '.')
+            var.precio = var.precio.replace(' ', '')
+
+            # cantidad=round(float(var.txtCantidad.text().replace(',', '.')), 2)
+            # print('cantidad')
+            # total_venta = float(precio) * float(cantidad)
+            # total_venta = round(total_venta, 2)
+            # total_linea=Facturas.totalLineaVenta(precio)
 
 
         except Exception as error:
@@ -99,11 +110,62 @@ class Facturas:
     def totalLineaVenta(self =None):
      try:
          row = var.ui.tabVentas.currentRow()
-         cantidad = round(float(var.txtCantidad.text().replace(',', '.')),2)
-         total_ventas= float(var.precio) * float(cantidad)
-         round(total_ventas,2)
-         var.ui.tabVentas.setItem(row, 4, QtWidgets.QTableWidgetItem(str(total_ventas) + '€'))
-         var.ui.tabVentas.item(row, 4).setTextAligment(QtCore.Qt.AlignRight)
+         cantidad = round(float(var.txtCantidad.text().replace(',', '.')), 2)
+         total_linea = round(float(var.precio) * float(cantidad), 2)
+         var.ui.tabVentas.setItem(row, 4, QtWidgets.QTableWidgetItem(str(total_linea) + '€'))
+         var.ui.tabVentas.item(row, 4).setTextAlignment(QtCore.Qt.AlignRight)
      except Exception as error:
          print('Error en (Invoice.Facturas.totalLineaVenta):   ', error)
-         return None
+
+         '''
+          def cargarLineaVenta(self):
+        try:
+            index=0
+            #var.cmbProducto=QtWidgets.QComboBox()
+            var.cmbProducto.setFixedSize(150,25)
+            # Hay que cargar el combo
+            conexion.Conexion.cargarCmbProducto(self)
+            #var.txtCantidad=QtWidgets.QLineEdit()
+            var.txtCantidad.setFixedSize(60,25)
+            var.txtCantidad.setAlignment(QtCore.Qt.AlignCenter)
+            var.ui.tabVentas.setRowCount(index+1)
+            var.ui.tabVentas.setCellWidget(index,1,var.cmbProducto)
+            var.ui.tabVentas.setCellWidget(index, 3, var.txtCantidad)
+        except Exception as error:
+            print('Error al cargar linea de venta ',error)
+
+    #Comprobar codigo:
+    def procesoVenta(self):
+        try:
+            row = var.ui.tabVentas.currentRow()
+            articulo = var.cmbProducto.currentText()
+            dato = conexion.Conexion.obtenerCodPrecio(articulo)
+
+            print(dato)
+            var.ui.tabVentas.setItem(row, 2, QtWidgets.QTableWidgetItem(str(dato[1])))
+            var.ui.tabVentas.item(row, 2).setTextAlignment(QtCore.Qt.AlignCenter)
+            #Adecuamos el campo de precio para pasarlo a float y operar con el
+            var.precio = dato[1].replace('€','')
+            var.precio=var.precio.replace(',','.')
+            var.precio = var.precio.replace(' ', '')
+
+            # cantidad=round(float(var.txtCantidad.text().replace(',', '.')), 2)
+            # print('cantidad')
+            # total_venta = float(precio) * float(cantidad)
+            # total_venta = round(total_venta, 2)
+            #total_linea=Facturas.totalLineaVenta(precio)
+        except Exception as error:
+            print('error en procesoVenta en invoice', error)
+
+    def totalLineaVenta(self=None):
+        try:
+            row = var.ui.tabVentas.currentRow()
+            cantidad=round(float(var.txtCantidad.text().replace(',', '.')), 2)
+            total_linea = round(float(var.precio)*float(cantidad),2)
+            var.ui.tabVentas.setItem(row, 4, QtWidgets.QTableWidgetItem(str(total_linea)+'€'))
+            var.ui.tabVentas.item(row, 4).setTextAlignment(QtCore.Qt.AlignRight)
+
+        except Exception as error:
+            print('Error en total linea venta de invoice: ',error)
+
+         '''
