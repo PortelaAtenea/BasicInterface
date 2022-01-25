@@ -1,0 +1,38 @@
+    def cargaFac(self):
+        try:
+            fila = var.ui.tabFacturas.selectedItems()  # seleccionamos la fila
+            datos = [var.ui.lblNumfac, var.ui.txtFechafac]
+            if fila:  # cargamos en row todos los datos de la fila
+                row = [dato.text() for dato in fila]
+            for i, dato in enumerate(datos):
+                dato.setText(row[i])
+            dni = conexion.Conexion.buscaDNIFac(row[0])
+            var.ui.txtDNIfac.setText(dni)
+            registro = conexion.Conexion.buscaClifac(dni)
+            if registro:
+                nombre = registro[0] + ', ' + registro[1]
+                var.ui.lblNomfac.setText(nombre)
+            conexion.Conexion.cargarLineasVenta(str(var.ui.lblNumfac.text()))
+
+        except Exception as error:
+            print('error alta en factura', error)
+
+
+
+    def cargarLineasVenta(codfac):
+        try:
+            var.ui.tabVentas.clearContents()
+            index = 0
+            query = QtSql.QSqlQuery()
+            query.prepare('select codventa,precio,cantidad from ventas where codfac = :codfac')
+            query.bindValue(':codfac', int(codfac))
+            if query.exec_():
+                while query.next():
+                    codventa = query.value(0)
+                    var.ui.tabVentas.setRowCount(index + 1)
+                    var.ui.tabVentas.setItem(index,0, QtWidgets.QTableWidgetItem(str(codventa)))
+                    var.ui.tabVentas.item(index, 0).setTextAlignment(QtCore.Qt.AlignCenter)
+                    index = index + 1
+
+        except Exception as error:
+            print('error cargar las lines de factura', error)

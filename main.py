@@ -2,7 +2,7 @@ import locale
 import sys, var, events, locale
 from datetime import datetime
 
-from PyQt5.QtWidgets import QFileDialog
+from PyQt5.QtWidgets import QFileDialog, QTableWidgetItem
 
 import archivo
 import articulos
@@ -91,7 +91,6 @@ class Main(QtWidgets.QMainWindow):
         Eventos  de comboBox
         '''
         var.ui.cmbProv.currentIndexChanged.connect(clients.Clientes.cargaMun)
-
         '''
         Barra de estado
         '''
@@ -164,6 +163,7 @@ class Main(QtWidgets.QMainWindow):
 
 
         invoice.Facturas.cargarLineaVenta(self)
+        invoice.Facturas.processVenta(self)
         #invoice.Facturas.prepararTabFac(self)
         var.ui.tabVentas.setSelectionBehavior(QtWidgets.QTableWidget.SelectRows)
         events.Eventos.resizeTablaVentas(self)

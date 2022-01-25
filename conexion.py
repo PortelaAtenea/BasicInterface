@@ -390,7 +390,7 @@ class Conexion():
 
     '''GESTION DE LA FACTURACION'''
 
-
+    #Busca el clinete para la facturacion(nombre y aplledos) ------> Funciona bien
     def BuscaCliFac(dni):
         try:
             registro = []
@@ -406,7 +406,7 @@ class Conexion():
         except Exception as error:
             print('Error en BUSCAR CLIENTE PARA FACTURAS(conexión) ', error)
 
-
+    # Da de alta la factura el al tabla factura ------> Funciona bien
     def AltaFac(registro):
         try:
 
@@ -431,9 +431,7 @@ class Conexion():
         except Exception as error:
             print('Error en BUSCAR CLIENTE PARA FACTURAS(conexión) ', error)
 
-
-
-
+    #Carga la los datos de la factura en la tabla -------> Funciona bien
     def cargaTabFac():
 
         try:
@@ -465,6 +463,8 @@ class Conexion():
         except Exception as error:
             print('Error en carga listado facturas ', error)
 
+    #Elimina la factura cuando le das al boton -------> No va(solo lo elimina cuando lo seleccionas primero)
+    #todo
     def bajaFac():
 
         try:
@@ -485,76 +485,71 @@ class Conexion():
         except Exception as error:
             print('Error en dar baja factura(conexion)', error)
 
-    def oneFac(codigo):
+    #Busca el dni de una factura -------> Funciona Bien
+    def buscaDNIFac(codigo):
 
         try:
-            record = []
 
             query = QtSql.QSqlQuery()
 
-            query.prepare("select codigo, fecha ,dni from facturas where codFac = :codigo")
+            query.prepare("select dni from facturas where codFac = :codigo")
             query.bindValue(':codigo', codigo)
             if query.exec_():
                 while query.next():
-                    for i in range(3):
-                        record.append(query.value(i))
-            query.prepare("select nombre , apellidos from clientes where dni = :dni")
-            query.bindValue(':dni', query.value(2))
-            nombre = query.value(0) ,' ',query.value(1)
-            record.append(nombre)
+                    record = str((query.value(0)))
             return record
         except Exception as error:
             print('Error en facturas en su sitio: :(  ', error)
 
-
-
-    def obtenerCodPrecio(articulo):
-
+    #Busca el nombre del cliente de una facura -------> Funciona Bien
+    def buscaClifac(dni):
 
         try:
-            record = []
 
             query = QtSql.QSqlQuery()
 
-            query.prepare("select codigo, fecha ,dni from facturas where codFac = :codigo")
-            query.bindValue(':codigo', codigo)
+            registro=[]
+            query.prepare("select nombre , apellidos from clientes where dni = :dni")
+            query.bindValue(':dni', dni)
             if query.exec_():
                 while query.next():
-                    for i in range(3):
-                        record.append(query.value(i))
-            query.prepare("select nombre , apellidos from clientes where dni = :dni")
-            query.bindValue(':dni', query.value(2))
-            nombre = query.value(0), ' ', query.value(1)
-            record.append(nombre)
-            return record
+                    for i in range(2):
+                        registro.append(str(query.value(i)))
+            print(registro)
+            return registro
         except Exception as error:
             print('Error en facturas en su sitio: :(  ', error)
 
-    def cargarCmbProducto(self):
-        dato = []
-        try:
-            query = QtSql.QSqlQuery()
-            query.prepare('SELECT nombre, precio FROM articulos')
-            if query.exec_():
-                while query.next():
-                    dato.append(query.value(0))
-                    dato.append(query.value(1))
-
-        except Exception as error:
-            print('Error en lista articulos (conexión) ', error)
-        return dato
+    #Carga el precio del producto -------> No va
+    #todo
     def CargarPrecioProd(prov):
         try:
+
             query = QtSql.QSqlQuery()
             query.prepare('SELECT precio FROM articulos WHERE nombre =:prov)')
             query.bindValue(':prov', str(prov))
             if query.exec_():
                 while query.next():
-                    precio=query.value(0)
+                    precio = str(query.value(0))
+                    print(precio)
         except Exception as error:
             print('Error en lista municipios (conexión) ', error)
-        return precio
 
+    #Carga el comboBox de la tabla con los productos -------> Funciona Bien
+    def cargarCmbProducto(self):
+        dato = []
+        try:
+            query = QtSql.QSqlQuery()
+            query.prepare('SELECT nombre FROM articulos')
+            if query.exec_():
+                while query.next():
+                    dato.append(query.value(0))
+
+        except Exception as error:
+            print('Error en lista articulos (conexión) ', error)
+        return dato
+
+    #Carga la venta cunado se le da al enter c en la tabla bventas -------> No Probado
     def CargarVenta(venta):
         try:
             query = QtSql.QSqlQuery()
@@ -574,7 +569,7 @@ class Conexion():
         except Exception as error:
             print('Error en Cargar venta (conexión.CargarVenta) ', error)
 
-
+    #Busca El codigo de la factura(no se para que)-------> No Probado
     def buscaCodFac(self):
         try:
             dato =''
@@ -590,31 +585,25 @@ class Conexion():
         except Exception as error:
             print('Error en Obtener codigo Factura (conexión.buscaCodFac) ', error)
 
-    '''
-    #Revisar:
-    def cargarCmbProducto(self):
+    #Carga la linea de venta(carga todas las ventas de una factura?)-------> No Probado
+    def CargarLineaVenta(codfac):
         try:
-            var.cmbProducto.clear()
+            var.ui.tabVentas.clearContents()
+            index = 0
             query = QtSql.QSqlQuery()
-            var.cmbProducto.addItem('')
-            query.prepare('select nombre from articulos order by nombre')
+            query.prepare('select codventa,precio,cantidad from ventas where codfac = :codfac')
+            query.bindValue(':codfac', int(codfac))
             if query.exec_():
                 while query.next():
-                    var.cmbProducto.addItem(str(query.value(0)))
+                    codventa = query.value(0)
+                    var.ui.tabVentas.setRowCount(index + 1)
+                    var.ui.tabVentas.setItem(index, 0, QtWidgets.QTableWidgetItem(str(codventa)))
+                    var.ui.tabVentas.item(index, 0).setTextAlignment(QtCore.Qt.AlignCenter)
+                    index = index + 1
         except Exception as error:
-            print('Fallo en cargarCmbProducto en conexion', error)
+            print('Error en Cargar la linea de venta (conexión.CargarLineaVenta) ', error)
 
-    def obtenerCodPrecio(articulo):
-        try:
-            dato = []
-            query = QtSql.QSqlQuery()
-            query.prepare('select codigo, precio from articulos where nombre = :nombre')
-            query.bindValue(':nombre', articulo)
-            if query.exec_():
-                while query.next():
-                    dato.append(int(query.value(0)))
-                    dato.append(str(query.value(1)))
-            return dato
-        except Exception as error:
-            print('Fallo en obtenerCodPrecio en conexion', error)
-    '''
+
+
+
+

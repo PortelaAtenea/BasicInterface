@@ -1,5 +1,6 @@
 '''Gestion de facturas'''
 from PyQt5 import QtWidgets, QtCore
+from PyQt5.QtWidgets import QTableWidgetItem
 
 import conexion
 import var
@@ -42,21 +43,6 @@ class Facturas:
             print('Error al dar de alta un factura(invoice.altaFac) ', error)
 
 
-    def cargaFac(self):
-        try:
-            valor = 0
-            #Facturas.limpiaFormFac(self)
-            fila = var.ui.tabFac.selectedItems()  # seleciona la fila #Busca el resto de los datos de la factura
-            if fila:
-                row = [dato.text() for dato in fila]
-            var.ui.lblNumFac.setText(row[0])
-            var.ui.txtFechaFac.setText(row[1])
-            numFac = row[0]
-            #acceder a los datos de la bbdd de facturas y clientes
-            cliente = conexion.Conexion.oneFac(numFac)
-            nombre = cliente[0]
-            var.ui.lblNombreApel.setText(str(nombre))
-            #cuando yo marque en una linea de la table, me lo prepara ya tambien en la tabla ventas
 
 
         except Exception as error:
@@ -67,10 +53,18 @@ class Facturas:
         try:
 
             index = 0
+            precio = ""
             var.cmbProducto=QtWidgets.QComboBox()
             var.cmbProducto.setFixedSize(150, 25)
             # Hay que cargar el combo
-            conexion.Conexion.cargarCmbProducto(self)
+            productos = conexion.Conexion.cargarCmbProducto(self)
+            for i in productos:
+                var.cmbProducto.addItem(i)
+            articulo = var.cmbProducto.currentText()
+            conexion.Conexion.CargarPrecioProd(articulo)
+            Facturas.processVenta(self)
+
+
             # var.txtCantidad=QtWidgets.QLineEdit()
             var.txtCantidad.setFixedSize(60, 25)
             var.txtCantidad.setAlignment(QtCore.Qt.AlignCenter)
@@ -84,17 +78,18 @@ class Facturas:
 
     def processVenta(self):
         try:
+            var.precio=""
             row = var.ui.tabVentas.currentRow()
             articulo = var.cmbProducto.currentText()
-            dato = conexion.Conexion.obtenerCodPrecio(articulo)
+            conexion.Conexion.CargarPrecioProd(articulo)
 
-            print(dato)
-            var.ui.tabVentas.setItem(row, 2, QtWidgets.QTableWidgetItem(str(dato[1])))
-            var.ui.tabVentas.item(row, 2).setTextAlignment(QtCore.Qt.AlignCenter)
-            # Adecuamos el campo de precio para pasarlo a float y operar con el
-            var.precio = dato[1].replace('€', '')
-            var.precio = var.precio.replace(',', '.')
-            var.precio = var.precio.replace(' ', '')
+            # print(dato)
+            # var.ui.tabVentas.setItem(row, 2, QtWidgets.QTableWidgetItem(str(dato[1])))
+            # var.ui.tabVentas.item(row, 2).setTextAlignment(QtCore.Qt.AlignCenter)
+            # # Adecuamos el campo de precio para pasarlo a float y operar con el
+            # var.precio = dato[1].replace('€', '')
+            # var.precio = var.precio.replace(',', '.')
+            # var.precio = var.precio.replace(' ', '')
 
             # cantidad=round(float(var.txtCantidad.text().replace(',', '.')), 2)
             # print('cantidad')
@@ -108,15 +103,34 @@ class Facturas:
             return None
 
     def totalLineaVenta(self =None):
-     try:
-         row = var.ui.tabVentas.currentRow()
-         cantidad = round(float(var.txtCantidad.text().replace(',', '.')), 2)
-         total_linea = round(float(var.precio) * float(cantidad), 2)
-         var.ui.tabVentas.setItem(row, 4, QtWidgets.QTableWidgetItem(str(total_linea) + '€'))
-         var.ui.tabVentas.item(row, 4).setTextAlignment(QtCore.Qt.AlignRight)
-     except Exception as error:
-         print('Error en (Invoice.Facturas.totalLineaVenta):   ', error)
+         try:
+             row = var.ui.tabVentas.currentRow()
+             cantidad = round(float(var.txtCantidad.text().replace(',', '.')), 2)
+             total_linea = round(float(precio) * float(cantidad), 2)
+             var.ui.tabVentas.setItem(row, 4, QtWidgets.QTableWidgetItem(str(total_linea) + '€'))
+             var.ui.tabVentas.item(row, 4).setTextAlignment(QtCore.Qt.AlignRight)
+         except Exception as error:
+             print('Error en (Invoice.Facturas.totalLineaVenta):   ', error)
 
+    def cargaFac(self):
+         try:
+             fila = var.ui.tabFac.selectedItems()  # seleccionamos la fila
+             datos = [var.ui.lblNumFac, var.ui.txtFechaFac]
+             if fila:  # cargamos en row todos los datos de la fila
+                 row = [dato.text() for dato in fila]
+             for i, dato in enumerate(datos):
+                 dato.setText(row[i])
+             dni = conexion.Conexion.buscaDNIFac(row[0])
+             var.ui.txtDniFac.setText(dni)
+             registro = conexion.Conexion.buscaClifac(dni)
+             if registro:
+                 nombre = registro[0] + ', ' + registro[1]
+                 var.ui.lblNombreApel.setText(nombre)
+             #Para cargar las ventsas en la tabla de ventas
+             #conexion.Conexion.cargarLineasVenta(str(var.ui.lblNumFac.text()))
+
+         except Exception as error:
+             print('error alta en factura', error)
          '''
           def cargarLineaVenta(self):
         try:
