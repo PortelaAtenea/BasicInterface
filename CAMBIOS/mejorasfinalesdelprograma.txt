@@ -1,0 +1,5 @@
+1. Acabar la factura en papel
+2. El 2º decimal cuando es 0
+3. Eliminar una venta en el proceso de venta
+4. Elimino una factura con lo que tengo que eliminar las ventas asociadas
+5. Botón de limpiar el contenido superior de la pestaña factura

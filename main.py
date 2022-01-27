@@ -163,7 +163,7 @@ class Main(QtWidgets.QMainWindow):
 
 
         invoice.Facturas.cargarLineaVenta(self)
-        invoice.Facturas.processVenta(self)
+        invoice.Facturas.procesoVenta(self)
         #invoice.Facturas.prepararTabFac(self)
         var.ui.tabVentas.setSelectionBehavior(QtWidgets.QTableWidget.SelectRows)
         events.Eventos.resizeTablaVentas(self)

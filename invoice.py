@@ -51,9 +51,9 @@ class Facturas:
 
     def cargarLineaVenta(self):
         try:
-
+            suma = 0.0
+            var.ui.tabVentas.clearContens()
             index = 0
-            precio = ""
             var.cmbProducto=QtWidgets.QComboBox()
             var.cmbProducto.setFixedSize(150, 25)
             # Hay que cargar el combo
@@ -61,11 +61,16 @@ class Facturas:
             for i in productos:
                 var.cmbProducto.addItem(i)
             articulo = var.cmbProducto.currentText()
-            conexion.Conexion.CargarPrecioProd(articulo)
-            Facturas.processVenta(self)
 
 
             # var.txtCantidad=QtWidgets.QLineEdit()
+            var.cmbProducto = QtWidgets.QComboBox()
+            var.cmbProducto.currentIndexChanged.connect(Facturas.procesoVenta)
+            var.cmbProducto.setFixedSize(170, 25)
+            conexion.Conexion.cargarCmbProducto(self=None)
+            var.txtCantidad = QtWidgets.QLineEdit()
+            var.txtCantidad.editingFinished.connect(Facturas.totalLineaVenta)
+
             var.txtCantidad.setFixedSize(60, 25)
             var.txtCantidad.setAlignment(QtCore.Qt.AlignCenter)
             var.ui.tabVentas.setRowCount(index + 1)
@@ -76,31 +81,31 @@ class Facturas:
             return None
 
 
-    def processVenta(self):
+    def procesoVenta(self):
         try:
             var.precio=""
             row = var.ui.tabVentas.currentRow()
             articulo = var.cmbProducto.currentText()
             conexion.Conexion.CargarPrecioProd(articulo)
 
-            # print(dato)
-            # var.ui.tabVentas.setItem(row, 2, QtWidgets.QTableWidgetItem(str(dato[1])))
-            # var.ui.tabVentas.item(row, 2).setTextAlignment(QtCore.Qt.AlignCenter)
-            # # Adecuamos el campo de precio para pasarlo a float y operar con el
-            # var.precio = dato[1].replace('€', '')
-            # var.precio = var.precio.replace(',', '.')
-            # var.precio = var.precio.replace(' ', '')
+            print(articulo)
+            var.ui.tabVentas.setItem(row, 2, QtWidgets.QTableWidgetItem(str(dato[1])))
+            var.ui.tabVentas.item(row, 2).setTextAlignment(QtCore.Qt.AlignCenter)
+            # Adecuamos el campo de precio para pasarlo a float y operar con el
+            var.precio = articulo[1].replace('€', '')
+            var.precio = var.precio.replace(',', '.')
+            var.precio = var.precio.replace(' ', '')
 
-            # cantidad=round(float(var.txtCantidad.text().replace(',', '.')), 2)
-            # print('cantidad')
-            # total_venta = float(precio) * float(cantidad)
-            # total_venta = round(total_venta, 2)
-            # total_linea=Facturas.totalLineaVenta(precio)
+            cantidad=round(float(var.txtCantidad.text().replace(',', '.')), 2)
+            print('cantidad')
+            total_venta = float(articulo) * float(cantidad)
+            total_venta = round(total_venta, 2)
+            total_linea=Facturas.totalLineaVenta(articulo)
 
 
         except Exception as error:
             print('Error en Cargar la linea de venta(Invoice.Facturas.processVenta):   ', error)
-            return None
+
 
     def totalLineaVenta(self =None):
          try:
