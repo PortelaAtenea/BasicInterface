@@ -243,6 +243,8 @@ class Conexion():
         except Exception as error:
             print('Error en conexion para exportar excel ', error)
 
+    '''MODULOS DE GESTION DE BASES DE DATOS DE ARTICULOS / PRODUCTOS'''
+
     def altaArti(newArti):
         try:
 
@@ -537,18 +539,34 @@ class Conexion():
 
     #Carga el comboBox de la tabla con los productos -------> Funciona Bien
     def cargarCmbProducto(self):
-        dato = []
         try:
+            var.cmbProducto.clear()
             query = QtSql.QSqlQuery()
-            query.prepare('SELECT nombre FROM articulos')
+            var.cmbProducto.addItem('')
+            query.prepare('select nombre from articulos order by nombre')
             if query.exec_():
                 while query.next():
-                    var.cmbProductos.addItem
-                    dato.append(query.value(0))
+                    var.cmbProducto.addItem(str(query.value(0)))
 
         except Exception as error:
             print('Error en lista articulos (conexión) ', error)
-        return dato
+
+    def cargarLineasVenta(codfac):
+        try:
+            index = 0
+            query = QtSql.QSqlQuery()
+            query.prepare('select codventa,precio,cantidad from ventas where codfac = :codfac')
+            query.bindValue(':codfac', int(codfac))
+            if query.exec_():
+                while query.next():
+                    codventa = query.value(0)
+                    var.ui.tabVentas.setRowCount(index + 1)
+                    var.ui.tabVentas.setItem(index, 0, QtWidgets.QTableWidgetItem(str(codventa)))
+                    var.ui.tabVentas.item(index, 0).setTextAlignment(QtCore.Qt.AlignCenter)
+                    index = index + 1
+
+        except Exception as error:
+            print('error cargar las lines de factura', error)
 
     #Carga la venta cunado se le da al enter c en la tabla bventas -------> No Probado
     def CargarVenta(venta):
@@ -586,36 +604,6 @@ class Conexion():
         except Exception as error:
             print('Error en Obtener codigo Factura (conexión.buscaCodFac) ', error)
 
-    #Carga la linea de venta(carga todas las ventas de una factura?)-------> No Probado
-    def CargarLineaVenta(codfac):
-        try:
-            suma = 0.0
-            var.ui.tabVentas.clearContents()
-            index = 0
-            query = QtSql.QSqlQuery()
-            query.prepare('select codventa,precio,cantidad from ventas where codfac = :codfac')
-            query.bindValue(':codfac', int(codfac))
-            if query.exec_():
-                i = 50
-                j = 655
-                while query.next():
-                    codventa = query.value(0)
-                    precio = str('{:.2f}'.format(round(query.value(1),2))) + ' €'
-                    cantidad = str('{:.2f}'.format(round(query.value(1)+query.value(2),2))).replace(',','.')
-                    articulo = Conexion.BuscarArt(str(query.value(3)))
-                    suma = suma + (round(query.value(1), 2)+round(query.value(2),2))).replace(',','.')
-                    var.cv.setFond('Helvetica', size = 8)
-                    var.cv.drawCenterString(i + 15, j, str(codventa))
-                    var.cv.drawString(210, 675, items[1])
-                    var.cv.drawString(350, 675, items[2])
-                    var.cv.line(40, 670, 530, 670)
-                    var.cv.setFont('Helvetica', size=8)
-                    var.ui.tabVentas.setRowCount(index + 1)
-                    var.ui.tabVentas.setItem(index, 0, QtWidgets.QTableWidgetItem(str(codventa)))
-                    var.ui.tabVentas.item(index, 0).setTextAlignment(QtCore.Qt.AlignCenter)
-                    index = index + 1
-        except Exception as error:
-            print('Error en Cargar la linea de venta (conexión.CargarLineaVenta) ', error)
 
 
 

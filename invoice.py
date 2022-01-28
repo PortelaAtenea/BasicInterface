@@ -25,6 +25,28 @@ class Facturas:
             print('Error al abrir el calendario ', error)
 
 
+    def cargaFac(self):
+         try:
+             fila = var.ui.tabFac.selectedItems()  # seleccionamos la fila
+             datos = [var.ui.lblNumFac, var.ui.txtFechaFac]
+             if fila:  # cargamos en row todos los datos de la fila
+                 row = [dato.text() for dato in fila]
+             for i, dato in enumerate(datos):
+                 dato.setText(row[i])
+             dni = conexion.Conexion.buscaDNIFac(row[0])
+             var.ui.txtDniFac.setText(dni)
+             registro = conexion.Conexion.buscaClifac(dni)
+             if registro:
+                 nombre = registro[0] + ', ' + registro[1]
+                 var.ui.lblNombreApel.setText(nombre)
+             #Para cargar las ventsas en la tabla de ventas
+             conexion.Conexion.cargarLineasVenta(str(var.ui.lblNumFac.text()))
+
+         except Exception as error:
+             print('error alta en factura', error)
+
+
+
     def altaFac(self):
         try:
             registro = []
@@ -43,28 +65,16 @@ class Facturas:
             print('Error al dar de alta un factura(invoice.altaFac) ', error)
 
 
-
-
-        except Exception as error:
-            print('Error en Cargar datos de Facturas', error)
-            return None
-
     def cargarLineaVenta(self):
         try:
             suma = 0.0
-            var.ui.tabVentas.clearContens()
+            productos = []
             index = 0
-            var.cmbProducto=QtWidgets.QComboBox()
             var.cmbProducto.setFixedSize(150, 25)
             # Hay que cargar el combo
-            productos = conexion.Conexion.cargarCmbProducto(self)
-            for i in productos:
-                var.cmbProducto.addItem(i)
+            conexion.Conexion.cargarCmbProducto()
             articulo = var.cmbProducto.currentText()
 
-
-            # var.txtCantidad=QtWidgets.QLineEdit()
-            var.cmbProducto = QtWidgets.QComboBox()
             var.cmbProducto.currentIndexChanged.connect(Facturas.procesoVenta)
             var.cmbProducto.setFixedSize(170, 25)
             conexion.Conexion.cargarCmbProducto(self=None)
@@ -111,80 +121,14 @@ class Facturas:
          try:
              row = var.ui.tabVentas.currentRow()
              cantidad = round(float(var.txtCantidad.text().replace(',', '.')), 2)
-             total_linea = round(float(precio) * float(cantidad), 2)
-             var.ui.tabVentas.setItem(row, 4, QtWidgets.QTableWidgetItem(str(total_linea) + '€'))
+
+             total_linea = round(float(var.precio) * float(cantidad), 2)
+             var.ui.tabVentas.setItem(row, 4, QtWidgets.QTableWidgetItem(str(total_linea)+'€'))
              var.ui.tabVentas.item(row, 4).setTextAlignment(QtCore.Qt.AlignRight)
          except Exception as error:
              print('Error en (Invoice.Facturas.totalLineaVenta):   ', error)
 
-    def cargaFac(self):
-         try:
-             fila = var.ui.tabFac.selectedItems()  # seleccionamos la fila
-             datos = [var.ui.lblNumFac, var.ui.txtFechaFac]
-             if fila:  # cargamos en row todos los datos de la fila
-                 row = [dato.text() for dato in fila]
-             for i, dato in enumerate(datos):
-                 dato.setText(row[i])
-             dni = conexion.Conexion.buscaDNIFac(row[0])
-             var.ui.txtDniFac.setText(dni)
-             registro = conexion.Conexion.buscaClifac(dni)
-             if registro:
-                 nombre = registro[0] + ', ' + registro[1]
-                 var.ui.lblNombreApel.setText(nombre)
-             #Para cargar las ventsas en la tabla de ventas
-             #conexion.Conexion.cargarLineasVenta(str(var.ui.lblNumFac.text()))
+'''
 
-         except Exception as error:
-             print('error alta en factura', error)
-         '''
-          def cargarLineaVenta(self):
-        try:
-            index=0
-            #var.cmbProducto=QtWidgets.QComboBox()
-            var.cmbProducto.setFixedSize(150,25)
-            # Hay que cargar el combo
-            conexion.Conexion.cargarCmbProducto(self)
-            #var.txtCantidad=QtWidgets.QLineEdit()
-            var.txtCantidad.setFixedSize(60,25)
-            var.txtCantidad.setAlignment(QtCore.Qt.AlignCenter)
-            var.ui.tabVentas.setRowCount(index+1)
-            var.ui.tabVentas.setCellWidget(index,1,var.cmbProducto)
-            var.ui.tabVentas.setCellWidget(index, 3, var.txtCantidad)
-        except Exception as error:
-            print('Error al cargar linea de venta ',error)
-
-    #Comprobar codigo:
-    def procesoVenta(self):
-        try:
-            row = var.ui.tabVentas.currentRow()
-            articulo = var.cmbProducto.currentText()
-            dato = conexion.Conexion.obtenerCodPrecio(articulo)
-
-            print(dato)
-            var.ui.tabVentas.setItem(row, 2, QtWidgets.QTableWidgetItem(str(dato[1])))
-            var.ui.tabVentas.item(row, 2).setTextAlignment(QtCore.Qt.AlignCenter)
-            #Adecuamos el campo de precio para pasarlo a float y operar con el
-            var.precio = dato[1].replace('€','')
-            var.precio=var.precio.replace(',','.')
-            var.precio = var.precio.replace(' ', '')
-
-            # cantidad=round(float(var.txtCantidad.text().replace(',', '.')), 2)
-            # print('cantidad')
-            # total_venta = float(precio) * float(cantidad)
-            # total_venta = round(total_venta, 2)
-            #total_linea=Facturas.totalLineaVenta(precio)
-        except Exception as error:
-            print('error en procesoVenta en invoice', error)
-
-    def totalLineaVenta(self=None):
-        try:
-            row = var.ui.tabVentas.currentRow()
-            cantidad=round(float(var.txtCantidad.text().replace(',', '.')), 2)
-            total_linea = round(float(var.precio)*float(cantidad),2)
-            var.ui.tabVentas.setItem(row, 4, QtWidgets.QTableWidgetItem(str(total_linea)+'€'))
-            var.ui.tabVentas.item(row, 4).setTextAlignment(QtCore.Qt.AlignRight)
-
-        except Exception as error:
-            print('Error en total linea venta de invoice: ',error)
 
          '''
