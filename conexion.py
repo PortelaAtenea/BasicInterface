@@ -604,6 +604,26 @@ class Conexion():
         except Exception as error:
             print('Error en Obtener codigo Factura (conexión.buscaCodFac) ', error)
 
+    #Elimina la venta seleccionada(A traves del botn btnBorrarVenta)-------> No Probado
+    def borrarVenta(self):
+        try:
+            print('Estas en borrar venta')
+            row = var.ui.tabVentas.currentRow()
+            codventa = var.ui.tabVentas.item(row, 0).text()
+            query = QtSql.QSqlQuery()
+            query.prepare('delete from ventas where codventa = :codventa')
+            query.bindValue(':codventa', int(codventa))
+            if query.exec_():
+
+                msg = QtWidgets.QMessageBox()
+                msg.setWindowTitle('AVISO')
+                msg.setIcon(QtWidgets.QMessageBox.Warning)
+                msg.setText('Venta Eliminada')
+                msg.exec()
+                codfac = var.ui.lblNumFac.text()
+                Conexion.cargarLineasVenta(codfac)
+        except Exception as error:
+            print('Error en Borrar Venta (conexión.borrarVenta) ', error)
 
 
 

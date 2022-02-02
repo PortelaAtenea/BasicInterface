@@ -23,6 +23,8 @@
 ##Tabla Facturas
 * Poner cosas en la tabla
 * Que al 
+* Boton de eliminar ventas
+* subtotal, iva, total _-Abajo
 
 ##BBDD
 * falta poner los delete on cascade en codFactura y dni cleinte

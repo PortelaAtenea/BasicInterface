@@ -81,7 +81,7 @@ class Articulos():
             print('Error en dar de baja un Articulo', error)
     def buscarArti(self):
         try:
-            nombre = var.ui.txtBusqueda.text()
+            nombre = var.ui.txtNombreArti.text()
             conexion.Conexion.buscaArti(nombre)
 
 

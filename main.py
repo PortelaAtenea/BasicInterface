@@ -57,7 +57,7 @@ class Main(QtWidgets.QMainWindow):
         '''
         Eventos de boton
         '''
-
+        #Tabla Clientes
         var.ui.btnCalendar.clicked.connect(events.Eventos.abrirCal)
         var.ui.btnGrabaCli.clicked.connect(clients.Clientes.guardaCli)  # Acciones del boton de Aceptar
         var.ui.btnLimpiar.clicked.connect(clients.Clientes.limpiaFormcli)
@@ -66,18 +66,24 @@ class Main(QtWidgets.QMainWindow):
         # var.ui.chkGroupPago.buttonClicked.connect(clients.Clientes.selPago)  #Seleccion del metodo de pago
         var.ui.btnBajaCli.clicked.connect(clients.Clientes.bajaCli)
         var.ui.btnModifCli.clicked.connect(clients.Clientes.modifCli)
-        #ARTICULOS
+        #Tabla Articulos
         var.ui.btnGrabaArti.clicked.connect(articulos.Articulos.guardaArti)  # Acciones del boton de Aceptar
         var.ui.btnBajaArti.clicked.connect(articulos.Articulos.bajaArti)
         var.ui.btnModifArti.clicked.connect(articulos.Articulos.modifArti)
         var.ui.btnBuscar.clicked.connect(articulos.Articulos.buscarArti)
-        var.ui.btnRecargar.clicked.connect(conexion.Conexion.cargaTabArti)
+        var.ui.btnLimpiaArti.clicked.connect(conexion.Conexion.cargaTabArti)
         var.ui.btnLimpiaArti.clicked.connect(articulos.Articulos.limpiaFormArti)
         var.ui.btnVerReportcli.clicked.connect(informes.Informes.listadoClientes)
+        #Tabla Facturas
+        var.ui.btnBuscaCliFac.clicked.connect(invoice.Facturas.buscaCli)
+        var.ui.btnFechaFac.clicked.connect(events.Eventos.abrirCal)
+        var.ui.btnFacturar.clicked.connect(invoice.Facturas.altaFac)
+        var.ui.btnBorrarVenta.clicked.connect(conexion.Conexion.borrarVenta)
 
         '''
         Eventos de la barra de menus
         '''
+        #Tabla Clientes
         var.ui.actionSalir.triggered.connect(events.Eventos.Salir)  # Salir del programa por la barrita de arriba
         var.ui.actionAbrir.triggered.connect(events.Eventos.abrir)
         var.ui.actionCrear_Buckup.triggered.connect(events.Eventos.crearBackup)
@@ -89,17 +95,20 @@ class Main(QtWidgets.QMainWindow):
         '''
         Eventos de la caje de texto
         '''
+        #Tabla Clientes
         var.ui.txtDni.editingFinished.connect(clients.Clientes.validarDNI)  # Validar dni
         var.ui.txtApel.editingFinished.connect(clients.Clientes.mayus)
         var.ui.txtNome.editingFinished.connect(clients.Clientes.mayus)
         var.ui.txtDir.editingFinished.connect(clients.Clientes.mayus)
+        #Tabla Facturas
         var.txtCantidad = QtWidgets.QLineEdit()
         var.txtCantidad.textEdited.connect(invoice.Facturas.totalLineaVenta)
-        #ARTICULOS
+        #Tabla Articulos
         var.ui.txtNombreArti.editingFinished.connect(articulos.Articulos.mayus)
         '''
         Eventos  de comboBox
         '''
+        #Tabla Clientes
         var.ui.cmbProv.currentIndexChanged.connect(clients.Clientes.cargaMun)
         '''
         Barra de estado
@@ -111,23 +120,36 @@ class Main(QtWidgets.QMainWindow):
         '''
         Eventos QTabWidget
         '''
-
+        #Tabla Clientes
         events.Eventos.resizeTablaCli(self)
         var.ui.tabClientes.clicked.connect(clients.Clientes.cargaCli)
         var.ui.tabClientes.setSelectionBehavior(QtWidgets.QTableWidget.SelectRows)
-        #ARTICULOS
+        #Tabla Articulos
         events.Eventos.resizeTablaArti(self)
         var.ui.tabArti.clicked.connect(articulos.Articulos.cargaArti)
         var.ui.tabArti.setSelectionBehavior(QtWidgets.QTableWidget.SelectRows)
+        #Tabla Facturas
+        invoice.Facturas.cargarLineaVenta(self)
+        invoice.Facturas.procesoVenta(self)
+        #invoice.Facturas.prepararTabFac(self)
+        var.ui.tabVentas.setSelectionBehavior(QtWidgets.QTableWidget.SelectRows)
+        events.Eventos.resizeTablaVentas(self)
+        var.ui.tabFac.setSelectionBehavior(QtWidgets.QTableWidget.SelectRows)
+        var.ui.tabFac.clicked.connect(invoice.Facturas.cargaFac)
+
         '''
         Eventos de la bbdd
         '''
+        #Tabla Clientes
         conexion.Conexion.db_connect(var.filedb)
         conexion.Conexion.cargaTabCli(self)
         clients.Clientes.cargaProv(self)
+        #Tabla Facturas
         conexion.Conexion.cargaTabFac()
         invoice.Facturas.cargarLineaVenta(self)
         var.ui.tabFac.setSelectionBehavior(QtWidgets.QTableWidget.SelectRows)
+        #Tabla Articulos
+        conexion.Conexion.cargaTabArti(self)
         '''Eventos del menu de herramientas'''
 
         var.ui.actionbarSalir.triggered.connect(events.Eventos.Salir)
@@ -137,44 +159,11 @@ class Main(QtWidgets.QMainWindow):
         var.ui.actionbarImprimir.triggered.connect(events.Eventos.imprimir)
 
         '''Eventos del Spinbox'''
+        #Tabla Clientes
         var.ui.spinEnvio.valueChanged.connect(clients.Clientes.envio)
 
-        '''                         Eventos Gastion de Articulos                        '''
-
-        '''Eventos de boton'''
-        #var.ui.btnSalirArti.clicked.connect(events.Eventos.Salir)  # botton de salir
 
 
-        '''Eventos de la caje de texto'''
-
-        '''Eventos QTabWidget'''
-
-
-
-        '''Eventos de la bbdd'''
-        conexion.Conexion.cargaTabArti(self)
-        '''FACTURACION'''
-
-        var.ui.btnBuscaCliFac.clicked.connect(invoice.Facturas.buscaCli)
-
-
-        '''botones'''
-        var.ui.btnFechaFac.clicked.connect(events.Eventos.abrirCal)
-        var.ui.btnFacturar.clicked.connect(invoice.Facturas.altaFac)
-
-        '''Eventos QTabWidget'''
-
-
-
-        invoice.Facturas.cargarLineaVenta(self)
-        invoice.Facturas.procesoVenta(self)
-        #invoice.Facturas.prepararTabFac(self)
-        var.ui.tabVentas.setSelectionBehavior(QtWidgets.QTableWidget.SelectRows)
-        events.Eventos.resizeTablaVentas(self)
-
-        var.ui.tabFac.setSelectionBehavior(QtWidgets.QTableWidget.SelectRows)
-
-        var.ui.tabFac.clicked.connect(invoice.Facturas.cargaFac)
 
 
 

@@ -1,8 +1,47 @@
-1. Acabar la factura en papel
+1. Acabar la factura en papel, con las sumas...y lo imprima directamente
 2. El 2º decimal cuando es 0
 3. Eliminar una venta en el proceso de venta
 4. Elimino una factura con lo que tengo que eliminar las ventas asociadas
 5. Botón de limpiar el contenido superior de la pestaña factura
+6. Ventana Acerca de (Autor, version, contacto,...)
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 Skip to content
