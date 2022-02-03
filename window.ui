@@ -197,10 +197,8 @@ background-color: rgb(239, 219, 255);</string>
         <string/>
        </property>
        <property name="icon">
-        <iconset>
-         <normaloff>../../.designer/backup/img/calendario.png</normaloff>
-         <disabledoff>../../.designer/backup/img/calendario.png</disabledoff>
-         <selectedoff>../../.designer/backup/img/calendario.png</selectedoff>../../.designer/backup/img/calendario.png</iconset>
+        <iconset resource="img/calendar.qrc">
+         <normaloff>:/newPrefix/calendario.png</normaloff>:/newPrefix/calendario.png</iconset>
        </property>
        <property name="iconSize">
         <size>
@@ -301,8 +299,8 @@ background-color: rgb(239, 219, 255);</string>
         <string/>
        </property>
        <property name="icon">
-        <iconset>
-         <normaloff>../../.designer/backup/img/recargar.png</normaloff>../../.designer/backup/img/recargar.png</iconset>
+        <iconset resource="img/limpiar.qrc">
+         <normaloff>:/newPrefix/recargar.png</normaloff>:/newPrefix/recargar.png</iconset>
        </property>
        <property name="iconSize">
         <size>
@@ -640,8 +638,8 @@ background-color: rgb(239, 219, 255);</string>
         <string/>
        </property>
        <property name="icon">
-        <iconset>
-         <normaloff>../../.designer/backup/img/impresion.png</normaloff>../../.designer/backup/img/impresion.png</iconset>
+        <iconset resource="img/impresion.qrc">
+         <normaloff>:/newPrefix/impresion.png</normaloff>:/newPrefix/impresion.png</iconset>
        </property>
        <property name="iconSize">
         <size>
@@ -663,13 +661,36 @@ background-color: rgb(239, 219, 255);</string>
         <string/>
        </property>
        <property name="icon">
-        <iconset>
-         <normaloff>../../.designer/backup/img/verPdf.png</normaloff>../../.designer/backup/img/verPdf.png</iconset>
+        <iconset resource="img/verPdf.qrc">
+         <normaloff>:/newPrefix/verPdf.png</normaloff>:/newPrefix/verPdf.png</iconset>
        </property>
        <property name="iconSize">
         <size>
          <width>32</width>
          <height>32</height>
+        </size>
+       </property>
+      </widget>
+      <widget class="QPushButton" name="btnLupa">
+       <property name="geometry">
+        <rect>
+         <x>340</x>
+         <y>10</y>
+         <width>31</width>
+         <height>31</height>
+        </rect>
+       </property>
+       <property name="text">
+        <string/>
+       </property>
+       <property name="icon">
+        <iconset resource="img/lupa.qrc">
+         <normaloff>:/newPrefix/buscar.png</normaloff>:/newPrefix/buscar.png</iconset>
+       </property>
+       <property name="iconSize">
+        <size>
+         <width>25</width>
+         <height>25</height>
         </size>
        </property>
       </widget>
@@ -828,8 +849,8 @@ background-color: rgb(249, 249, 249);</string>
            <string/>
           </property>
           <property name="icon">
-           <iconset>
-            <normaloff>img/buscar.png</normaloff>img/buscar.png</iconset>
+           <iconset resource="img/lupa.qrc">
+            <normaloff>:/newPrefix/buscar.png</normaloff>:/newPrefix/buscar.png</iconset>
           </property>
           <property name="iconSize">
            <size>
@@ -845,8 +866,8 @@ background-color: rgb(249, 249, 249);</string>
            <string/>
           </property>
           <property name="icon">
-           <iconset>
-            <normaloff>img/recargar.png</normaloff>img/recargar.png</iconset>
+           <iconset resource="img/limpiar.qrc">
+            <normaloff>:/newPrefix/recargar.png</normaloff>:/newPrefix/recargar.png</iconset>
           </property>
           <property name="iconSize">
            <size>
@@ -1030,8 +1051,8 @@ background-color: rgb(252, 255, 235);</string>
         <string/>
        </property>
        <property name="icon">
-        <iconset>
-         <normaloff>img/impresion.png</normaloff>img/impresion.png</iconset>
+        <iconset resource="img/impresion.qrc">
+         <normaloff>:/newPrefix/impresion.png</normaloff>:/newPrefix/impresion.png</iconset>
        </property>
       </widget>
       <widget class="QPushButton" name="btnBorrarVenta">
@@ -1053,8 +1074,8 @@ background-color: rgb(252, 255, 235);</string>
         <string/>
        </property>
        <property name="icon">
-        <iconset>
-         <normaloff>img/papelera.png</normaloff>img/papelera.png</iconset>
+        <iconset resource="img/basura.qrc">
+         <normaloff>:/newPrefix/papelera.png</normaloff>:/newPrefix/papelera.png</iconset>
        </property>
       </widget>
      </widget>
@@ -1547,8 +1568,8 @@ background-color: rgb(252, 255, 235);</string>
         <string/>
        </property>
        <property name="icon">
-        <iconset>
-         <normaloff>img/recargar.png</normaloff>img/recargar.png</iconset>
+        <iconset resource="img/limpiar.qrc">
+         <normaloff>:/newPrefix/recargar.png</normaloff>:/newPrefix/recargar.png</iconset>
        </property>
        <property name="iconSize">
         <size>
@@ -1580,8 +1601,8 @@ background-color: rgb(252, 255, 235);</string>
         <string/>
        </property>
        <property name="icon">
-        <iconset>
-         <normaloff>img/buscar.png</normaloff>img/buscar.png</iconset>
+        <iconset resource="img/lupa.qrc">
+         <normaloff>:/newPrefix/buscar.png</normaloff>:/newPrefix/buscar.png</iconset>
        </property>
        <property name="iconSize">
         <size>
@@ -1717,8 +1738,8 @@ background-color: rgb(252, 255, 235);</string>
   </action>
   <action name="actionbarSalir">
    <property name="icon">
-    <iconset>
-     <normaloff>../../.designer/backup/img/salir.png</normaloff>../../.designer/backup/img/salir.png</iconset>
+    <iconset resource="img/salir.qrc">
+     <normaloff>:/newPrefix/salir.png</normaloff>:/newPrefix/salir.png</iconset>
    </property>
    <property name="text">
     <string>barSalir</string>
@@ -1726,8 +1747,8 @@ background-color: rgb(252, 255, 235);</string>
   </action>
   <action name="actionbarAbrirCarpeta">
    <property name="icon">
-    <iconset>
-     <normaloff>../../.designer/backup/img/abrirCarpeta.jpg</normaloff>../../.designer/backup/img/abrirCarpeta.jpg</iconset>
+    <iconset resource="img/abrirCarpeta.qrc">
+     <normaloff>:/newPrefix/abrirCarpeta.jpg</normaloff>:/newPrefix/abrirCarpeta.jpg</iconset>
    </property>
    <property name="text">
     <string>barAbrirCarpeta</string>
@@ -1735,8 +1756,8 @@ background-color: rgb(252, 255, 235);</string>
   </action>
   <action name="actionvarBackupRestaurar">
    <property name="icon">
-    <iconset>
-     <normaloff>../../.designer/backup/img/restaurarBackup.jpg</normaloff>../../.designer/backup/img/restaurarBackup.jpg</iconset>
+    <iconset resource="img/restaurarBackup.qrc">
+     <normaloff>:/newPrefix/restaurarBackup.jpg</normaloff>:/newPrefix/restaurarBackup.jpg</iconset>
    </property>
    <property name="text">
     <string>varBackupRestaurar</string>
@@ -1744,8 +1765,8 @@ background-color: rgb(252, 255, 235);</string>
   </action>
   <action name="actionvarBackupCrear">
    <property name="icon">
-    <iconset>
-     <normaloff>../../.designer/backup/img/crearBackup.jpg</normaloff>../../.designer/backup/img/crearBackup.jpg</iconset>
+    <iconset resource="img/crearBackup.qrc">
+     <normaloff>:/newPrefix/crearBackup.jpg</normaloff>:/newPrefix/crearBackup.jpg</iconset>
    </property>
    <property name="text">
     <string>varBackupCrear</string>
@@ -1753,8 +1774,8 @@ background-color: rgb(252, 255, 235);</string>
   </action>
   <action name="actionbarImprimir">
    <property name="icon">
-    <iconset>
-     <normaloff>../../.designer/backup/img/impresion.png</normaloff>../../.designer/backup/img/impresion.png</iconset>
+    <iconset resource="img/impresion.qrc">
+     <normaloff>:/newPrefix/impresion.png</normaloff>:/newPrefix/impresion.png</iconset>
    </property>
    <property name="text">
     <string>barImpresion</string>
@@ -1779,14 +1800,25 @@ background-color: rgb(252, 255, 235);</string>
    </property>
   </action>
  </widget>
- <resources/>
+ <resources>
+  <include location="img/limpiar.qrc"/>
+  <include location="img/basura.qrc"/>
+  <include location="img/restaurarBackup.qrc"/>
+  <include location="img/crearBackup.qrc"/>
+  <include location="img/salir.qrc"/>
+  <include location="img/abrirCarpeta.qrc"/>
+  <include location="img/impresion.qrc"/>
+  <include location="img/verPdf.qrc"/>
+  <include location="img/calendar.qrc"/>
+  <include location="img/lupa.qrc"/>
+ </resources>
  <connections/>
  <buttongroups>
-  <buttongroup name="rbtGroupSex"/>
   <buttongroup name="chkGroupPago">
    <property name="exclusive">
     <bool>false</bool>
    </property>
   </buttongroup>
+  <buttongroup name="rbtGroupSex"/>
  </buttongroups>
 </ui>

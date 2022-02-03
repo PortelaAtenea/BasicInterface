@@ -564,6 +564,8 @@ class Conexion():
                     var.ui.tabVentas.setItem(index, 0, QtWidgets.QTableWidgetItem(str(codventa)))
                     var.ui.tabVentas.item(index, 0).setTextAlignment(QtCore.Qt.AlignCenter)
                     index = index + 1
+                    var.ui.tabVentas.scrollTabItem()
+
 
         except Exception as error:
             print('error cargar las lines de factura', error)

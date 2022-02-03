@@ -1,0 +1,14 @@
+
+    def cargaCliFac(self):
+        # carga datos de cliente en Facturación al seleccionar en tabla Clientes
+        try:
+            fila = var.ui.tabClientes.selectedItems() #seleccionamos fila en tab clientes
+            datos = [var.ui.txtDNIfac, var.ui.lblNomfac]
+            if fila:
+                row = [dato.text() for dato in fila]
+            for i, dato in enumerate(datos):
+                dato.setText(row[i]) #cargamos los datos en las cajas de texto
+            '''carga el dni y los apellidos, falta nombre'''
+
+        except Exception as error:
+            print("Error en cargar datos de un cliente en Facturación", error)
