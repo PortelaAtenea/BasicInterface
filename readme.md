@@ -46,3 +46,20 @@ from img import lupa
 from img import restaurarBackup
 from img import salir
 from img import verPdf
+
+
+
+
+
+
+Error en Cargar la linea de venta(Invoice.Facturas.CargarLineaVenta):    
+arguments did not match any overloaded call:
+  setFixedSize(self, QSize): first argument of unbound method must have type 'QWidget'
+  setFixedSize(self, int, int): first argument of unbound method must have type 'QWidget'
+Error en Cargar la linea de venta(Invoice.Facturas.processVenta):    currentText(self): first argument of unbound method must have type 'QComboBox'
+Conexion establecida
+Error en Cargar la linea de venta(Invoice.Facturas.CargarLineaVenta):    arguments did not match any overloaded call:
+  setFixedSize(self, QSize): first argument of unbound method must have type 'QWidget'
+  setFixedSize(self, int, int): first argument of unbound method must have type 'QWidget'
+Error en Borrar Venta Factura (conexión.delVentaFac)  invalid literal for int() with base 10: ''
+Error en dar baja factura(conexion) invalid literal for int() with base 10: ''

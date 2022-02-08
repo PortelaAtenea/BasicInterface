@@ -11,6 +11,8 @@ global dlgabrir
 global copia
 global archivoDatos
 global cv
+global txtCantidad
+global cmbProducto
 filedb = 'bbdd.sqlite'
 filexlsx = 'DATOSCLIENTES.xls'
 

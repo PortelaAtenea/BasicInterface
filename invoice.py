@@ -70,6 +70,7 @@ class Facturas:
             suma = 0.0
             productos = []
             index = 0
+            var.cmbProducto = QtWidgets.QComboBox
             var.cmbProducto.setFixedSize(150, 25)
             # Hay que cargar el combo
             conexion.Conexion.cargarCmbProducto()
@@ -95,6 +96,7 @@ class Facturas:
         try:
             var.precio=""
             row = var.ui.tabVentas.currentRow()
+            print(row)
             articulo = var.cmbProducto.currentText()
             conexion.Conexion.CargarPrecioProd(articulo)
 
@@ -114,7 +116,7 @@ class Facturas:
 
 
         except Exception as error:
-            print('Error en Cargar la linea de venta(Invoice.Facturas.processVenta):   ', error)
+            print('Error en Cargar la linea de venta(Invoice.Facturas.procesoVenta):   ', error)
 
 
     def totalLineaVenta(self =None):

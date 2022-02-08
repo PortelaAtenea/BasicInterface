@@ -6,6 +6,7 @@ from PyQt5 import QtCore, QtGui, QtWidgets
 from PyQt5.QtWidgets import QTableWidgetItem, QMessageBox
 
 import archivo
+import invoice
 import var
 
 
@@ -472,17 +473,19 @@ class Conexion():
         try:
 
             numfac = var.ui.lblNumFac.text()
+            Conexion.delVentaFac(numfac)
             query = QtSql.QSqlQuery()
             query.prepare('delete from facturas where codfac = :codfac')
             query.bindValue(':codfac', int(numfac))
             if query.exec_():
-                Conexion.cargaTabFac()
                 msgBox = QMessageBox()
                 msgBox.setIcon(QtWidgets.QMessageBox.Information)
                 msgBox.setText("La factura ha sido dada de baja")
                 msgBox.setWindowTitle("Aviso")
                 msgBox.setStandardButtons(QMessageBox.Ok)
                 msgBox.exec()
+                Conexion.cargaTabFac()
+                Conexion.delVentaFac()
 
         except Exception as error:
             print('Error en dar baja factura(conexion)', error)
@@ -626,6 +629,28 @@ class Conexion():
                 Conexion.cargarLineasVenta(codfac)
         except Exception as error:
             print('Error en Borrar Venta (conexión.borrarVenta) ', error)
+    #Elimina la venta seleccionada(A traves del botn btnBorrarVenta)-------> No Probado
+    def delVentaFac(codfac):
+        try:
+            ventas=[]
+            query = QtSql.QSqlQuery()
+            query.prepare('select codventa from ventas where codfac = :codfac')
+            query.bindValue(':codfac', int(codfac))
+            if query.exec_():
+                ventas.append(query.value(0))
+            for dato in ventas:
+                query = QtSql.QSqlQuery()
+                query.prepare('delete from ventas where codventa = :codventa')
+                query.bindValue(':codventa', int(dato))
+                if query.exec_():
+                    pass
+                var.ui.tabVentas.clearContent()
+                invoice.Facturas.cargarLineaVenta()
+                var.ui.lblIva.setText('')
+                var.ui.lblSubtotal.setText('')
+                var.ui.lblTotal.setText('')
+        except Exception as error:
+            print('Error en Borrar Venta Factura (conexión.delVentaFac) ', error)
 
 
 
