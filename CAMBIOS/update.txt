@@ -1,0 +1,31 @@
+      public void GsonCreator(){
+        builder = new GsonBuilder();
+        gson = builder.create();
+    }
+
+    public void ObtenerAcceso() {
+        client= MongoClients.create("mongodb+srv://Sergio:sergio@cluster0.7yl6t.mongodb.net/myFirstDatabase?retryWrites=true&w=majority");
+        db= client.getDatabase("Distribuidora");
+
+        col= db.getCollection("Videojuegos");
+
+    }
+
+
+
+
+
+
+ @Override
+    public void update(Videojuego videojuego) {
+        ObtenerAcceso();
+
+        BasicDBObject filtroModificar = new BasicDBObject();
+        filtroModificar.put("_id", videojuego.get_id());
+
+        BasicDBObject SetModificacion = new BasicDBObject();
+        String stringintermedio= gson.toJson(videojuego);
+        SetModificacion.append("$set",Document.parse(stringintermedio));
+        col.updateOne(filtroModificar,SetModificacion);
+        client.close();
+    }

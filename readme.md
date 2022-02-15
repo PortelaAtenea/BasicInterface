@@ -3,18 +3,28 @@
 - la tabla tien  que ser amplia para poder verla bien pero con ceherenca  con el resto
 
 
+-El programa funciona 
+-3 mejoras con distintos apastados
+-1 hora por mejora
+-la documentacion tien eque estar hecha
+-ejecutable
+-el exe es necesario(como minimo)(es previo a la mejora del exemen)
+-
+
+https://github.com/XoanCarlos?tab=repositories
+
 ##Modulo Articulos
 
-* codigo y precio en tabla ajustado al contenido, en nombre que noja el resto
+[* codi*go y precio en tabla ajustado al contenido, en nombre que noja el resto
 * color rojo el codigo
 * arregalr el coso del precio:
   * si es con coma o con punto da igual, se peude guardar igual pero cse cambia igual al qeu es correcto: --> precio = precio.remplace(',', ''.')????Mas o meneso, creo
   * tine que poder poner la current moneda del --- > precio = locale.currency(float(precio))
   * en la base de datos se guarda como texto porque va con en € 
   * cuando se cojen los datos de los precios se quita el€ y se cambia la , por el .
+  ** 
   * 
-  * 
-
+]()
 ##Informes
 
 * poner imagen

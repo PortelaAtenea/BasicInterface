@@ -14,6 +14,11 @@ import var
 class Clientes():
 
     def validarDNI():
+        """
+
+        :return:
+        :rtype:
+        """
         try:
             global validodni
             validodni = False
@@ -82,6 +87,9 @@ class Clientes():
     #         print('Error en modulo Seleccionar modo de pago')
 
     def cargaProv(self):
+        """
+
+        """
         try:
             var.ui.cmbProv.clear()
             prov = conexion.Conexion.listaProvincias(self)
@@ -108,6 +116,9 @@ class Clientes():
     #         print('Error en seleccion municipio', error)
 
     def cargarFecha(qDate):
+        """
+
+        """
         try:
             data = ('{0}/{1}/{2}'.format(qDate.day(), qDate.month(), qDate.year()))
 

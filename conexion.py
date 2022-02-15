@@ -11,7 +11,24 @@ import var
 
 
 class Conexion():
+    #me falta modulo create_db(filedb):
+    '''
+        """
+
+        Modulo uqe se ejecuta al principio de programa
+        Crea las tablas y carga ,unicipios y provincias en la basa de datos
+        Crea los directorios necesario
+        :rtype: object
+
+        """'''
     def db_connect(filedb):
+        """
+
+        Realiza la conexion a la basa de datos
+        :return: boolean, True si es correcto, false si hay un errror
+        :rtype: String
+
+        """
         try:
             db = QtSql.QSqlDatabase.addDatabase('QSQLITE')
             db.setDatabaseName(filedb)
@@ -26,9 +43,20 @@ class Conexion():
         except Exception as error:
             print('Problemas en la conexion ', error)
 
+    #def existeDni(dni)
+    #Modulo uqe busca un deni en la bbdd
+    #retorna true si existe el dni
+
+
+    # def existeDni(dni)
+    # Modulo uqe busca un deni en la bbdd
+    # retorna true si existe el dni
     '''MODULOS GESTION BASE DE DATOS CLIENTES'''
 
     def altaCli(newcli):
+        """
+        Modulo que recibe los datos de un cliente y los carga en la bbdd
+        """
         try:
 
             query = QtSql.QSqlQuery()
@@ -67,7 +95,16 @@ class Conexion():
         except Exception as error:
             print('Problemas con el nuevo cliente ', error)
 
+    # def AltaClienteExcel(dni)
+    # Modulo que carga un nuevo cliente en la tabla execel
+    # retorna true si existe el dni
     def cargaTabCli(self):
+        """
+
+        Modulo que toma datos de los clientes y los carga en la tabla de la interfaz grafica
+        :rtype: object
+
+        """
         try:
             index = 0
             query = QtSql.QSqlQuery()
@@ -92,7 +129,13 @@ class Conexion():
             print('Problemas al mostrar table clientes :(  ', error)
 
     def oneClie(dni):
+        """
 
+        Modulo que seleciona un cliente segun su dni y lo debvuelve a la funcion cargaCli del fichero clientesdel fichero clietes
+
+        :return: Object
+        :rtype: String
+        """
         try:
             record = []
 
@@ -113,6 +156,13 @@ class Conexion():
 
 
     def bajaCli( dni):
+        """
+
+        Modulo que recibe dni del cliente y lo elimina de la bbdd
+        :return: None
+        :rtype: String
+
+        """
         try:
             query = QtSql.QSqlQuery()
             query.prepare('delete from clientes where dni = :dni')
@@ -135,6 +185,11 @@ class Conexion():
             return None
 
     def listaMunicipios(prov):
+        """
+        Modulo que seleciona los municipios dadda una provincia y la carga en la combobozx del panel cliente
+        :return:
+        :rtype:
+        """
         municipios = []
         try:
             query = QtSql.QSqlQuery()
@@ -148,6 +203,11 @@ class Conexion():
         return municipios
 
     def listaProvincias(self):
+        """
+        Modulo que carga las provincias Españolas a la intefaz
+        :return: Lista
+        :rtype: Object
+        """
         provincias = []
         try:
             query = QtSql.QSqlQuery()
@@ -161,6 +221,9 @@ class Conexion():
 
 
     def modifCli( modcliente):
+        """
+        Modulo que recibe los datos del cliente al modificar y lo modifica en la bbdd
+        """
         try:
             query = QtSql.QSqlQuery()
             query.prepare('UPDATE clientes SET alta =:alta, apellidos =:apellidos, nombre =:nombre, direccion =:direcion, provincia =:provincia, municipio =:municipio, '
@@ -190,6 +253,16 @@ class Conexion():
         except Exception as error:
             print('Error en modificar clientes (conexión) ', error)
 
+    def comprobardni( dni):
+        """
+        Modulo que si el dni es correcto
+        retorna un boleano y recoje un String
+        """
+    def buscaCli( dni):
+        """
+        Modulo que busca un dni
+        retorna un boleano y recoje un String
+        """
     def altaCliEx(newcli):
         try:
             query = QtSql.QSqlQuery()
@@ -247,6 +320,9 @@ class Conexion():
     '''MODULOS DE GESTION DE BASES DE DATOS DE ARTICULOS / PRODUCTOS'''
 
     def altaArti(newArti):
+        """
+        Modulo que recibe datos de un producto y los carga en la bbdd
+        """
         try:
 
             query = QtSql.QSqlQuery()
@@ -274,6 +350,11 @@ class Conexion():
             print('Problemas con el nuevo cliente ', error)
 
     def cargaTabArti(self):
+        """
+
+        modulo qeu recarga la tabla de productos en el paneal de articulos siempre que se dea de alta baja o modificacion un producto
+
+        """
         try:
             index = 0
             query = QtSql.QSqlQuery()
@@ -293,6 +374,11 @@ class Conexion():
         except Exception as error:
             print('Problemas al mostrar table clientes :(  ', error)
     def bajaArti( codigo):
+        """
+        Modulo que dado el cdigo de un producto, lo elimina de la bbdd
+        :return: None
+        :rtype: String
+        """
         try:
             query = QtSql.QSqlQuery()
             query.prepare('delete from articulos where codigo = :codigo')
@@ -315,6 +401,12 @@ class Conexion():
             return None
 
     def buscaArti(nombre):
+        """
+        Metodo qeu dado e nombre del producto los busca en la bbdd y lo devuelbe al modulo de buscaarti en Articulos y los carga en
+        el panel de gestion de productos
+        :return: Registro de datos de un productos
+        :rtype: Object
+        """
         try:
             index = 0
             record = []
@@ -368,6 +460,9 @@ class Conexion():
             return None
 
     def modifArti(modcliente):
+        """
+        Modulo que recibie datos de un producto y los modifica el la bbdd
+        """
         try:
             query = QtSql.QSqlQuery()
             query.prepare(
@@ -395,6 +490,11 @@ class Conexion():
 
     #Busca el clinete para la facturacion(nombre y aplledos) ------> Funciona bien
     def BuscaCliFac(dni):
+        """
+        Modulo qeu dado el dni de un cliente busca los datos de un cliente a facturar
+        :return: datos del cliente a facturar
+        :rtype: Registro(dni, apellidos, nombre)
+        """
         try:
             registro = []
             query = QtSql.QSqlQuery()
@@ -411,6 +511,9 @@ class Conexion():
 
     # Da de alta la factura el al tabla factura ------> Funciona bien
     def AltaFac(registro):
+        """
+q       Dado el cliente a facturar, se da de alta un factura en la bbdd a nomre de dicho cliente
+        """
         try:
 
             query = QtSql.QSqlQuery()
@@ -436,7 +539,10 @@ class Conexion():
 
     #Carga la los datos de la factura en la tabla -------> Funciona bien
     def cargaTabFac():
-
+        """
+        Modulo que recarga la tabla facturas cuendo se añada, modifiqeu o elimine una factaura
+        Recargando en el panel de gestiopnd de facturacion de la tabla facturas
+        """
         try:
             index = 0
             query = QtSql.QSqlQuery()
@@ -469,7 +575,10 @@ class Conexion():
     #Elimina la factura cuando le das al boton -------> No va(solo lo elimina cuando lo seleccionas primero)
     #todo
     def bajaFac():
-
+        """
+        Metodo que elimina una factura dado el numero de factura que es selecionado
+        Ademas llama al modulo EliminarVwentas para eliminar todad las ventas asociadasd a un factura de la bbdd
+        """
         try:
 
             numfac = var.ui.lblNumFac.text()
@@ -492,7 +601,11 @@ class Conexion():
 
     #Busca el dni de una factura -------> Funciona Bien
     def buscaDNIFac(codigo):
-
+        """
+        Modulo que busca el dni asociado a al codigo de un factura en la bbdd
+        :return: Dni
+        :rtype: String
+        """
         try:
 
             query = QtSql.QSqlQuery()
@@ -542,6 +655,9 @@ class Conexion():
 
     #Carga el comboBox de la tabla con los productos -------> Funciona Bien
     def cargarCmbProducto(self):
+        """
+        Modulo que toma los datos de los nombres de lso productos existentes de la bbdd y los carga en el panel de la tabla ventas del panel de facturacion
+        """
         try:
             var.cmbProducto.clear()
             query = QtSql.QSqlQuery()
@@ -554,7 +670,16 @@ class Conexion():
         except Exception as error:
             print('Error en lista articulos (conexión) ', error)
 
+    def obtenercodigoPrecio(self):
+        """
+        Modulo que dado el nuimero de un articulo obtiene el precio para realizar los calculos necesarios
+        retorn  un array con el ael precio que es un float y el codigo del articulo
+        """
     def cargarLineasVenta(codfac):
+        """
+        Modulo que carga todas las ventas asociadas a auna factura en la table ventas del panel de facturacionademas, realiza los calculos para el tota, subtota, iva etc, de la fact
+        Este modulo dese le llama cadavez que se realiza una venta
+        """
         try:
             index = 0
             query = QtSql.QSqlQuery()
@@ -575,6 +700,9 @@ class Conexion():
 
     #Carga la venta cunado se le da al enter c en la tabla bventas -------> No Probado
     def CargarVenta(venta):
+        """
+Carga el reguistro de una venta realizada en la tabla ventas de nosseque
+        """
         try:
             query = QtSql.QSqlQuery()
             query.prepare(
@@ -595,6 +723,11 @@ class Conexion():
 
     #Busca El codigo de la factura(no se para que)-------> No Probado
     def buscaCodFac(self):
+        """
+        Modulo uqe seleciona el codigo de la factura con numero mas alta(la ultima en ser dada de alta)
+        :return: Numero de factura
+        :rtype: Entero
+        """
         try:
             dato =''
             query = QtSql.QSqlQuery()
@@ -609,8 +742,19 @@ class Conexion():
         except Exception as error:
             print('Error en Obtener codigo Factura (conexión.buscaCodFac) ', error)
 
+        # Busca El codigo de la factura(no se para que)-------> No Probado
+
+    def buscarArticulo(codigo):
+        """
+        Modulo uqe busca el nombre de un articulo para usarlo en las vaentas aprtir de su codigo)
+        :return: nombre del articulo
+        :rtype: String
+        """
     #Elimina la venta seleccionada(A traves del botn btnBorrarVenta)-------> No Probado
     def borrarVenta(self):
+        """
+        Modulo qeu elimina una venta en una factura
+        """
         try:
             print('Estas en borrar venta')
             row = var.ui.tabVentas.currentRow()
@@ -630,7 +774,15 @@ class Conexion():
         except Exception as error:
             print('Error en Borrar Venta (conexión.borrarVenta) ', error)
     #Elimina la venta seleccionada(A traves del botn btnBorrarVenta)-------> No Probado
-    def delVentaFac(codfac):
+    def delVentaFac(self, codfac):#hay que poner el self, sino no lo reconoce
+        """
+
+        :param codfac valor de la factura
+        :type numfac:int
+        Modulo qeu se llama cuando se da de baja una factura, para que elimine a todads las ventas asociadas a esa factura
+        Recibe el numero de factura a borrar. A partir de ese codigo, primero selecciona todos los codigos de vetas asociadas a ala factura, y los guasdar en una  listaAcontinuacion, a la vex qeu recorre
+        el array leyecto los codigos de venta losd a de baja de la tabla de ventas de la bbdd, recargha la table de ventas en el panel de facturacion y limpia todo
+        """
         try:
             ventas=[]
             query = QtSql.QSqlQuery()
