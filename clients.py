@@ -16,8 +16,12 @@ class Clientes():
     def validarDNI():
         """
 
-        :return:
-        :rtype:
+        Modulo que se encarga de comprobar que el dni introducido es valido. Si eso se cumple, aparaecera en la interfaz una V en verde para señalizarlo. En
+        caso contrario, Aparecera una X roja y el cajon de texto tendra un fondo rojo
+
+        :return:None
+        :rtype: Object
+
         """
         try:
             global validodni
@@ -89,6 +93,9 @@ class Clientes():
     def cargaProv(self):
         """
 
+        Modulo que carga la lista de provincias en la interfaz. Para conseguir la lista de provincias llama al metodo listaProvincia que
+        devuelve un array con las provincias
+
         """
         try:
             var.ui.cmbProv.clear()
@@ -99,6 +106,11 @@ class Clientes():
             print('Error en módulos al cargar provinvia, ', error)
 
     def cargaMun(self):
+        """
+        Modulo que se encarga de colocar en el cmb de la interfaz la lista de mucnicipios correspondiente a la provincia seleccionada.
+        Para conseguir el array, llama al metodo listaMunicipios pasandole la provincia que fue seleccionada
+
+        """
         try:
             var.ui.cmbMuni.clear()
             prov = var.ui.cmbProv.currentText()
@@ -115,9 +127,12 @@ class Clientes():
     #     except Exception as error:
     #         print('Error en seleccion municipio', error)
 
-    def cargarFecha(qDate):
+    def cargarFecha(self, qDate):
         """
+        Metodo que carga la fecha selecionada en el calendario, en la caja de texto correspondiente en la interfaz
 
+        :param qDate: Metodo necesario para pasrsear la fecha de tipo Date a tipo String
+        :type qDate: Libreria
         """
         try:
             data = ('{0}/{1}/{2}'.format(qDate.day(), qDate.month(), qDate.year()))
@@ -132,6 +147,13 @@ class Clientes():
             print('Error en cargar fecha del calendario', error)
 
     def mayus():
+        """
+
+        Metodo que convierte las iniciales del nombre y apellidos a mayuscula
+
+        :return: None
+        :rtype: Object
+        """
         try:
             apellido = var.ui.txtApel.text()
             apellido = apellido.title()
@@ -147,6 +169,13 @@ class Clientes():
             return None
 
     def guardaCli(self):
+        """
+
+        Metodo qeu recoje los datos de un nuevo cliente  y los envia a altaCli en caso de que el dni sea valido (siendo esto comprobado por la funcion validoDni de Clientes)
+
+        :return: None
+        :rtype: Object
+        """
         try:
             # preparamos el registro
             newcli = []  # para la base de datos
@@ -219,6 +248,13 @@ class Clientes():
             return None
 
     def limpiaFormcli(self):
+        """
+
+        Metodo que se encarga de limpiar los datos de la interfaz para poder volver a introducirlos
+
+        :return: None
+        :rtype: Object
+        """
         try:
             var.ui.txtApel.setText("")
             var.ui.txtDni.setText("")
@@ -243,6 +279,12 @@ class Clientes():
             return None
 
     def bajaCli(self):
+        """
+
+        Metodo que se ejecuta cuando el ususario quiere dar de baja a un cliente. Este llama al metodo bajaCli de Conexxion que recibe el dni del cliente a eliminar. Por
+        ultimo, se llama al metodo cargaTabCli para recargar la tabla y que el cliente eliminado no aparezca mas en esta
+
+        """
         try:
             dni = var.ui.txtDni.text()
             conexion.Conexion.bajaCli(dni)
@@ -252,8 +294,13 @@ class Clientes():
             print('Error en dar de baja un clientes', error)
 
     def cargaCli(self):
+        """
 
-        # carga los datos dfel cliente al selecionar uno en la tabla
+        Metodo que carga los datos de un cliente determinado al seleccioarlo en la tabla de la interfaz
+
+        :return: None
+        :rtype: Object
+        """
         try:
             valor = 0
             Clientes.limpiaFormcli(self)
@@ -304,6 +351,12 @@ class Clientes():
 
 
     def modifCli(self):
+        """
+
+        Metodo que se ejecuta cuando se quiere modificar a un cliente. Este metodo recoje todos los datos introducidos por el usuario y los envia al metod modifCli de conexion
+        para que e modifiqeu el la bbdd. Por ultimo se llama al metrodo cargarTabCli para actualizar los datos de la interfaz.
+
+        """
         try:
             modcliente = []
             cliente = [var.ui.txtDni, var.ui.txtAltaCli, var.ui.txtApel, var.ui.txtNome, var.ui.txtDir]  # para recorrerlo
@@ -342,6 +395,11 @@ class Clientes():
         except Exception as error:
             print('Error en Modificar un cliente', error)
     def envio(self):
+        """
+
+        Modulo que muestra el tipo de envio segun el valor seleccionado en el spinEnvio
+
+        """
         try:
           valor = var.ui.spinEnvio.value()
           if valor == 0:

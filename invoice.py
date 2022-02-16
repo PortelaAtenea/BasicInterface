@@ -7,6 +7,11 @@ import var
 import window
 class Facturas:
     def buscaCli(self):
+        """
+
+        Modulo que busca el nombre y apellidos de un cliente segun el dni de una factura
+
+        """
         try:
             dni = var.ui.txtDniFac.text().upper()
             print(dni)
@@ -19,6 +24,11 @@ class Facturas:
 
 
     def fecha(self):
+        """
+
+        Modulo que abre el calendario para elegir una fecha
+
+        """
         try:
             var.dlgcalendar.show()
         except Exception as error:
@@ -26,6 +36,11 @@ class Facturas:
 
 
     def cargaFac(self):
+         """
+
+        Modulo que carga en la interfaz la factura que se ha selecionado en la tabla
+
+         """
          try:
              fila = var.ui.tabFac.selectedItems()  # seleccionamos la fila
              datos = [var.ui.lblNumFac, var.ui.txtFechaFac]
@@ -48,6 +63,12 @@ class Facturas:
 
 
     def altaFac(self):
+        """
+
+        Modulo que se encarga de dar de alta a una factura. Este recoje todos los datos introducidos(dni del facturado y fecha de la factura) y los envia a AltaFac en conexion para qu8e este
+        lo añada en al bbdd. Por ultimo se reocoje el codigo de la factura mediante el metodo buscaCodFac de Conexion
+
+        """
         try:
             registro = []
             dni = var.ui.txtDniFac.text().upper()
@@ -66,6 +87,15 @@ class Facturas:
 
 
     def cargarLineaVenta(self):
+        """
+
+        Metodo que carga las lineas de venta de una determinada factura en la tabla ventas
+
+        :return: None
+
+        :rtype: Object
+
+        """
         try:
             suma = 0.0
             productos = []
@@ -93,6 +123,11 @@ class Facturas:
 
 
     def procesoVenta(self):
+        """
+
+        Metodo que suma y muestra los resultaos de las fentas de una determinada factura.
+
+        """
         try:
             var.precio=""
             row = var.ui.tabVentas.currentRow()
@@ -120,6 +155,11 @@ class Facturas:
 
 
     def totalLineaVenta(self =None):
+         """
+
+        Metodo que calcula el total de la linea de venta.
+
+         """
          try:
              row = var.ui.tabVentas.currentRow()
              cantidad = round(float(var.txtCantidad.text().replace(',', '.')), 2)

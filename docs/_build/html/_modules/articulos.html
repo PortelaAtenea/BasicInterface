@@ -1,0 +1,259 @@
+
+<!DOCTYPE html>
+
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>articulos &#8212; portelafernandez 2022 documentation</title>
+    <link rel="stylesheet" type="text/css" href="../_static/pygments.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/alabaster.css" />
+    <script data-url_root="../" id="documentation_options" src="../_static/documentation_options.js"></script>
+    <script src="../_static/jquery.js"></script>
+    <script src="../_static/underscore.js"></script>
+    <script src="../_static/doctools.js"></script>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+   
+  <link rel="stylesheet" href="../_static/custom.css" type="text/css" />
+  
+  
+  <meta name="viewport" content="width=device-width, initial-scale=0.9, maximum-scale=0.9" />
+
+  </head><body>
+  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          
+
+          <div class="body" role="main">
+            
+  <h1>Source code for articulos</h1><div class="highlight"><pre>
+<span></span><span class="sd">&#39;&#39;&#39;&#39;</span>
+<span class="sd">Funciones  gestion de clientes</span>
+<span class="sd">&#39;&#39;&#39;</span>
+<span class="kn">from</span> <span class="nn">idlelib</span> <span class="kn">import</span> <span class="n">query</span>
+<span class="kn">from</span> <span class="nn">tkinter</span> <span class="kn">import</span> <span class="n">Label</span>
+
+<span class="kn">from</span> <span class="nn">PyQt5</span> <span class="kn">import</span> <span class="n">QtSql</span>
+<span class="kn">from</span> <span class="nn">PyQt5.QtWidgets</span> <span class="kn">import</span> <span class="n">QMessageBox</span><span class="p">,</span> <span class="n">QTableWidgetItem</span>
+
+<span class="kn">import</span> <span class="nn">conexion</span>
+<span class="kn">from</span> <span class="nn">window</span> <span class="kn">import</span> <span class="o">*</span>
+<span class="kn">import</span> <span class="nn">var</span>
+
+
+<div class="viewcode-block" id="Articulos"><a class="viewcode-back" href="../src/articulos.html#articulos.Articulos">[docs]</a><span class="k">class</span> <span class="nc">Articulos</span><span class="p">():</span>
+
+
+
+
+<div class="viewcode-block" id="Articulos.mayus"><a class="viewcode-back" href="../src/articulos.html#articulos.Articulos.mayus">[docs]</a>    <span class="k">def</span> <span class="nf">mayus</span><span class="p">():</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+
+<span class="sd">        Modulo que convierte la inicial de un articulo en una mayuscula</span>
+
+<span class="sd">        :return: None</span>
+<span class="sd">        :rtype: Object</span>
+
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">try</span><span class="p">:</span>
+            <span class="n">nombre</span> <span class="o">=</span> <span class="n">var</span><span class="o">.</span><span class="n">ui</span><span class="o">.</span><span class="n">txtNombreArti</span><span class="o">.</span><span class="n">text</span><span class="p">()</span>
+            <span class="n">nombre</span> <span class="o">=</span> <span class="n">nombre</span><span class="o">.</span><span class="n">title</span><span class="p">()</span>
+            <span class="n">var</span><span class="o">.</span><span class="n">ui</span><span class="o">.</span><span class="n">txtNombreArti</span><span class="o">.</span><span class="n">setText</span><span class="p">(</span><span class="n">nombre</span><span class="p">)</span>
+        <span class="k">except</span><span class="p">:</span>
+            <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Error en la aplicacion&#39;</span><span class="p">)</span>
+            <span class="k">return</span> <span class="kc">None</span></div>
+
+<div class="viewcode-block" id="Articulos.guardaArti"><a class="viewcode-back" href="../src/articulos.html#articulos.Articulos.guardaArti">[docs]</a>    <span class="k">def</span> <span class="nf">guardaArti</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+
+<span class="sd">        modulo que se ejecuta cuando se intenta insertar un nuevo Articulo , este comprueba que el esapcio del nombre no esta vacio y conecta con la bbdd para añadir un</span>
+<span class="sd">        nuevo articulo mediante el metodo altaArti en conexion y con el metodo cargaTabArti en conexion para añadir este a la tabla</span>
+
+<span class="sd">        :return: None</span>
+<span class="sd">        :rtype: Object</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">try</span><span class="p">:</span>
+            <span class="k">if</span> <span class="n">var</span><span class="o">.</span><span class="n">ui</span><span class="o">.</span><span class="n">txtNombreArti</span><span class="o">.</span><span class="n">text</span><span class="p">()</span> <span class="o">==</span> <span class="s1">&#39;&#39;</span><span class="p">:</span>
+                <span class="n">msg</span> <span class="o">=</span> <span class="n">QtWidgets</span><span class="o">.</span><span class="n">QMessageBox</span><span class="p">()</span>
+                <span class="n">msg</span><span class="o">.</span><span class="n">setWindowTitle</span><span class="p">(</span><span class="s1">&#39;ERROR!!!&#39;</span><span class="p">)</span>
+                <span class="n">msg</span><span class="o">.</span><span class="n">setIcon</span><span class="p">(</span><span class="n">QtWidgets</span><span class="o">.</span><span class="n">QMessageBox</span><span class="o">.</span><span class="n">Warning</span><span class="p">)</span>
+                <span class="n">msg</span><span class="o">.</span><span class="n">setText</span><span class="p">(</span><span class="n">query</span><span class="o">.</span><span class="n">lastError</span><span class="p">()</span><span class="o">.</span><span class="n">text</span><span class="p">())</span>
+                <span class="n">msg</span><span class="o">.</span><span class="n">exec</span><span class="p">()</span>
+            <span class="k">else</span><span class="p">:</span>
+                <span class="c1"># preparamos el registro</span>
+                <span class="n">newArti</span> <span class="o">=</span> <span class="p">[]</span>  <span class="c1"># para la base de datos</span>
+                <span class="n">arti</span> <span class="o">=</span> <span class="p">[</span><span class="n">var</span><span class="o">.</span><span class="n">ui</span><span class="o">.</span><span class="n">txtNombreArti</span><span class="p">]</span>  <span class="c1"># para la base de datos</span>
+                <span class="n">tabArti</span> <span class="o">=</span> <span class="p">[]</span>  <span class="c1"># para la tableWidget</span>
+                <span class="n">Articulo</span> <span class="o">=</span> <span class="p">[</span><span class="n">var</span><span class="o">.</span><span class="n">ui</span><span class="o">.</span><span class="n">txtNombreArti</span><span class="p">]</span>
+                <span class="c1"># codigo para cargar en la table</span>
+                <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="n">arti</span><span class="p">:</span>
+                    <span class="n">newArti</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">i</span><span class="o">.</span><span class="n">text</span><span class="p">())</span>
+                <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="n">Articulo</span><span class="p">:</span>
+                    <span class="n">tabArti</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">i</span><span class="o">.</span><span class="n">text</span><span class="p">())</span>
+
+                <span class="n">valor</span> <span class="o">=</span> <span class="n">var</span><span class="o">.</span><span class="n">ui</span><span class="o">.</span><span class="n">spinPrecio</span><span class="o">.</span><span class="n">value</span><span class="p">()</span>
+                <span class="n">newArti</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">valor</span><span class="p">)</span>
+                <span class="n">tabArti</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">valor</span><span class="p">)</span>
+                <span class="c1"># Cargamos en la tabla</span>
+
+                <span class="n">conexion</span><span class="o">.</span><span class="n">Conexion</span><span class="o">.</span><span class="n">altaArti</span><span class="p">(</span><span class="n">newArti</span><span class="p">)</span>  <span class="c1"># graba en la tabla de la base de datos</span>
+                <span class="n">conexion</span><span class="o">.</span><span class="n">Conexion</span><span class="o">.</span><span class="n">cargaTabArti</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span>  <span class="c1"># reacrga la tabla</span>
+
+
+        <span class="k">except</span><span class="p">:</span>
+            <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Error en Guardar Articulo&#39;</span><span class="p">)</span>
+            <span class="k">return</span> <span class="kc">None</span></div>
+
+<div class="viewcode-block" id="Articulos.limpiaFormArti"><a class="viewcode-back" href="../src/articulos.html#articulos.Articulos.limpiaFormArti">[docs]</a>    <span class="k">def</span> <span class="nf">limpiaFormArti</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+
+<span class="sd">        Modulo que limpia los datos de la interfaz para poder volvel a introducir datos</span>
+
+<span class="sd">        :return: None</span>
+<span class="sd">        :rtype: Object</span>
+
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">try</span><span class="p">:</span>
+            <span class="n">var</span><span class="o">.</span><span class="n">ui</span><span class="o">.</span><span class="n">txtNombreArti</span><span class="o">.</span><span class="n">setText</span><span class="p">(</span><span class="s2">&quot;&quot;</span><span class="p">)</span>
+            <span class="n">var</span><span class="o">.</span><span class="n">ui</span><span class="o">.</span><span class="n">lblCodigoArti</span><span class="o">.</span><span class="n">setText</span><span class="p">(</span><span class="s2">&quot;&quot;</span><span class="p">)</span>
+            <span class="n">var</span><span class="o">.</span><span class="n">ui</span><span class="o">.</span><span class="n">spinPrecio</span><span class="o">.</span><span class="n">setValue</span><span class="p">(</span><span class="mf">0.00</span><span class="p">)</span>
+        <span class="k">except</span><span class="p">:</span>
+            <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Error en Limpiar Formato&#39;</span><span class="p">)</span>
+            <span class="k">return</span> <span class="kc">None</span></div>
+
+<div class="viewcode-block" id="Articulos.bajaArti"><a class="viewcode-back" href="../src/articulos.html#articulos.Articulos.bajaArti">[docs]</a>    <span class="k">def</span> <span class="nf">bajaArti</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+
+<span class="sd">        Modulo que se ejcuta cuando el usuario qeuire dar de baja a un articulo. Para hacer eso recoje el codigo del articulo que se ha marcado en la tabla antes de clicar en en btnBorrar</span>
+<span class="sd">        Este metodo llama al modulo de bajaArti y cargaTabArti en Conexion para poder, respectivamente, eliminar al articulo de la bbdd segun el codigo enviado y poder recargar la tabla del la interfaz para que no</span>
+<span class="sd">        se visualice mas ese articulo.</span>
+
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">try</span><span class="p">:</span>
+            <span class="n">fila</span> <span class="o">=</span> <span class="n">var</span><span class="o">.</span><span class="n">ui</span><span class="o">.</span><span class="n">tabArti</span><span class="o">.</span><span class="n">selectedItems</span><span class="p">()</span>  <span class="c1"># seleciona la fila</span>
+            <span class="k">if</span> <span class="n">fila</span><span class="p">:</span>
+                <span class="n">row</span> <span class="o">=</span> <span class="p">[</span><span class="n">dato</span><span class="o">.</span><span class="n">text</span><span class="p">()</span> <span class="k">for</span> <span class="n">dato</span> <span class="ow">in</span> <span class="n">fila</span><span class="p">]</span>
+            <span class="n">codigo</span> <span class="o">=</span> <span class="n">row</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
+            <span class="n">conexion</span><span class="o">.</span><span class="n">Conexion</span><span class="o">.</span><span class="n">bajaArti</span><span class="p">(</span><span class="n">codigo</span><span class="p">)</span>
+            <span class="n">conexion</span><span class="o">.</span><span class="n">Conexion</span><span class="o">.</span><span class="n">cargaTabArti</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span>
+
+        <span class="k">except</span> <span class="ne">Exception</span> <span class="k">as</span> <span class="n">error</span><span class="p">:</span>
+            <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Error en dar de baja un Articulo&#39;</span><span class="p">,</span> <span class="n">error</span><span class="p">)</span></div>
+<div class="viewcode-block" id="Articulos.buscarArti"><a class="viewcode-back" href="../src/articulos.html#articulos.Articulos.buscarArti">[docs]</a>    <span class="k">def</span> <span class="nf">buscarArti</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="k">try</span><span class="p">:</span>
+            <span class="n">nombre</span> <span class="o">=</span> <span class="n">var</span><span class="o">.</span><span class="n">ui</span><span class="o">.</span><span class="n">txtNombreArti</span><span class="o">.</span><span class="n">text</span><span class="p">()</span>
+            <span class="n">conexion</span><span class="o">.</span><span class="n">Conexion</span><span class="o">.</span><span class="n">buscaArti</span><span class="p">(</span><span class="n">nombre</span><span class="p">)</span>
+
+
+
+        <span class="k">except</span> <span class="ne">Exception</span> <span class="k">as</span> <span class="n">error</span><span class="p">:</span>
+            <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Error en buscar un articulo&#39;</span><span class="p">,</span> <span class="n">error</span><span class="p">)</span></div>
+
+<div class="viewcode-block" id="Articulos.cargaArti"><a class="viewcode-back" href="../src/articulos.html#articulos.Articulos.cargaArti">[docs]</a>    <span class="k">def</span> <span class="nf">cargaArti</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+
+<span class="sd">        Este metodo se ejecuta caundo se selecciona a un articulo en la tabla para poder visualizar el nombre, el codigo y el precio del articulo seleccionado en la interfaz y poder asi modificarlo</span>
+
+<span class="sd">        :return: None</span>
+<span class="sd">        :rtype: Object</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">try</span><span class="p">:</span>
+            <span class="n">valor</span> <span class="o">=</span> <span class="mi">0</span>
+            <span class="n">Articulos</span><span class="o">.</span><span class="n">limpiaFormArti</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span>
+            <span class="n">fila</span> <span class="o">=</span> <span class="n">var</span><span class="o">.</span><span class="n">ui</span><span class="o">.</span><span class="n">tabArti</span><span class="o">.</span><span class="n">selectedItems</span><span class="p">()</span><span class="c1"># seleciona la fila</span>
+            <span class="k">if</span> <span class="n">fila</span><span class="p">:</span>
+                <span class="n">row</span> <span class="o">=</span> <span class="p">[</span><span class="n">dato</span><span class="o">.</span><span class="n">text</span><span class="p">()</span> <span class="k">for</span> <span class="n">dato</span> <span class="ow">in</span> <span class="n">fila</span><span class="p">]</span>
+            <span class="n">var</span><span class="o">.</span><span class="n">ui</span><span class="o">.</span><span class="n">lblCodigoArti</span><span class="o">.</span><span class="n">setText</span><span class="p">(</span><span class="n">row</span><span class="p">[</span><span class="mi">0</span><span class="p">])</span>
+            <span class="n">var</span><span class="o">.</span><span class="n">ui</span><span class="o">.</span><span class="n">txtNombreArti</span><span class="o">.</span><span class="n">setText</span><span class="p">(</span><span class="n">row</span><span class="p">[</span><span class="mi">1</span><span class="p">])</span>
+            <span class="n">var</span><span class="o">.</span><span class="n">ui</span><span class="o">.</span><span class="n">spinPrecio</span><span class="o">.</span><span class="n">setValue</span><span class="p">(</span><span class="nb">float</span><span class="p">(</span><span class="n">row</span><span class="p">[</span><span class="mi">2</span><span class="p">]))</span>
+        <span class="k">except</span> <span class="ne">Exception</span> <span class="k">as</span> <span class="n">error</span><span class="p">:</span>
+            <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Error en Cargar datos de un Articulo- Articulos&#39;</span><span class="p">,</span> <span class="n">error</span><span class="p">)</span>
+            <span class="k">return</span> <span class="kc">None</span></div>
+
+
+<div class="viewcode-block" id="Articulos.modifArti"><a class="viewcode-back" href="../src/articulos.html#articulos.Articulos.modifArti">[docs]</a>    <span class="k">def</span> <span class="nf">modifArti</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+
+<span class="sd">        Modulo que se ejecua cuando se pulsa el btn de modificar un articulo. Este recoje los datos introducidos en la interfaz y modifica al articulo enviando en codigo(que no se puede cambiar)</span>
+<span class="sd">        al metodo de modifArti en Conexion. Por ultimo se recarga la tabla con el metodo cargaTabArti en conexion</span>
+
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">try</span><span class="p">:</span>
+            <span class="n">modArti</span> <span class="o">=</span> <span class="p">[]</span>
+            <span class="n">modArti</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">var</span><span class="o">.</span><span class="n">ui</span><span class="o">.</span><span class="n">lblCodigoArti</span><span class="o">.</span><span class="n">text</span><span class="p">())</span>
+            <span class="n">modArti</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">var</span><span class="o">.</span><span class="n">ui</span><span class="o">.</span><span class="n">txtNombreArti</span><span class="o">.</span><span class="n">text</span><span class="p">())</span>
+            <span class="n">modArti</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">var</span><span class="o">.</span><span class="n">ui</span><span class="o">.</span><span class="n">spinPrecio</span><span class="o">.</span><span class="n">text</span><span class="p">())</span>
+            <span class="n">conexion</span><span class="o">.</span><span class="n">Conexion</span><span class="o">.</span><span class="n">modifArti</span><span class="p">(</span><span class="n">modArti</span><span class="p">)</span>
+            <span class="n">conexion</span><span class="o">.</span><span class="n">Conexion</span><span class="o">.</span><span class="n">cargaTabArti</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span>
+            <span class="n">Articulos</span><span class="o">.</span><span class="n">limpiaFormArti</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span>
+        <span class="k">except</span> <span class="ne">Exception</span> <span class="k">as</span> <span class="n">error</span><span class="p">:</span>
+            <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Error en Modificar un Articulo&#39;</span><span class="p">,</span> <span class="n">error</span><span class="p">)</span></div></div>
+
+</pre></div>
+
+          </div>
+          
+        </div>
+      </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+<h1 class="logo"><a href="../index.html">portelafernandez</a></h1>
+
+
+
+
+
+
+
+
+<h3>Navigation</h3>
+
+<div class="relations">
+<h3>Related Topics</h3>
+<ul>
+  <li><a href="../index.html">Documentation overview</a><ul>
+  <li><a href="index.html">Module code</a><ul>
+  </ul></li>
+  </ul></li>
+</ul>
+</div>
+<div id="searchbox" style="display: none" role="search">
+  <h3 id="searchlabel">Quick search</h3>
+    <div class="searchformwrapper">
+    <form class="search" action="../search.html" method="get">
+      <input type="text" name="q" aria-labelledby="searchlabel" autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false"/>
+      <input type="submit" value="Go" />
+    </form>
+    </div>
+</div>
+<script>$('#searchbox').show(0);</script>
+
+
+
+
+
+
+
+
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="footer">
+      &copy;2022, Atenea Portela.
+      
+      |
+      Powered by <a href="http://sphinx-doc.org/">Sphinx 4.4.0</a>
+      &amp; <a href="https://github.com/bitprophet/alabaster">Alabaster 0.7.12</a>
+      
+    </div>
+
+    
+
+    
+  </body>
+</html>

@@ -10,6 +10,11 @@ import conexion
 class Informes():
     var.cv = canvas.Canvas('informes/ListadoClientes.pdf')  # Creación del lienzo de la plantilla
     def listadoClientes(self):
+        """
+
+        Metodo que imprime en el informwe todos los clientes. Lalama al emtodo cabecera para poder imprimir la cabecera en todas las hioojas del pdf
+
+        """
         try:
 
             Informes.cabecera(var.cv)
@@ -71,6 +76,11 @@ class Informes():
         except Exception as error:
             print('Error al emitir el listado de clientes ', error)
     def cabecera(self):
+        """
+
+        Metodo qeu imprime la cabecera en el pdf
+
+        """
         try:
             logo ='\\img\logo_empresa.png'
             var.cv.line(40,800,530,800)
@@ -90,6 +100,11 @@ class Informes():
             print('Error en cabezeca interna ', error)
 
     def pie(texto):
+        """
+
+        Metodo qeu imprime el pie de pagina en el pdf
+
+        """
         try:
 
             var.cv.line(50, 50, 530, 50)
@@ -106,6 +121,11 @@ class Informes():
             print('Error en creacion de pie de informe clientes ', error)
 
     def factura(self):
+        """
+
+        Metodo que imprime en el pdf de facturas, todas las facturas de la bbdd. Tambien llama a los metodos cabecera y pie de esta clase
+
+        """
         try:
             var.cv = canvas.Canvas('informes/factura.pdf')
             var.cv.setTitle('Factura')

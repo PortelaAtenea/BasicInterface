@@ -11,22 +11,24 @@ import var
 
 
 class Conexion():
-    #me falta modulo create_db(filedb):
-    '''
+    def create_db(filedb):
         """
 
         Modulo uqe se ejecuta al principio de programa
         Crea las tablas y carga ,unicipios y provincias en la basa de datos
         Crea los directorios necesario
+
+        :return: None?
         :rtype: object
 
-        """'''
+        """
     def db_connect(filedb):
         """
 
         Realiza la conexion a la basa de datos
-        :return: boolean, True si es correcto, false si hay un errror
-        :rtype: String
+
+        :return: True si es correcto, false si hay un errror
+        :rtype: boolean
 
         """
         try:
@@ -53,9 +55,14 @@ class Conexion():
     # retorna true si existe el dni
     '''MODULOS GESTION BASE DE DATOS CLIENTES'''
 
-    def altaCli(newcli):
+    def altaCli( self, newcli):
         """
+
         Modulo que recibe los datos de un cliente y los carga en la bbdd
+
+        :param newcli: datos del nuevo cliente que se quiere añadir a la bbdd
+        :type newcli:Array
+
         """
         try:
 
@@ -102,7 +109,6 @@ class Conexion():
         """
 
         Modulo que toma datos de los clientes y los carga en la tabla de la interfaz grafica
-        :rtype: object
 
         """
         try:
@@ -128,13 +134,16 @@ class Conexion():
         except Exception as error:
             print('Problemas al mostrar table clientes :(  ', error)
 
-    def oneClie(dni):
+    def oneClie(self, dni):
         """
 
         Modulo que seleciona un cliente segun su dni y lo debvuelve a la funcion cargaCli del fichero clientesdel fichero clietes
 
-        :return: Object
-        :rtype: String
+        :param dni: dni de un cliente determinado
+        :type dni: String
+
+        :return:
+        :rtype:
         """
         try:
             record = []
@@ -159,6 +168,7 @@ class Conexion():
         """
 
         Modulo que recibe dni del cliente y lo elimina de la bbdd
+
         :return: None
         :rtype: String
 

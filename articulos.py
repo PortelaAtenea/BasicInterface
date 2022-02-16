@@ -18,6 +18,14 @@ class Articulos():
 
 
     def mayus():
+        """
+
+        Modulo que convierte la inicial de un articulo en una mayuscula
+
+        :return: None
+        :rtype: Object
+
+        """
         try:
             nombre = var.ui.txtNombreArti.text()
             nombre = nombre.title()
@@ -27,6 +35,14 @@ class Articulos():
             return None
 
     def guardaArti(self):
+        """
+
+        modulo que se ejecuta cuando se intenta insertar un nuevo Articulo , este comprueba que el esapcio del nombre no esta vacio y conecta con la bbdd para añadir un
+        nuevo articulo mediante el metodo altaArti en conexion y con el metodo cargaTabArti en conexion para añadir este a la tabla
+
+        :return: None
+        :rtype: Object
+        """
         try:
             if var.ui.txtNombreArti.text() == '':
                 msg = QtWidgets.QMessageBox()
@@ -60,6 +76,14 @@ class Articulos():
             return None
 
     def limpiaFormArti(self):
+        """
+
+        Modulo que limpia los datos de la interfaz para poder volvel a introducir datos
+
+        :return: None
+        :rtype: Object
+
+        """
         try:
             var.ui.txtNombreArti.setText("")
             var.ui.lblCodigoArti.setText("")
@@ -69,6 +93,13 @@ class Articulos():
             return None
 
     def bajaArti(self):
+        """
+
+        Modulo que se ejcuta cuando el usuario qeuire dar de baja a un articulo. Para hacer eso recoje el codigo del articulo que se ha marcado en la tabla antes de clicar en en btnBorrar
+        Este metodo llama al modulo de bajaArti y cargaTabArti en Conexion para poder, respectivamente, eliminar al articulo de la bbdd segun el codigo enviado y poder recargar la tabla del la interfaz para que no
+        se visualice mas ese articulo.
+
+        """
         try:
             fila = var.ui.tabArti.selectedItems()  # seleciona la fila
             if fila:
@@ -90,7 +121,13 @@ class Articulos():
             print('Error en buscar un articulo', error)
 
     def cargaArti(self):
+        """
 
+        Este metodo se ejecuta caundo se selecciona a un articulo en la tabla para poder visualizar el nombre, el codigo y el precio del articulo seleccionado en la interfaz y poder asi modificarlo
+
+        :return: None
+        :rtype: Object
+        """
         try:
             valor = 0
             Articulos.limpiaFormArti(self)
@@ -106,6 +143,12 @@ class Articulos():
 
 
     def modifArti(self):
+        """
+
+        Modulo que se ejecua cuando se pulsa el btn de modificar un articulo. Este recoje los datos introducidos en la interfaz y modifica al articulo enviando en codigo(que no se puede cambiar)
+        al metodo de modifArti en Conexion. Por ultimo se recarga la tabla con el metodo cargaTabArti en conexion
+
+        """
         try:
             modArti = []
             modArti.append(var.ui.lblCodigoArti.text())

@@ -22,6 +22,11 @@ class Eventos():
 
 
     def Salir(self):
+        """
+
+        Metodo qeu se ejecuta cuando el ususario pulca los botones de salida. Este metodo muestra una aviso qeu requiere la confirmacion del usuario para cerrar la aplicaion o no.
+
+        """
         try:
             var.dlgaviso.show()
             if var.dlgaviso.exec_():
@@ -32,6 +37,11 @@ class Eventos():
             print('Error en modulo salir ', error)
 
     def abrirCal(self):
+        """
+
+        Metodo que abre el calendario cuando es requerido por el ususario
+
+        """
         try:
             var.dlgcalendar.show()
         except Exception as error:
@@ -39,6 +49,11 @@ class Eventos():
 
 
     def resizeTablaCli(self):
+        """
+
+        Metodo que cambia el tamaño de la tabla de clientes para que quede mas igualado a los tamaños del contenido
+
+        """
         try:
             header = var.ui.tabClientes.horizontalHeader()
             for i in range(5):
@@ -49,6 +64,12 @@ class Eventos():
             print('Error en al redimensionar la tabla ', error)
 
     def resizeTablaArti(self):
+        """
+
+        Metodo que cambia el tamaño de la tabla de Articulos para que quede mas igualado a los tamaños del contenido
+
+
+        """
         try:
             header = var.ui.tabArti.horizontalHeader()
             for i in range(3):
@@ -58,6 +79,12 @@ class Eventos():
         except Exception as error:
             print('Error en al redimensionar la tabla ', error)
     def resizeTablaVentas(self):
+        """
+
+        Metodo que cambia el tamaño de la tabla de ventas para que quede mas igualado a los tamaños del contenido
+
+
+        """
         try:
             header = var.ui.tabArti.horizontalHeader()
             for i in range(3):
@@ -66,12 +93,22 @@ class Eventos():
             print('Error en al redimensionar la tabla ', error)
 
     def abrir(self):
+        """
+
+        Metodo que abre la ventana de dialogo cuando es requerido por el ususario para abrir algo
+
+        """
         try:
             var.dlgabrir.show()
         except Exception as error:
             print('Error al abrir cuador de dialogo ', error)
 
     def crearBackup(self):
+        """
+
+        Metodo que cera un backup de la bbdd de clientes cuando es requerido por el usuario
+
+        """
         try:
             fecha = datetime.today()
             fecha = fecha.strftime('%Y.%m.%d.%M.%M.%S')
@@ -94,6 +131,11 @@ class Eventos():
             print('Error al crear buckup de la bbdd ', error)
 
     def restaurarBackup(self):
+        """
+
+        Metodo que restaura la bbdd cuando es requerido por el usuario
+
+        """
         try:
             option = QtWidgets.QFileDialog.Options()
             filename=var.dlgabrir.getOpenFileName(None, 'Restaurar copia de seguridad', '', '*.zip', options=option )
@@ -115,6 +157,11 @@ class Eventos():
         except Exception as error:
             print('Error al restaurar backup de la bbdd ', error)
     def imprimir(self):
+        """
+
+        Modulo que abre una ventana de dialogo cuando el usuario pide imprimir los datos de los clientes
+
+        """
         try:
             printDialgo = QtPrintSupport.QPrintDialog()
             if printDialgo.exec():
@@ -123,6 +170,11 @@ class Eventos():
             print('Error al imprimir ', error)
 
     def ExportarDatos(self):
+        """
+
+        Metodo que exporta los datos de los clientes de la bbdd a un excel
+
+        """
         try:
             conexion.Conexion.exportExcel(self)
             try:

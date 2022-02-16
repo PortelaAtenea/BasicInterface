@@ -1,0 +1,273 @@
+
+<!DOCTYPE html>
+
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>invoice &#8212; portelafernandez 2022 documentation</title>
+    <link rel="stylesheet" type="text/css" href="../_static/pygments.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/alabaster.css" />
+    <script data-url_root="../" id="documentation_options" src="../_static/documentation_options.js"></script>
+    <script src="../_static/jquery.js"></script>
+    <script src="../_static/underscore.js"></script>
+    <script src="../_static/doctools.js"></script>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+   
+  <link rel="stylesheet" href="../_static/custom.css" type="text/css" />
+  
+  
+  <meta name="viewport" content="width=device-width, initial-scale=0.9, maximum-scale=0.9" />
+
+  </head><body>
+  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          
+
+          <div class="body" role="main">
+            
+  <h1>Source code for invoice</h1><div class="highlight"><pre>
+<span></span><span class="sd">&#39;&#39;&#39;Gestion de facturas&#39;&#39;&#39;</span>
+<span class="kn">from</span> <span class="nn">PyQt5</span> <span class="kn">import</span> <span class="n">QtWidgets</span><span class="p">,</span> <span class="n">QtCore</span>
+<span class="kn">from</span> <span class="nn">PyQt5.QtWidgets</span> <span class="kn">import</span> <span class="n">QTableWidgetItem</span>
+
+<span class="kn">import</span> <span class="nn">conexion</span>
+<span class="kn">import</span> <span class="nn">var</span>
+<span class="kn">import</span> <span class="nn">window</span>
+<div class="viewcode-block" id="Facturas"><a class="viewcode-back" href="../src/invoice.html#invoice.Facturas">[docs]</a><span class="k">class</span> <span class="nc">Facturas</span><span class="p">:</span>
+<div class="viewcode-block" id="Facturas.buscaCli"><a class="viewcode-back" href="../src/invoice.html#invoice.Facturas.buscaCli">[docs]</a>    <span class="k">def</span> <span class="nf">buscaCli</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+
+<span class="sd">        Modulo que busca el nombre y apellidos de un cliente segun el dni de una factura</span>
+
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">try</span><span class="p">:</span>
+            <span class="n">dni</span> <span class="o">=</span> <span class="n">var</span><span class="o">.</span><span class="n">ui</span><span class="o">.</span><span class="n">txtDniFac</span><span class="o">.</span><span class="n">text</span><span class="p">()</span><span class="o">.</span><span class="n">upper</span><span class="p">()</span>
+            <span class="nb">print</span><span class="p">(</span><span class="n">dni</span><span class="p">)</span>
+            <span class="n">registro</span> <span class="o">=</span> <span class="n">conexion</span><span class="o">.</span><span class="n">Conexion</span><span class="o">.</span><span class="n">BuscaCliFac</span><span class="p">(</span><span class="n">dni</span><span class="p">)</span>
+            <span class="n">nombre</span> <span class="o">=</span> <span class="n">registro</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">+</span> <span class="s1">&#39;, &#39;</span> <span class="o">+</span><span class="n">registro</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span>
+            <span class="n">var</span><span class="o">.</span><span class="n">ui</span><span class="o">.</span><span class="n">lblNombreApel</span><span class="o">.</span><span class="n">setText</span><span class="p">(</span><span class="n">nombre</span><span class="p">)</span>
+            <span class="n">var</span><span class="o">.</span><span class="n">ui</span><span class="o">.</span><span class="n">txtDniFac</span><span class="o">.</span><span class="n">setText</span><span class="p">(</span><span class="n">dni</span><span class="p">)</span>
+        <span class="k">except</span> <span class="ne">Exception</span> <span class="k">as</span> <span class="n">e</span><span class="p">:</span>
+            <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Eror en Buascar cliente en facturas.:    &#39;</span><span class="p">,</span><span class="n">e</span><span class="p">)</span></div>
+
+
+<div class="viewcode-block" id="Facturas.fecha"><a class="viewcode-back" href="../src/invoice.html#invoice.Facturas.fecha">[docs]</a>    <span class="k">def</span> <span class="nf">fecha</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+
+<span class="sd">        Modulo que abre el calendario para elegir una fecha</span>
+
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">try</span><span class="p">:</span>
+            <span class="n">var</span><span class="o">.</span><span class="n">dlgcalendar</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+        <span class="k">except</span> <span class="ne">Exception</span> <span class="k">as</span> <span class="n">error</span><span class="p">:</span>
+            <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Error al abrir el calendario &#39;</span><span class="p">,</span> <span class="n">error</span><span class="p">)</span></div>
+
+
+<div class="viewcode-block" id="Facturas.cargaFac"><a class="viewcode-back" href="../src/invoice.html#invoice.Facturas.cargaFac">[docs]</a>    <span class="k">def</span> <span class="nf">cargaFac</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+         <span class="sd">&quot;&quot;&quot;</span>
+
+<span class="sd">        Modulo que carga en la interfaz la factura que se ha selecionado en la tabla</span>
+
+<span class="sd">         &quot;&quot;&quot;</span>
+         <span class="k">try</span><span class="p">:</span>
+             <span class="n">fila</span> <span class="o">=</span> <span class="n">var</span><span class="o">.</span><span class="n">ui</span><span class="o">.</span><span class="n">tabFac</span><span class="o">.</span><span class="n">selectedItems</span><span class="p">()</span>  <span class="c1"># seleccionamos la fila</span>
+             <span class="n">datos</span> <span class="o">=</span> <span class="p">[</span><span class="n">var</span><span class="o">.</span><span class="n">ui</span><span class="o">.</span><span class="n">lblNumFac</span><span class="p">,</span> <span class="n">var</span><span class="o">.</span><span class="n">ui</span><span class="o">.</span><span class="n">txtFechaFac</span><span class="p">]</span>
+             <span class="k">if</span> <span class="n">fila</span><span class="p">:</span>  <span class="c1"># cargamos en row todos los datos de la fila</span>
+                 <span class="n">row</span> <span class="o">=</span> <span class="p">[</span><span class="n">dato</span><span class="o">.</span><span class="n">text</span><span class="p">()</span> <span class="k">for</span> <span class="n">dato</span> <span class="ow">in</span> <span class="n">fila</span><span class="p">]</span>
+             <span class="k">for</span> <span class="n">i</span><span class="p">,</span> <span class="n">dato</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">datos</span><span class="p">):</span>
+                 <span class="n">dato</span><span class="o">.</span><span class="n">setText</span><span class="p">(</span><span class="n">row</span><span class="p">[</span><span class="n">i</span><span class="p">])</span>
+             <span class="n">dni</span> <span class="o">=</span> <span class="n">conexion</span><span class="o">.</span><span class="n">Conexion</span><span class="o">.</span><span class="n">buscaDNIFac</span><span class="p">(</span><span class="n">row</span><span class="p">[</span><span class="mi">0</span><span class="p">])</span>
+             <span class="n">var</span><span class="o">.</span><span class="n">ui</span><span class="o">.</span><span class="n">txtDniFac</span><span class="o">.</span><span class="n">setText</span><span class="p">(</span><span class="n">dni</span><span class="p">)</span>
+             <span class="n">registro</span> <span class="o">=</span> <span class="n">conexion</span><span class="o">.</span><span class="n">Conexion</span><span class="o">.</span><span class="n">buscaClifac</span><span class="p">(</span><span class="n">dni</span><span class="p">)</span>
+             <span class="k">if</span> <span class="n">registro</span><span class="p">:</span>
+                 <span class="n">nombre</span> <span class="o">=</span> <span class="n">registro</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">+</span> <span class="s1">&#39;, &#39;</span> <span class="o">+</span> <span class="n">registro</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span>
+                 <span class="n">var</span><span class="o">.</span><span class="n">ui</span><span class="o">.</span><span class="n">lblNombreApel</span><span class="o">.</span><span class="n">setText</span><span class="p">(</span><span class="n">nombre</span><span class="p">)</span>
+             <span class="c1">#Para cargar las ventsas en la tabla de ventas</span>
+             <span class="n">conexion</span><span class="o">.</span><span class="n">Conexion</span><span class="o">.</span><span class="n">cargarLineasVenta</span><span class="p">(</span><span class="nb">str</span><span class="p">(</span><span class="n">var</span><span class="o">.</span><span class="n">ui</span><span class="o">.</span><span class="n">lblNumFac</span><span class="o">.</span><span class="n">text</span><span class="p">()))</span>
+
+         <span class="k">except</span> <span class="ne">Exception</span> <span class="k">as</span> <span class="n">error</span><span class="p">:</span>
+             <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;error alta en factura&#39;</span><span class="p">,</span> <span class="n">error</span><span class="p">)</span></div>
+
+
+
+<div class="viewcode-block" id="Facturas.altaFac"><a class="viewcode-back" href="../src/invoice.html#invoice.Facturas.altaFac">[docs]</a>    <span class="k">def</span> <span class="nf">altaFac</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+
+<span class="sd">        Modulo que se encarga de dar de alta a una factura. Este recoje todos los datos introducidos(dni del facturado y fecha de la factura) y los envia a AltaFac en conexion para qu8e este</span>
+<span class="sd">        lo añada en al bbdd. Por ultimo se reocoje el codigo de la factura mediante el metodo buscaCodFac de Conexion</span>
+
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">try</span><span class="p">:</span>
+            <span class="n">registro</span> <span class="o">=</span> <span class="p">[]</span>
+            <span class="n">dni</span> <span class="o">=</span> <span class="n">var</span><span class="o">.</span><span class="n">ui</span><span class="o">.</span><span class="n">txtDniFac</span><span class="o">.</span><span class="n">text</span><span class="p">()</span><span class="o">.</span><span class="n">upper</span><span class="p">()</span>
+            <span class="n">registro</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="nb">str</span><span class="p">(</span><span class="n">dni</span><span class="p">))</span>
+            <span class="n">var</span><span class="o">.</span><span class="n">ui</span><span class="o">.</span><span class="n">txtDniFac</span><span class="o">.</span><span class="n">setText</span><span class="p">(</span><span class="n">dni</span><span class="p">)</span>
+            <span class="n">fecha</span> <span class="o">=</span> <span class="n">var</span><span class="o">.</span><span class="n">ui</span><span class="o">.</span><span class="n">txtFechaFac</span><span class="o">.</span><span class="n">text</span><span class="p">()</span>
+            <span class="n">registro</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="nb">str</span><span class="p">(</span><span class="n">fecha</span><span class="p">))</span>
+            <span class="nb">print</span><span class="p">(</span><span class="n">registro</span><span class="p">)</span>
+            <span class="n">registro</span> <span class="o">=</span> <span class="n">conexion</span><span class="o">.</span><span class="n">Conexion</span><span class="o">.</span><span class="n">AltaFac</span><span class="p">(</span><span class="n">registro</span><span class="p">)</span>
+            <span class="n">codfac</span> <span class="o">=</span> <span class="n">conexion</span><span class="o">.</span><span class="n">Conexion</span><span class="o">.</span><span class="n">buscaCodFac</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span>
+            <span class="n">var</span><span class="o">.</span><span class="n">ui</span><span class="o">.</span><span class="n">lblNumFac</span><span class="o">.</span><span class="n">setText</span><span class="p">(</span><span class="n">codfac</span><span class="p">)</span>
+
+
+        <span class="k">except</span> <span class="ne">Exception</span> <span class="k">as</span> <span class="n">error</span><span class="p">:</span>
+            <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Error al dar de alta un factura(invoice.altaFac) &#39;</span><span class="p">,</span> <span class="n">error</span><span class="p">)</span></div>
+
+
+<div class="viewcode-block" id="Facturas.cargarLineaVenta"><a class="viewcode-back" href="../src/invoice.html#invoice.Facturas.cargarLineaVenta">[docs]</a>    <span class="k">def</span> <span class="nf">cargarLineaVenta</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+
+<span class="sd">        Metodo que carga las lineas de venta de una determinada factura en la tabla ventas</span>
+
+<span class="sd">        :return: None</span>
+
+<span class="sd">        :rtype: Object</span>
+
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">try</span><span class="p">:</span>
+            <span class="n">suma</span> <span class="o">=</span> <span class="mf">0.0</span>
+            <span class="n">productos</span> <span class="o">=</span> <span class="p">[]</span>
+            <span class="n">index</span> <span class="o">=</span> <span class="mi">0</span>
+            <span class="n">var</span><span class="o">.</span><span class="n">cmbProducto</span> <span class="o">=</span> <span class="n">QtWidgets</span><span class="o">.</span><span class="n">QComboBox</span>
+            <span class="n">var</span><span class="o">.</span><span class="n">cmbProducto</span><span class="o">.</span><span class="n">setFixedSize</span><span class="p">(</span><span class="mi">150</span><span class="p">,</span> <span class="mi">25</span><span class="p">)</span>
+            <span class="c1"># Hay que cargar el combo</span>
+            <span class="n">conexion</span><span class="o">.</span><span class="n">Conexion</span><span class="o">.</span><span class="n">cargarCmbProducto</span><span class="p">()</span>
+            <span class="n">articulo</span> <span class="o">=</span> <span class="n">var</span><span class="o">.</span><span class="n">cmbProducto</span><span class="o">.</span><span class="n">currentText</span><span class="p">()</span>
+
+            <span class="n">var</span><span class="o">.</span><span class="n">cmbProducto</span><span class="o">.</span><span class="n">currentIndexChanged</span><span class="o">.</span><span class="n">connect</span><span class="p">(</span><span class="n">Facturas</span><span class="o">.</span><span class="n">procesoVenta</span><span class="p">)</span>
+            <span class="n">var</span><span class="o">.</span><span class="n">cmbProducto</span><span class="o">.</span><span class="n">setFixedSize</span><span class="p">(</span><span class="mi">170</span><span class="p">,</span> <span class="mi">25</span><span class="p">)</span>
+            <span class="n">conexion</span><span class="o">.</span><span class="n">Conexion</span><span class="o">.</span><span class="n">cargarCmbProducto</span><span class="p">(</span><span class="bp">self</span><span class="o">=</span><span class="kc">None</span><span class="p">)</span>
+            <span class="n">var</span><span class="o">.</span><span class="n">txtCantidad</span> <span class="o">=</span> <span class="n">QtWidgets</span><span class="o">.</span><span class="n">QLineEdit</span><span class="p">()</span>
+            <span class="n">var</span><span class="o">.</span><span class="n">txtCantidad</span><span class="o">.</span><span class="n">editingFinished</span><span class="o">.</span><span class="n">connect</span><span class="p">(</span><span class="n">Facturas</span><span class="o">.</span><span class="n">totalLineaVenta</span><span class="p">)</span>
+
+            <span class="n">var</span><span class="o">.</span><span class="n">txtCantidad</span><span class="o">.</span><span class="n">setFixedSize</span><span class="p">(</span><span class="mi">60</span><span class="p">,</span> <span class="mi">25</span><span class="p">)</span>
+            <span class="n">var</span><span class="o">.</span><span class="n">txtCantidad</span><span class="o">.</span><span class="n">setAlignment</span><span class="p">(</span><span class="n">QtCore</span><span class="o">.</span><span class="n">Qt</span><span class="o">.</span><span class="n">AlignCenter</span><span class="p">)</span>
+            <span class="n">var</span><span class="o">.</span><span class="n">ui</span><span class="o">.</span><span class="n">tabVentas</span><span class="o">.</span><span class="n">setRowCount</span><span class="p">(</span><span class="n">index</span> <span class="o">+</span> <span class="mi">1</span><span class="p">)</span>
+            <span class="n">var</span><span class="o">.</span><span class="n">ui</span><span class="o">.</span><span class="n">tabVentas</span><span class="o">.</span><span class="n">setCellWidget</span><span class="p">(</span><span class="n">index</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="n">var</span><span class="o">.</span><span class="n">cmbProducto</span><span class="p">)</span>
+            <span class="n">var</span><span class="o">.</span><span class="n">ui</span><span class="o">.</span><span class="n">tabVentas</span><span class="o">.</span><span class="n">setCellWidget</span><span class="p">(</span><span class="n">index</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="n">var</span><span class="o">.</span><span class="n">txtCantidad</span><span class="p">)</span>
+        <span class="k">except</span> <span class="ne">Exception</span> <span class="k">as</span> <span class="n">error</span><span class="p">:</span>
+            <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Error en Cargar la linea de venta(Invoice.Facturas.CargarLineaVenta):   &#39;</span><span class="p">,</span> <span class="n">error</span><span class="p">)</span>
+            <span class="k">return</span> <span class="kc">None</span></div>
+
+
+<div class="viewcode-block" id="Facturas.procesoVenta"><a class="viewcode-back" href="../src/invoice.html#invoice.Facturas.procesoVenta">[docs]</a>    <span class="k">def</span> <span class="nf">procesoVenta</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+
+<span class="sd">        Metodo que suma y muestra los resultaos de las fentas de una determinada factura.</span>
+
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">try</span><span class="p">:</span>
+            <span class="n">var</span><span class="o">.</span><span class="n">precio</span><span class="o">=</span><span class="s2">&quot;&quot;</span>
+            <span class="n">row</span> <span class="o">=</span> <span class="n">var</span><span class="o">.</span><span class="n">ui</span><span class="o">.</span><span class="n">tabVentas</span><span class="o">.</span><span class="n">currentRow</span><span class="p">()</span>
+            <span class="nb">print</span><span class="p">(</span><span class="n">row</span><span class="p">)</span>
+            <span class="n">articulo</span> <span class="o">=</span> <span class="n">var</span><span class="o">.</span><span class="n">cmbProducto</span><span class="o">.</span><span class="n">currentText</span><span class="p">()</span>
+            <span class="n">conexion</span><span class="o">.</span><span class="n">Conexion</span><span class="o">.</span><span class="n">CargarPrecioProd</span><span class="p">(</span><span class="n">articulo</span><span class="p">)</span>
+
+            <span class="nb">print</span><span class="p">(</span><span class="n">articulo</span><span class="p">)</span>
+            <span class="n">var</span><span class="o">.</span><span class="n">ui</span><span class="o">.</span><span class="n">tabVentas</span><span class="o">.</span><span class="n">setItem</span><span class="p">(</span><span class="n">row</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="n">QtWidgets</span><span class="o">.</span><span class="n">QTableWidgetItem</span><span class="p">(</span><span class="nb">str</span><span class="p">(</span><span class="n">dato</span><span class="p">[</span><span class="mi">1</span><span class="p">])))</span>
+            <span class="n">var</span><span class="o">.</span><span class="n">ui</span><span class="o">.</span><span class="n">tabVentas</span><span class="o">.</span><span class="n">item</span><span class="p">(</span><span class="n">row</span><span class="p">,</span> <span class="mi">2</span><span class="p">)</span><span class="o">.</span><span class="n">setTextAlignment</span><span class="p">(</span><span class="n">QtCore</span><span class="o">.</span><span class="n">Qt</span><span class="o">.</span><span class="n">AlignCenter</span><span class="p">)</span>
+            <span class="c1"># Adecuamos el campo de precio para pasarlo a float y operar con el</span>
+            <span class="n">var</span><span class="o">.</span><span class="n">precio</span> <span class="o">=</span> <span class="n">articulo</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">replace</span><span class="p">(</span><span class="s1">&#39;€&#39;</span><span class="p">,</span> <span class="s1">&#39;&#39;</span><span class="p">)</span>
+            <span class="n">var</span><span class="o">.</span><span class="n">precio</span> <span class="o">=</span> <span class="n">var</span><span class="o">.</span><span class="n">precio</span><span class="o">.</span><span class="n">replace</span><span class="p">(</span><span class="s1">&#39;,&#39;</span><span class="p">,</span> <span class="s1">&#39;.&#39;</span><span class="p">)</span>
+            <span class="n">var</span><span class="o">.</span><span class="n">precio</span> <span class="o">=</span> <span class="n">var</span><span class="o">.</span><span class="n">precio</span><span class="o">.</span><span class="n">replace</span><span class="p">(</span><span class="s1">&#39; &#39;</span><span class="p">,</span> <span class="s1">&#39;&#39;</span><span class="p">)</span>
+
+            <span class="n">cantidad</span><span class="o">=</span><span class="nb">round</span><span class="p">(</span><span class="nb">float</span><span class="p">(</span><span class="n">var</span><span class="o">.</span><span class="n">txtCantidad</span><span class="o">.</span><span class="n">text</span><span class="p">()</span><span class="o">.</span><span class="n">replace</span><span class="p">(</span><span class="s1">&#39;,&#39;</span><span class="p">,</span> <span class="s1">&#39;.&#39;</span><span class="p">)),</span> <span class="mi">2</span><span class="p">)</span>
+            <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;cantidad&#39;</span><span class="p">)</span>
+            <span class="n">total_venta</span> <span class="o">=</span> <span class="nb">float</span><span class="p">(</span><span class="n">articulo</span><span class="p">)</span> <span class="o">*</span> <span class="nb">float</span><span class="p">(</span><span class="n">cantidad</span><span class="p">)</span>
+            <span class="n">total_venta</span> <span class="o">=</span> <span class="nb">round</span><span class="p">(</span><span class="n">total_venta</span><span class="p">,</span> <span class="mi">2</span><span class="p">)</span>
+            <span class="n">total_linea</span><span class="o">=</span><span class="n">Facturas</span><span class="o">.</span><span class="n">totalLineaVenta</span><span class="p">(</span><span class="n">articulo</span><span class="p">)</span>
+
+
+        <span class="k">except</span> <span class="ne">Exception</span> <span class="k">as</span> <span class="n">error</span><span class="p">:</span>
+            <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Error en Cargar la linea de venta(Invoice.Facturas.procesoVenta):   &#39;</span><span class="p">,</span> <span class="n">error</span><span class="p">)</span></div>
+
+
+<div class="viewcode-block" id="Facturas.totalLineaVenta"><a class="viewcode-back" href="../src/invoice.html#invoice.Facturas.totalLineaVenta">[docs]</a>    <span class="k">def</span> <span class="nf">totalLineaVenta</span><span class="p">(</span><span class="bp">self</span> <span class="o">=</span><span class="kc">None</span><span class="p">):</span>
+         <span class="sd">&quot;&quot;&quot;</span>
+
+<span class="sd">        Metodo que calcula el total de la linea de venta.</span>
+
+<span class="sd">         &quot;&quot;&quot;</span>
+         <span class="k">try</span><span class="p">:</span>
+             <span class="n">row</span> <span class="o">=</span> <span class="n">var</span><span class="o">.</span><span class="n">ui</span><span class="o">.</span><span class="n">tabVentas</span><span class="o">.</span><span class="n">currentRow</span><span class="p">()</span>
+             <span class="n">cantidad</span> <span class="o">=</span> <span class="nb">round</span><span class="p">(</span><span class="nb">float</span><span class="p">(</span><span class="n">var</span><span class="o">.</span><span class="n">txtCantidad</span><span class="o">.</span><span class="n">text</span><span class="p">()</span><span class="o">.</span><span class="n">replace</span><span class="p">(</span><span class="s1">&#39;,&#39;</span><span class="p">,</span> <span class="s1">&#39;.&#39;</span><span class="p">)),</span> <span class="mi">2</span><span class="p">)</span>
+
+             <span class="n">total_linea</span> <span class="o">=</span> <span class="nb">round</span><span class="p">(</span><span class="nb">float</span><span class="p">(</span><span class="n">var</span><span class="o">.</span><span class="n">precio</span><span class="p">)</span> <span class="o">*</span> <span class="nb">float</span><span class="p">(</span><span class="n">cantidad</span><span class="p">),</span> <span class="mi">2</span><span class="p">)</span>
+             <span class="n">var</span><span class="o">.</span><span class="n">ui</span><span class="o">.</span><span class="n">tabVentas</span><span class="o">.</span><span class="n">setItem</span><span class="p">(</span><span class="n">row</span><span class="p">,</span> <span class="mi">4</span><span class="p">,</span> <span class="n">QtWidgets</span><span class="o">.</span><span class="n">QTableWidgetItem</span><span class="p">(</span><span class="nb">str</span><span class="p">(</span><span class="n">total_linea</span><span class="p">)</span><span class="o">+</span><span class="s1">&#39;€&#39;</span><span class="p">))</span>
+             <span class="n">var</span><span class="o">.</span><span class="n">ui</span><span class="o">.</span><span class="n">tabVentas</span><span class="o">.</span><span class="n">item</span><span class="p">(</span><span class="n">row</span><span class="p">,</span> <span class="mi">4</span><span class="p">)</span><span class="o">.</span><span class="n">setTextAlignment</span><span class="p">(</span><span class="n">QtCore</span><span class="o">.</span><span class="n">Qt</span><span class="o">.</span><span class="n">AlignRight</span><span class="p">)</span>
+         <span class="k">except</span> <span class="ne">Exception</span> <span class="k">as</span> <span class="n">error</span><span class="p">:</span>
+             <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Error en (Invoice.Facturas.totalLineaVenta):   &#39;</span><span class="p">,</span> <span class="n">error</span><span class="p">)</span></div></div>
+
+<span class="sd">&#39;&#39;&#39;</span>
+
+
+<span class="sd">         &#39;&#39;&#39;</span>
+</pre></div>
+
+          </div>
+          
+        </div>
+      </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+<h1 class="logo"><a href="../index.html">portelafernandez</a></h1>
+
+
+
+
+
+
+
+
+<h3>Navigation</h3>
+
+<div class="relations">
+<h3>Related Topics</h3>
+<ul>
+  <li><a href="../index.html">Documentation overview</a><ul>
+  <li><a href="index.html">Module code</a><ul>
+  </ul></li>
+  </ul></li>
+</ul>
+</div>
+<div id="searchbox" style="display: none" role="search">
+  <h3 id="searchlabel">Quick search</h3>
+    <div class="searchformwrapper">
+    <form class="search" action="../search.html" method="get">
+      <input type="text" name="q" aria-labelledby="searchlabel" autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false"/>
+      <input type="submit" value="Go" />
+    </form>
+    </div>
+</div>
+<script>$('#searchbox').show(0);</script>
+
+
+
+
+
+
+
+
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="footer">
+      &copy;2022, Atenea Portela.
+      
+      |
+      Powered by <a href="http://sphinx-doc.org/">Sphinx 4.4.0</a>
+      &amp; <a href="https://github.com/bitprophet/alabaster">Alabaster 0.7.12</a>
+      
+    </div>
+
+    
+
+    
+  </body>
+</html>
