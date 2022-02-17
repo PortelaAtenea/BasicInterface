@@ -142,8 +142,9 @@ class Conexion():
         :param dni: dni de un cliente determinado
         :type dni: String
 
-        :return:
-        :rtype:
+        :return:None
+        :rtype: Object
+
         """
         try:
             record = []
@@ -164,13 +165,15 @@ class Conexion():
             return None
 
 
-    def bajaCli( dni):
+    def bajaCli( self,dni):
         """
 
         Modulo que recibe dni del cliente y lo elimina de la bbdd
 
+        :param dni: dni del cliente a eliminar
+        :type dni: String
         :return: None
-        :rtype: String
+        :rtype: Object
 
         """
         try:
@@ -194,11 +197,17 @@ class Conexion():
             print('Error en baja de un cliente de la bd  ', error)
             return None
 
-    def listaMunicipios(prov):
+    def listaMunicipios(self,prov):
         """
+
+
         Modulo que seleciona los municipios dadda una provincia y la carga en la combobozx del panel cliente
-        :return:
-        :rtype:
+
+        :param prov: provincia selecionada por el usuario
+        :type prov: String
+        :return: lsita de municipios para visualizar en el comboBox
+        :rtype: List
+
         """
         municipios = []
         try:
@@ -214,9 +223,12 @@ class Conexion():
 
     def listaProvincias(self):
         """
+
         Modulo que carga las provincias Españolas a la intefaz
-        :return: Lista
-        :rtype: Object
+
+        :return: Concunto de provincias para que el usuario visualice en el comboBox
+        :rtype: Lista
+
         """
         provincias = []
         try:
@@ -230,9 +242,15 @@ class Conexion():
         return provincias
 
 
-    def modifCli( modcliente):
+    def modifCli(self , modcliente):
         """
+
+
         Modulo que recibe los datos del cliente al modificar y lo modifica en la bbdd
+
+        :param modcliente: Contiene los datos del cliente a modificar
+        :type modcliente: Lista
+
         """
         try:
             query = QtSql.QSqlQuery()
@@ -263,10 +281,16 @@ class Conexion():
         except Exception as error:
             print('Error en modificar clientes (conexión) ', error)
 
-    def comprobardni( dni):
+    def comprobardni(self, dni):
         """
+
+
         Modulo que si el dni es correcto
-        retorna un boleano y recoje un String
+
+        :param dni:dni a combrobar
+        :type dni: String
+        :return: True si es verdad y False si no le es
+        :rtype: Boolean
         """
     def buscaCli( dni):
         """

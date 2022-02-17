@@ -70,8 +70,14 @@
 
 <dl class="py method">
 <dt class="sig sig-object py" id="conexion.Conexion.altaCli">
-<span class="sig-name descname"><span class="pre">altaCli</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/conexion.html#Conexion.altaCli"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#conexion.Conexion.altaCli" title="Permalink to this definition">¶</a></dt>
+<span class="sig-name descname"><span class="pre">altaCli</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">newcli</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/conexion.html#Conexion.altaCli"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#conexion.Conexion.altaCli" title="Permalink to this definition">¶</a></dt>
 <dd><p>Modulo que recibe los datos de un cliente y los carga en la bbdd</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>newcli</strong> – datos del nuevo cliente que se quiere añadir a la bbdd</p>
+</dd>
+</dl>
+<p>:type newcli:Array</p>
 </dd></dl>
 
 <dl class="py method">
@@ -89,10 +95,19 @@
 
 <dl class="py method">
 <dt class="sig sig-object py" id="conexion.Conexion.bajaCli">
-<span class="sig-name descname"><span class="pre">bajaCli</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/conexion.html#Conexion.bajaCli"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#conexion.Conexion.bajaCli" title="Permalink to this definition">¶</a></dt>
-<dd><p>Modulo que recibe dni del cliente y lo elimina de la bbdd
-:return: None
-:rtype: String</p>
+<span class="sig-name descname"><span class="pre">bajaCli</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">dni</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/conexion.html#Conexion.bajaCli"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#conexion.Conexion.bajaCli" title="Permalink to this definition">¶</a></dt>
+<dd><p>Modulo que recibe dni del cliente y lo elimina de la bbdd</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>dni</strong> (<em>String</em>) – dni del cliente a eliminar</p>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>None</p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p>Object</p>
+</dd>
+</dl>
 </dd></dl>
 
 <dl class="py method">
@@ -162,8 +177,7 @@ retorna un boleano y recoje un String</p>
 <dl class="py method">
 <dt class="sig sig-object py" id="conexion.Conexion.cargaTabCli">
 <span class="sig-name descname"><span class="pre">cargaTabCli</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/conexion.html#Conexion.cargaTabCli"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#conexion.Conexion.cargaTabCli" title="Permalink to this definition">¶</a></dt>
-<dd><p>Modulo que toma datos de los clientes y los carga en la tabla de la interfaz grafica
-:rtype: object</p>
+<dd><p>Modulo que toma datos de los clientes y los carga en la tabla de la interfaz grafica</p>
 </dd></dl>
 
 <dl class="py method">
@@ -188,9 +202,12 @@ Este modulo dese le llama cadavez que se realiza una venta</p>
 
 <dl class="py method">
 <dt class="sig sig-object py" id="conexion.Conexion.comprobardni">
-<span class="sig-name descname"><span class="pre">comprobardni</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/conexion.html#Conexion.comprobardni"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#conexion.Conexion.comprobardni" title="Permalink to this definition">¶</a></dt>
-<dd><p>Modulo que si el dni es correcto
-retorna un boleano y recoje un String</p>
+<span class="sig-name descname"><span class="pre">comprobardni</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">dni</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/conexion.html#Conexion.comprobardni"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#conexion.Conexion.comprobardni" title="Permalink to this definition">¶</a></dt>
+<dd><p>Modulo que si el dni es correcto</p>
+<p>:param dni:dni a combrobar
+:type dni: String
+:return: True si es verdad y False si no le es
+:rtype: Boolean</p>
 </dd></dl>
 
 <dl class="py method">
@@ -198,16 +215,29 @@ retorna un boleano y recoje un String</p>
 <span class="sig-name descname"><span class="pre">create_db</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/conexion.html#Conexion.create_db"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#conexion.Conexion.create_db" title="Permalink to this definition">¶</a></dt>
 <dd><p>Modulo uqe se ejecuta al principio de programa
 Crea las tablas y carga ,unicipios y provincias en la basa de datos
-Crea los directorios necesario
-:rtype: object</p>
+Crea los directorios necesario</p>
+<dl class="field-list simple">
+<dt class="field-odd">Returns</dt>
+<dd class="field-odd"><p>None?</p>
+</dd>
+<dt class="field-even">Return type</dt>
+<dd class="field-even"><p>object</p>
+</dd>
+</dl>
 </dd></dl>
 
 <dl class="py method">
 <dt class="sig sig-object py" id="conexion.Conexion.db_connect">
 <span class="sig-name descname"><span class="pre">db_connect</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/conexion.html#Conexion.db_connect"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#conexion.Conexion.db_connect" title="Permalink to this definition">¶</a></dt>
-<dd><p>Realiza la conexion a la basa de datos
-:return: boolean, True si es correcto, false si hay un errror
-:rtype: String</p>
+<dd><p>Realiza la conexion a la basa de datos</p>
+<dl class="field-list simple">
+<dt class="field-odd">Returns</dt>
+<dd class="field-odd"><p>True si es correcto, false si hay un errror</p>
+</dd>
+<dt class="field-even">Return type</dt>
+<dd class="field-even"><p>boolean</p>
+</dd>
+</dl>
 </dd></dl>
 
 <dl class="py method">
@@ -227,18 +257,33 @@ el array leyecto los codigos de venta losd a de baja de la tabla de ventas de la
 
 <dl class="py method">
 <dt class="sig sig-object py" id="conexion.Conexion.listaMunicipios">
-<span class="sig-name descname"><span class="pre">listaMunicipios</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/conexion.html#Conexion.listaMunicipios"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#conexion.Conexion.listaMunicipios" title="Permalink to this definition">¶</a></dt>
-<dd><p>Modulo que seleciona los municipios dadda una provincia y la carga en la combobozx del panel cliente
-:return:
-:rtype:</p>
+<span class="sig-name descname"><span class="pre">listaMunicipios</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">prov</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/conexion.html#Conexion.listaMunicipios"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#conexion.Conexion.listaMunicipios" title="Permalink to this definition">¶</a></dt>
+<dd><p>Modulo que seleciona los municipios dadda una provincia y la carga en la combobozx del panel cliente</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>prov</strong> (<em>String</em>) – provincia selecionada por el usuario</p>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>lsita de municipios para visualizar en el comboBox</p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p>List</p>
+</dd>
+</dl>
 </dd></dl>
 
 <dl class="py method">
 <dt class="sig sig-object py" id="conexion.Conexion.listaProvincias">
 <span class="sig-name descname"><span class="pre">listaProvincias</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/conexion.html#Conexion.listaProvincias"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#conexion.Conexion.listaProvincias" title="Permalink to this definition">¶</a></dt>
-<dd><p>Modulo que carga las provincias Españolas a la intefaz
-:return: Lista
-:rtype: Object</p>
+<dd><p>Modulo que carga las provincias Españolas a la intefaz</p>
+<dl class="field-list simple">
+<dt class="field-odd">Returns</dt>
+<dd class="field-odd"><p>Concunto de provincias para que el usuario visualice en el comboBox</p>
+</dd>
+<dt class="field-even">Return type</dt>
+<dd class="field-even"><p>Lista</p>
+</dd>
+</dl>
 </dd></dl>
 
 <dl class="py method">
@@ -249,8 +294,13 @@ el array leyecto los codigos de venta losd a de baja de la tabla de ventas de la
 
 <dl class="py method">
 <dt class="sig sig-object py" id="conexion.Conexion.modifCli">
-<span class="sig-name descname"><span class="pre">modifCli</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/conexion.html#Conexion.modifCli"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#conexion.Conexion.modifCli" title="Permalink to this definition">¶</a></dt>
+<span class="sig-name descname"><span class="pre">modifCli</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">modcliente</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/conexion.html#Conexion.modifCli"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#conexion.Conexion.modifCli" title="Permalink to this definition">¶</a></dt>
 <dd><p>Modulo que recibe los datos del cliente al modificar y lo modifica en la bbdd</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>modcliente</strong> (<em>Lista</em>) – Contiene los datos del cliente a modificar</p>
+</dd>
+</dl>
 </dd></dl>
 
 <dl class="py method">
@@ -267,16 +317,15 @@ retorn  un array con el ael precio que es un float y el codigo del articulo</p>
 
 <dl class="py method">
 <dt class="sig sig-object py" id="conexion.Conexion.oneClie">
-<span class="sig-name descname"><span class="pre">oneClie</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/conexion.html#Conexion.oneClie"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#conexion.Conexion.oneClie" title="Permalink to this definition">¶</a></dt>
+<span class="sig-name descname"><span class="pre">oneClie</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">dni</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/conexion.html#Conexion.oneClie"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#conexion.Conexion.oneClie" title="Permalink to this definition">¶</a></dt>
 <dd><p>Modulo que seleciona un cliente segun su dni y lo debvuelve a la funcion cargaCli del fichero clientesdel fichero clietes</p>
 <dl class="field-list simple">
-<dt class="field-odd">Returns</dt>
-<dd class="field-odd"><p>Object</p>
-</dd>
-<dt class="field-even">Return type</dt>
-<dd class="field-even"><p>String</p>
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>dni</strong> (<em>String</em>) – dni de un cliente determinado</p>
 </dd>
 </dl>
+<p>:return:None
+:rtype: Object</p>
 </dd></dl>
 
 </dd></dl>

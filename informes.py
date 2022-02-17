@@ -132,12 +132,17 @@ class Informes():
             var.cv.setAuthor('Departamento de Administración')
             rootPath = '.\\informes'
             var.cv.setFont('Helvetica-Bold', size=12)
+
             textotitulo = 'FACTURA'
             Informes.cabecera(self)
             Informes.pie(textotitulo)
             codfac = var.ui.lblNumfac.text()
+
             var.cv.drawString(260, 694, textotitulo + ': ' + (str(codfac)))
             var.cv.line(30, 685, 550, 685)
+
+            var.cv.drawString(180,790,'CIF: '+ var.ui.txtDniFac.text())
+            var.cv.drawString(180,790,'Nombre: '+ var.ui.txtNombreFac.text())
             items = ['Venta', 'Articulo', 'Precio', 'Cantidad', 'Total']
             var.cv.drawString(65, 673, items[0])
             var.cv.drawString(165, 673, items[1])

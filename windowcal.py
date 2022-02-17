@@ -13,6 +13,12 @@ from PyQt5 import QtCore, QtGui, QtWidgets
 
 class Ui_windowcal(object):
     def setupUi(self, windowcal):
+        """
+
+        Codigo abtenido por e codigo xml generado para la interfaz grafica para la ventana calendario
+        :param windowcal:
+        :type windowcal:
+        """
         windowcal.setObjectName("windowcal")
         windowcal.resize(308, 185)
         windowcal.setModal(True)

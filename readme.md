@@ -3,6 +3,10 @@
 - la tabla tien  que ser amplia para poder verla bien pero con ceherenca  con el resto
 
 
+# Posibles ejercicios del examen
+
+
+
 -El programa funciona 
 -3 mejoras con distintos apastados
 -1 hora por mejora

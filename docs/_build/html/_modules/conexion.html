@@ -50,6 +50,8 @@
 <span class="sd">        Modulo uqe se ejecuta al principio de programa</span>
 <span class="sd">        Crea las tablas y carga ,unicipios y provincias en la basa de datos</span>
 <span class="sd">        Crea los directorios necesario</span>
+
+<span class="sd">        :return: None?</span>
 <span class="sd">        :rtype: object</span>
 
 <span class="sd">        &quot;&quot;&quot;</span></div>
@@ -57,8 +59,9 @@
         <span class="sd">&quot;&quot;&quot;</span>
 
 <span class="sd">        Realiza la conexion a la basa de datos</span>
-<span class="sd">        :return: boolean, True si es correcto, false si hay un errror</span>
-<span class="sd">        :rtype: String</span>
+
+<span class="sd">        :return: True si es correcto, false si hay un errror</span>
+<span class="sd">        :rtype: boolean</span>
 
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="k">try</span><span class="p">:</span>
@@ -85,9 +88,14 @@
     <span class="c1"># retorna true si existe el dni</span>
     <span class="sd">&#39;&#39;&#39;MODULOS GESTION BASE DE DATOS CLIENTES&#39;&#39;&#39;</span>
 
-<div class="viewcode-block" id="Conexion.altaCli"><a class="viewcode-back" href="../src/conexion.html#conexion.Conexion.altaCli">[docs]</a>    <span class="k">def</span> <span class="nf">altaCli</span><span class="p">(</span><span class="n">newcli</span><span class="p">):</span>
+<div class="viewcode-block" id="Conexion.altaCli"><a class="viewcode-back" href="../src/conexion.html#conexion.Conexion.altaCli">[docs]</a>    <span class="k">def</span> <span class="nf">altaCli</span><span class="p">(</span> <span class="bp">self</span><span class="p">,</span> <span class="n">newcli</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;</span>
+
 <span class="sd">        Modulo que recibe los datos de un cliente y los carga en la bbdd</span>
+
+<span class="sd">        :param newcli: datos del nuevo cliente que se quiere añadir a la bbdd</span>
+<span class="sd">        :type newcli:Array</span>
+
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="k">try</span><span class="p">:</span>
 
@@ -134,7 +142,6 @@
         <span class="sd">&quot;&quot;&quot;</span>
 
 <span class="sd">        Modulo que toma datos de los clientes y los carga en la tabla de la interfaz grafica</span>
-<span class="sd">        :rtype: object</span>
 
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="k">try</span><span class="p">:</span>
@@ -160,13 +167,17 @@
         <span class="k">except</span> <span class="ne">Exception</span> <span class="k">as</span> <span class="n">error</span><span class="p">:</span>
             <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Problemas al mostrar table clientes :(  &#39;</span><span class="p">,</span> <span class="n">error</span><span class="p">)</span></div>
 
-<div class="viewcode-block" id="Conexion.oneClie"><a class="viewcode-back" href="../src/conexion.html#conexion.Conexion.oneClie">[docs]</a>    <span class="k">def</span> <span class="nf">oneClie</span><span class="p">(</span><span class="n">dni</span><span class="p">):</span>
+<div class="viewcode-block" id="Conexion.oneClie"><a class="viewcode-back" href="../src/conexion.html#conexion.Conexion.oneClie">[docs]</a>    <span class="k">def</span> <span class="nf">oneClie</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">dni</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;</span>
 
 <span class="sd">        Modulo que seleciona un cliente segun su dni y lo debvuelve a la funcion cargaCli del fichero clientesdel fichero clietes</span>
 
-<span class="sd">        :return: Object</span>
-<span class="sd">        :rtype: String</span>
+<span class="sd">        :param dni: dni de un cliente determinado</span>
+<span class="sd">        :type dni: String</span>
+
+<span class="sd">        :return:None</span>
+<span class="sd">        :rtype: Object</span>
+
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="k">try</span><span class="p">:</span>
             <span class="n">record</span> <span class="o">=</span> <span class="p">[]</span>
@@ -187,12 +198,15 @@
             <span class="k">return</span> <span class="kc">None</span></div>
 
 
-<div class="viewcode-block" id="Conexion.bajaCli"><a class="viewcode-back" href="../src/conexion.html#conexion.Conexion.bajaCli">[docs]</a>    <span class="k">def</span> <span class="nf">bajaCli</span><span class="p">(</span> <span class="n">dni</span><span class="p">):</span>
+<div class="viewcode-block" id="Conexion.bajaCli"><a class="viewcode-back" href="../src/conexion.html#conexion.Conexion.bajaCli">[docs]</a>    <span class="k">def</span> <span class="nf">bajaCli</span><span class="p">(</span> <span class="bp">self</span><span class="p">,</span><span class="n">dni</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;</span>
 
 <span class="sd">        Modulo que recibe dni del cliente y lo elimina de la bbdd</span>
+
+<span class="sd">        :param dni: dni del cliente a eliminar</span>
+<span class="sd">        :type dni: String</span>
 <span class="sd">        :return: None</span>
-<span class="sd">        :rtype: String</span>
+<span class="sd">        :rtype: Object</span>
 
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="k">try</span><span class="p">:</span>
@@ -216,11 +230,17 @@
             <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Error en baja de un cliente de la bd  &#39;</span><span class="p">,</span> <span class="n">error</span><span class="p">)</span>
             <span class="k">return</span> <span class="kc">None</span></div>
 
-<div class="viewcode-block" id="Conexion.listaMunicipios"><a class="viewcode-back" href="../src/conexion.html#conexion.Conexion.listaMunicipios">[docs]</a>    <span class="k">def</span> <span class="nf">listaMunicipios</span><span class="p">(</span><span class="n">prov</span><span class="p">):</span>
+<div class="viewcode-block" id="Conexion.listaMunicipios"><a class="viewcode-back" href="../src/conexion.html#conexion.Conexion.listaMunicipios">[docs]</a>    <span class="k">def</span> <span class="nf">listaMunicipios</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">prov</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;</span>
+
+
 <span class="sd">        Modulo que seleciona los municipios dadda una provincia y la carga en la combobozx del panel cliente</span>
-<span class="sd">        :return:</span>
-<span class="sd">        :rtype:</span>
+
+<span class="sd">        :param prov: provincia selecionada por el usuario</span>
+<span class="sd">        :type prov: String</span>
+<span class="sd">        :return: lsita de municipios para visualizar en el comboBox</span>
+<span class="sd">        :rtype: List</span>
+
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="n">municipios</span> <span class="o">=</span> <span class="p">[]</span>
         <span class="k">try</span><span class="p">:</span>
@@ -236,9 +256,12 @@
 
 <div class="viewcode-block" id="Conexion.listaProvincias"><a class="viewcode-back" href="../src/conexion.html#conexion.Conexion.listaProvincias">[docs]</a>    <span class="k">def</span> <span class="nf">listaProvincias</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;</span>
+
 <span class="sd">        Modulo que carga las provincias Españolas a la intefaz</span>
-<span class="sd">        :return: Lista</span>
-<span class="sd">        :rtype: Object</span>
+
+<span class="sd">        :return: Concunto de provincias para que el usuario visualice en el comboBox</span>
+<span class="sd">        :rtype: Lista</span>
+
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="n">provincias</span> <span class="o">=</span> <span class="p">[]</span>
         <span class="k">try</span><span class="p">:</span>
@@ -252,9 +275,15 @@
         <span class="k">return</span> <span class="n">provincias</span></div>
 
 
-<div class="viewcode-block" id="Conexion.modifCli"><a class="viewcode-back" href="../src/conexion.html#conexion.Conexion.modifCli">[docs]</a>    <span class="k">def</span> <span class="nf">modifCli</span><span class="p">(</span> <span class="n">modcliente</span><span class="p">):</span>
+<div class="viewcode-block" id="Conexion.modifCli"><a class="viewcode-back" href="../src/conexion.html#conexion.Conexion.modifCli">[docs]</a>    <span class="k">def</span> <span class="nf">modifCli</span><span class="p">(</span><span class="bp">self</span> <span class="p">,</span> <span class="n">modcliente</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;</span>
+
+
 <span class="sd">        Modulo que recibe los datos del cliente al modificar y lo modifica en la bbdd</span>
+
+<span class="sd">        :param modcliente: Contiene los datos del cliente a modificar</span>
+<span class="sd">        :type modcliente: Lista</span>
+
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="k">try</span><span class="p">:</span>
             <span class="n">query</span> <span class="o">=</span> <span class="n">QtSql</span><span class="o">.</span><span class="n">QSqlQuery</span><span class="p">()</span>
@@ -285,10 +314,16 @@
         <span class="k">except</span> <span class="ne">Exception</span> <span class="k">as</span> <span class="n">error</span><span class="p">:</span>
             <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Error en modificar clientes (conexión) &#39;</span><span class="p">,</span> <span class="n">error</span><span class="p">)</span></div>
 
-<div class="viewcode-block" id="Conexion.comprobardni"><a class="viewcode-back" href="../src/conexion.html#conexion.Conexion.comprobardni">[docs]</a>    <span class="k">def</span> <span class="nf">comprobardni</span><span class="p">(</span> <span class="n">dni</span><span class="p">):</span>
+<div class="viewcode-block" id="Conexion.comprobardni"><a class="viewcode-back" href="../src/conexion.html#conexion.Conexion.comprobardni">[docs]</a>    <span class="k">def</span> <span class="nf">comprobardni</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">dni</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;</span>
+
+
 <span class="sd">        Modulo que si el dni es correcto</span>
-<span class="sd">        retorna un boleano y recoje un String</span>
+
+<span class="sd">        :param dni:dni a combrobar</span>
+<span class="sd">        :type dni: String</span>
+<span class="sd">        :return: True si es verdad y False si no le es</span>
+<span class="sd">        :rtype: Boolean</span>
 <span class="sd">        &quot;&quot;&quot;</span></div>
 <div class="viewcode-block" id="Conexion.buscaCli"><a class="viewcode-back" href="../src/conexion.html#conexion.Conexion.buscaCli">[docs]</a>    <span class="k">def</span> <span class="nf">buscaCli</span><span class="p">(</span> <span class="n">dni</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;</span>
