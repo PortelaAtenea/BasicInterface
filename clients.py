@@ -13,7 +13,7 @@ import var
 
 class Clientes():
 
-    def validarDNI():
+    def validarDNI(dni):
         """
 
         Modulo que se encarga de comprobar que el dni introducido es valido. Si eso se cumple, aparaecera en la interfaz una V en verde para señalizarlo. En
@@ -26,8 +26,8 @@ class Clientes():
         try:
             global validodni
             validodni = False
-            dni = var.ui.txtDni.text()  # Sea lo que sea que hayya en una caja de texto de la interfaz(float, int String) el lo va a cojer siempre como un string
-            var.ui.txtDni.setText(dni)
+            #dni = var.ui.txtDni.text()  # Sea lo que sea que hayya en una caja de texto de la interfaz(float, int String) el lo va a cojer siempre como un string
+            #var.ui.txtDni.setText(dni)
             tabla = 'TRWAGMYFPDXBNJZSQVHLCKE'  # lETRAS DEL DNI
             dig_ext = 'XYZ'  # Letra Dni extrangero
             reemp_dig_ext = {'X': '0', 'Y': '1',
@@ -48,24 +48,27 @@ class Clientes():
 
                     print('Correcto')
                     validodni = True
-
+                    return validodni
                     var.ui.txtDni.setStyleSheet('background-color: white;')
                 else:
                     print('Incorrecto')
 
+                    validodni = False
                     var.ui.lblValidoDni.setStyleSheet('QLabel {color:red;}')
                     var.ui.lblValidoDni.setText('X')
                     var.ui.txtDni.setStyleSheet('background-color: pink;')
             else:
                 print('Incorrecto')
 
+                validodni = False
                 var.ui.lblValidoDni.setStyleSheet('QLabel {color:red;}')
                 var.ui.lblValidoDni.setText('X')
                 var.ui.txtDni.setStyleSheet('background-color: pink;')
 
+            return validodni
         except:
             print('Error en la aplicacion')
-            return None
+            return False
 
     # def selSex(self):
     #     try:

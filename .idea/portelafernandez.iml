@@ -11,4 +11,7 @@
   <component name="ReSTService">
     <option name="DOC_DIR" value="C:\Users\a20ateneapf\PycharmProjects\portelafernandez\docs" />
   </component>
+  <component name="TestRunnerService">
+    <option name="PROJECT_TEST_RUNNER" value="Unittests" />
+  </component>
 </module>
