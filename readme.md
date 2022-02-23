@@ -20,7 +20,7 @@ https://github.com/XoanCarlos?tab=repositories
 ##Modulo Articulos
 
 [* codi*go y precio en tabla ajustado al contenido, en nombre que noja el resto
-* color rojo el codigo
+* color rojo el codigo   --> hecho
 * arregalr el coso del precio:
   * si es con coma o con punto da igual, se peude guardar igual pero cse cambia igual al qeu es correcto: --> precio = precio.remplace(',', ''.')????Mas o meneso, creo
   * tine que poder poner la current moneda del --- > precio = locale.currency(float(precio))

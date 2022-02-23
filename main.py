@@ -2,6 +2,7 @@ import locale
 import sys, var, events, locale
 from datetime import datetime
 
+from PyQt5.QtGui import QDoubleValidator
 from PyQt5.QtWidgets import QFileDialog, QTableWidgetItem
 
 import archivo
@@ -105,6 +106,7 @@ class Main(QtWidgets.QMainWindow):
         var.txtCantidad.textEdited.connect(invoice.Facturas.totalLineaVenta)
         #Tabla Articulos
         var.ui.txtNombreArti.editingFinished.connect(articulos.Articulos.mayus)
+        var.ui.txtPrecio.setValidator(QDoubleValidator(0.00, 99.99, 2))
         '''
         Eventos  de comboBox
         '''

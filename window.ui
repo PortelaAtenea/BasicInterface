@@ -61,7 +61,7 @@ background-color: rgb(239, 219, 255);</string>
      </rect>
     </property>
     <property name="currentIndex">
-     <number>1</number>
+     <number>2</number>
     </property>
     <widget class="QWidget" name="tabClientes_2">
      <attribute name="title">
@@ -1519,22 +1519,6 @@ background-color: rgb(252, 255, 235);</string>
         <string/>
        </property>
       </widget>
-      <widget class="QDoubleSpinBox" name="spinPrecio">
-       <property name="geometry">
-        <rect>
-         <x>150</x>
-         <y>90</y>
-         <width>121</width>
-         <height>22</height>
-        </rect>
-       </property>
-       <property name="decimals">
-        <number>2</number>
-       </property>
-       <property name="singleStep">
-        <double>0.100000000000000</double>
-       </property>
-      </widget>
       <widget class="QLabel" name="lblCodigoArti_2">
        <property name="geometry">
         <rect>
@@ -1581,9 +1565,9 @@ background-color: rgb(252, 255, 235);</string>
       <widget class="QLineEdit" name="txtPrecio">
        <property name="geometry">
         <rect>
-         <x>280</x>
-         <y>90</y>
-         <width>371</width>
+         <x>150</x>
+         <y>80</y>
+         <width>121</width>
          <height>20</height>
         </rect>
        </property>
@@ -1814,11 +1798,11 @@ background-color: rgb(252, 255, 235);</string>
  </resources>
  <connections/>
  <buttongroups>
+  <buttongroup name="rbtGroupSex"/>
   <buttongroup name="chkGroupPago">
    <property name="exclusive">
     <bool>false</bool>
    </property>
   </buttongroup>
-  <buttongroup name="rbtGroupSex"/>
  </buttongroups>
 </ui>

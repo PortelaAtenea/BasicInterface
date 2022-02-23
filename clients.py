@@ -117,7 +117,7 @@ class Clientes():
         try:
             var.ui.cmbMuni.clear()
             prov = var.ui.cmbProv.currentText()
-            mun = conexion.Conexion.listaMunicipios(prov)
+            mun = conexion.Conexion.listaMunicipios(self,prov)
             for i in mun:
                 var.ui.cmbMuni.addItem(i)
         except Exception as error:
@@ -322,7 +322,7 @@ class Clientes():
             if 'Cargo' in row[4]:
                 var.ui.chkCargoCuenta.setChecked(True)
 
-            registro = conexion.Conexion.oneClie(row[0])  # row[0] es el dni
+            registro = conexion.Conexion.oneClie(self,row[0])  # row[0] es el dni
             var.ui.txtDir.setText(str(registro[0]))
             var.ui.cmbProv.setCurrentText(str(registro[1]))
             var.ui.cmbMuni.setCurrentText(str(registro[2]))
@@ -349,7 +349,7 @@ class Clientes():
             var.ui.lblNombreApel.setText(nombre)
             var.ui.txtDniFac.setText(row[0])
         except Exception as error:
-            print('Error en Cargar datos de un cliente', error)
+            print('Error en Cargar datos de un cliente en clientes.Clientes.CargaCli', error)
             return None
 
 

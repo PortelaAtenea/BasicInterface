@@ -9,17 +9,6 @@
 
 
 from PyQt5 import QtCore, QtGui, QtWidgets
-from img import basura
-from img import calendar
-
-from img import abrirCarpeta
-from img import crearBackup
-from img import impresion
-from img import limpiar
-from img import lupa
-from img import restaurarBackup
-from img import salir
-from img import verPdf
 
 
 class Ui_MainWindow(object):
@@ -652,11 +641,6 @@ class Ui_MainWindow(object):
         self.lblCodigoArti.setFont(font)
         self.lblCodigoArti.setText("")
         self.lblCodigoArti.setObjectName("lblCodigoArti")
-        self.spinPrecio = QtWidgets.QDoubleSpinBox(self.groupBox_2)
-        self.spinPrecio.setGeometry(QtCore.QRect(150, 90, 121, 22))
-        self.spinPrecio.setDecimals(2)
-        self.spinPrecio.setSingleStep(0.1)
-        self.spinPrecio.setObjectName("spinPrecio")
         self.lblCodigoArti_2 = QtWidgets.QLabel(self.groupBox_2)
         self.lblCodigoArti_2.setGeometry(QtCore.QRect(670, 20, 61, 41))
         font = QtGui.QFont()
@@ -672,7 +656,7 @@ class Ui_MainWindow(object):
         self.btnLimpiaArti.setIconSize(QtCore.QSize(25, 25))
         self.btnLimpiaArti.setObjectName("btnLimpiaArti")
         self.txtPrecio = QtWidgets.QLineEdit(self.groupBox_2)
-        self.txtPrecio.setGeometry(QtCore.QRect(280, 90, 371, 20))
+        self.txtPrecio.setGeometry(QtCore.QRect(150, 80, 121, 20))
         self.txtPrecio.setObjectName("txtPrecio")
         self.btnBuscar = QtWidgets.QPushButton(self.groupBox_2)
         self.btnBuscar.setGeometry(QtCore.QRect(580, 20, 31, 31))
@@ -777,7 +761,7 @@ class Ui_MainWindow(object):
         self.toolBar.addAction(self.actionbarImprimir)
 
         self.retranslateUi(MainWindow)
-        self.tabPrograma.setCurrentIndex(1)
+        self.tabPrograma.setCurrentIndex(2)
         QtCore.QMetaObject.connectSlotsByName(MainWindow)
 
     def retranslateUi(self, MainWindow):
@@ -875,3 +859,4 @@ class Ui_MainWindow(object):
         self.actionImprimir.setText(_translate("MainWindow", "Imprimir"))
         self.actionImportar_Datos.setText(_translate("MainWindow", "Importar Datos"))
         self.actionExportar_Datos.setText(_translate("MainWindow", "Exportar Datos"))
+

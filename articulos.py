@@ -62,7 +62,7 @@ class Articulos():
                 for i in Articulo:
                     tabArti.append(i.text())
 
-                valor = var.ui.spinPrecio.value()
+                valor = var.ui.txtPrecio.text()
                 newArti.append(valor)
                 tabArti.append(valor)
                 # Cargamos en la tabla
@@ -87,7 +87,7 @@ class Articulos():
         try:
             var.ui.txtNombreArti.setText("")
             var.ui.lblCodigoArti.setText("")
-            var.ui.spinPrecio.setValue(0.00)
+            var.ui.txtPrecio.setText("")
         except:
             print('Error en Limpiar Formato')
             return None
@@ -135,8 +135,10 @@ class Articulos():
             if fila:
                 row = [dato.text() for dato in fila]
             var.ui.lblCodigoArti.setText(row[0])
+            var.ui.lblCodigoArti.setStyleSheet('QLabel {color:red;}')
             var.ui.txtNombreArti.setText(row[1])
-            var.ui.spinPrecio.setValue(float(row[2]))
+
+            var.ui.txtPrecio.setText(row[2])
         except Exception as error:
             print('Error en Cargar datos de un Articulo- Articulos', error)
             return None
