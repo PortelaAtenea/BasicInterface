@@ -1595,6 +1595,29 @@ background-color: rgb(252, 255, 235);</string>
         </size>
        </property>
       </widget>
+      <widget class="QPushButton" name="btnVerReportArti">
+       <property name="geometry">
+        <rect>
+         <x>810</x>
+         <y>160</y>
+         <width>31</width>
+         <height>31</height>
+        </rect>
+       </property>
+       <property name="text">
+        <string/>
+       </property>
+       <property name="icon">
+        <iconset resource="img/verPdf.qrc">
+         <normaloff>:/newPrefix/verPdf.png</normaloff>:/newPrefix/verPdf.png</iconset>
+       </property>
+       <property name="iconSize">
+        <size>
+         <width>32</width>
+         <height>32</height>
+        </size>
+       </property>
+      </widget>
      </widget>
      <widget class="QTableWidget" name="tabArti">
       <property name="geometry">
