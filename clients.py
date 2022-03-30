@@ -148,6 +148,13 @@ class Clientes():
             var.dlgcalendar.hide()
         except Exception as error:
             print('Error en cargar fecha del calendario', error)
+    def cargarFechaFactura(qDate):
+        try:
+            data = ('{0}/{1}/{2}'.format(qDate.day(), qDate.month(), qDate.year()))
+            var.ui.txtFechaFactura.setText(str(data))
+            var.dlgcalendarFac.hide()
+        except Exception as error:
+            print('Error cargar fecha en txtFecha', error)
 
     def mayus():
         """
