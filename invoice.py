@@ -22,7 +22,18 @@ class Facturas:
         except Exception as e:
             print('Eror en Buascar cliente en facturas.:    ',e)
 
+    def cargarFecha(qDate):
+        try:
+            data = ('{0}/{1}/{2}'.format(qDate.day(), qDate.month(), qDate.year()))
 
+            if var.ui.tabPrograma.currentIndex() == 0:
+                var.ui.txtAltaCli.setText(str(data))
+
+            elif var.ui.tabPrograma.currentIndex() == 1:
+                var.ui.txtFechaFac.setText(str(data))
+            var.dlgcalendar.hide()
+        except Exception as error:
+            print('Error en cargar fecha del calendario', error)
     def fecha(self):
         """
 

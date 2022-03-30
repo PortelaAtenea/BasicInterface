@@ -130,13 +130,7 @@ class Clientes():
     #     except Exception as error:
     #         print('Error en seleccion municipio', error)
 
-    def cargarFecha(self, qDate):
-        """
-        Metodo que carga la fecha selecionada en el calendario, en la caja de texto correspondiente en la interfaz
-
-        :param qDate: Metodo necesario para pasrsear la fecha de tipo Date a tipo String
-        :type qDate: Libreria
-        """
+    def cargarFecha(qDate):
         try:
             data = ('{0}/{1}/{2}'.format(qDate.day(), qDate.month(), qDate.year()))
 
@@ -144,17 +138,10 @@ class Clientes():
                 var.ui.txtAltaCli.setText(str(data))
 
             elif var.ui.tabPrograma.currentIndex() == 1:
-                var.ui.txtFechaFac.setText(str(data))
+                var.ui.txtAltaCli.setText(str(data))
             var.dlgcalendar.hide()
         except Exception as error:
             print('Error en cargar fecha del calendario', error)
-    def cargarFechaFactura(qDate):
-        try:
-            data = ('{0}/{1}/{2}'.format(qDate.day(), qDate.month(), qDate.year()))
-            var.ui.txtFechaFactura.setText(str(data))
-            var.dlgcalendarFac.hide()
-        except Exception as error:
-            print('Error cargar fecha en txtFecha', error)
 
     def mayus():
         """
