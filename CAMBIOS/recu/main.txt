@@ -1,0 +1,6 @@
+        '''
+        Proveedores
+        '''
+        events.Eventos.resizeTablaProv(self)
+        var.ui.tabProveedores.setSelectionBehavior(QtWidgets.QTableWidget.SelectRows)
+        var.ui.tabProveedores.clicked.connect(proveedores.Proveedor.cargarProv)

@@ -11,6 +11,7 @@ global dlgabrir
 global copia
 global archivoDatos
 global cv
+global cvProv
 global txtCantidad
 global cmbProducto
 filedb = 'bbdd.sqlite'

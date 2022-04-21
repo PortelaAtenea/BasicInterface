@@ -9,6 +9,7 @@ import conexion
 
 class Informes():
     var.cv = canvas.Canvas('informes/ListadoClientes.pdf')  # Creación del lienzo de la plantilla
+    var.cvProv = canvas.Canvas('informes/ListadoProvedores.pdf')  # Creación del lienzo de la plantilla
 
     def listadoClientes(self):
                 """
@@ -376,3 +377,71 @@ class Informes():
             var.cv.drawString(420, alturaPie - 40, total)
         except Exception as error:
                     print('Error al crear pie de informe facura ', error)
+
+    def listadoProv(self):
+                """
+                Método que dibuja el el informe de listado de clientes y lo guarda en formato pdf.
+                Usa los métodos cabecera y pie para dibujar dichas partes.
+                """
+                try:
+
+
+
+                    Informes.cabecera(self)
+
+                    var.cv.setFont('Helvetica-Bold', 9)
+                    textotitulo = 'LISTADO CLIENTES'
+                    var.cv.drawString(255, 690, textotitulo)
+                    var.cv.line(40, 685, 530, 685)
+                    items = ['CIF', 'Nombre', 'Telefono']
+                    var.cv.drawString(65, 675, items[0])
+                    var.cv.drawString(220, 675, items[1])
+                    var.cv.drawString(400, 675, items[2])
+                    var.cv.line(40, 670, 530, 670)
+                    Informes.pie(textotitulo)
+                    query = QtSql.QSqlQuery()
+                    query.prepare('select cif,nombre, telefono from proveedores order by cif')
+                    var.cv.setFont('Helvetica', 8)
+                    if query.exec_():
+                        i = 50
+                        j = 655
+                        while query.next():
+                            if j <= 80:
+                                # Para saltar de página y colocar pie y cabecera en la nueva
+                                var.cv.drawString(460, 65,
+                                                  'Página siguiente...')  # Ellos están poniendo esta línea más abajo
+                                var.cv.showPage()  # Avanza la página
+                                var.cv.setFont('Helvetica-Bold', 10)
+                                textotitulo = 'LISTADO PROVEEDORES'
+                                var.cv.drawString(255, 690, textotitulo)
+                                var.cv.line(40, 685, 530, 685)
+                                items = ['CIF', 'Nombre', 'Telefono']
+                                var.cv.drawString(65, 675, items[0])
+                                var.cv.drawString(220, 675, items[1])
+                                var.cv.drawString(400, 675, items[2])
+                                var.cv.line(40, 670, 530, 670)
+                                Informes.cabecera(self)
+                                Informes.pie(textotitulo)
+                                i = 50
+                                j = 655
+                            var.cv.drawString(i, j, str(query.value(0)))
+                            var.cv.drawString(i + 150, j, (str(query.value(1))))
+                            var.cv.drawString(i + 310, j, str(query.value(2)))
+                            j -= 20
+
+                    # Propiedades del documento
+                    var.cv.setFont('Helvetica', 8)
+                    var.cv.setTitle('Listado Clientes')
+                    var.cv.setAuthor('Departamento de administración')
+
+                    # Guarda el lienzo
+                    var.cv.save()
+                    rootPath = '.\\Informes'
+                    cont = 0
+
+                    for file in os.listdir(rootPath):
+                        if file.endswith('tes.pdf'):
+                            os.startfile('%s/%s' % (rootPath, file))
+
+                except Exception as error:
+                    print('Error al listar Proveedores informe ', error)

@@ -92,6 +92,24 @@ class Eventos():
         except Exception as error:
             print('Error en al redimensionar la tabla ', error)
 
+    def resizeTablaProv(self):
+        """
+
+        Metodo que cambia el tamaño de la tabla de ventas para que quede mas igualado a los tamaños del contenido
+
+
+        """
+        #Cambiar a la tabla de prov
+        try:
+            header = var.ui.tabProv.horizontalHeader()
+            for i in range(3):
+                header.setSectionResizeMode(i, QtWidgets.QHeaderView.Stretch)
+                if i == 2:
+                    header.setSectionResizeMode(i, QtWidgets.QHeaderView.ResizeToContents)
+        except Exception as error:
+            print('Error en al redimensionar la tabla ', error)
+
+
     def abrir(self):
         """
 

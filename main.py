@@ -11,6 +11,7 @@ import clients
 import conexion
 import informes
 import invoice
+import proveedores
 from windowaviso import *
 from window import *
 from windowcal import *
@@ -40,6 +41,7 @@ class dialogCalendar(QtWidgets.QDialog):
         var.dlgcalendar.Calendar.clicked.connect(clients.Clientes.cargarFecha)
         var.dlgcalendar.Calendar.clicked.connect(invoice.Facturas.cargarFecha)
 
+        var.dlgcalendar.Calendar.clicked.connect(proveedores.Proveedor.cargarFecha)
 
 class DialogAviso(QtWidgets.QDialog):
     def __init__(self):
@@ -81,6 +83,10 @@ class Main(QtWidgets.QMainWindow):
         var.ui.btnFechaFac.clicked.connect(events.Eventos.abrirCal)
         var.ui.btnFacturar.clicked.connect(invoice.Facturas.altaFac)
         var.ui.btnBorrarVenta.clicked.connect(conexion.Conexion.borrarVenta)
+        # Tabla Prov
+        var.ui.btnCalendarProv.clicked.connect(events.Eventos.abrirCal)
+        var.ui.btnAltaProv.clicked.connect(proveedores.Proveedor.altaprov)  # Acciones del boton de Aceptar
+        var.ui.btnLimpiarProv.clicked.connect(proveedores.Proveedor.limpiar)
 
         '''
         Eventos de la barra de menus
@@ -93,6 +99,7 @@ class Main(QtWidgets.QMainWindow):
         var.ui.actionImprimir.triggered.connect(events.Eventos.imprimir)
         var.ui.actionImportar_Datos.triggered.connect(archivo.Archivo.ImportarExcel)
         var.ui.actionExportar_Datos.triggered.connect(archivo.Archivo.exportExcel)
+        var.ui.actionlistado_Proveedores.triggered.connect(informes.Informes.listadoProv)
 
         '''
         Eventos de la caje de texto
@@ -140,6 +147,12 @@ class Main(QtWidgets.QMainWindow):
         var.ui.tabFac.setSelectionBehavior(QtWidgets.QTableWidget.SelectRows)
         var.ui.tabFac.clicked.connect(invoice.Facturas.cargaFac)
 
+        #Tabla Proveedores
+        #resize la tabla proveedores para que quede bonita
+        events.Eventos.resizeTablaProv(self)
+        var.ui.tabProv.clicked.connect(proveedores.Proveedor.cargarProv) #Parecida a cargaCli
+        var.ui.tabProv.setSelectionBehavior(QtWidgets.QTableWidget.SelectRows)
+
         '''
         Eventos de la bbdd
         '''
@@ -153,6 +166,8 @@ class Main(QtWidgets.QMainWindow):
         var.ui.tabFac.setSelectionBehavior(QtWidgets.QTableWidget.SelectRows)
         #Tabla Articulos
         conexion.Conexion.cargaTabArti(self)
+        #Tabla Clientes
+        conexion.Conexion.mostrarProvtab(self)
         '''Eventos del menu de herramientas'''
 
         var.ui.actionbarSalir.triggered.connect(events.Eventos.Salir)

@@ -1,0 +1,41 @@
+class Informes: 
+
+	 def cabecera(self):
+        """
+
+        Modulo que genera la cabecera de cualquier informe sea listado clientes, productos, etc...
+
+        """
+        try:
+            logo = '.\\img\logo-empresa.jpg'
+            var.cv.line(40, 800, 530, 800)
+            var.cv.setFont('Helvetica-Bold', 14)
+            var.cv.drawString(50,785, 'Import-Export Vigo')
+            var.cv.setFont('Helvetica', 10)
+            var.cv.drawString(50, 770, 'CIF: A0000000H')
+            var.cv.drawString(50, 755, 'Dirección: Avenida Galicia,101')
+            var.cv.drawString(50, 740, 'Vigo - 36216 - Spain')
+            var.cv.drawString(50, 725, 'e-mail: micorreo@mail.com')
+            var.cv.drawImage(logo, 450, 745)
+            var.cv.line(40, 710, 530, 710)
+        except Exception as error:
+            print('Error en cabecera informe', error)
+
+    def pie(texto):
+        """
+
+        Módulo que genera el pié del informe adaptado al listado que lo llama
+        :param texto: recibe el nombre del informe
+        :type texto: basestring
+
+        """
+        try:
+            var.cv.line(50, 50, 530, 50)
+            fecha = datetime.today()
+            fecha = fecha.strftime('%d.%m.%Y  %H.%M.%S')
+            var.cv.setFont('Helvetica', size = 6)
+            var.cv.drawString(70, 40, str(fecha))
+            var.cv.drawString(255, 40, str(texto))
+            var.cv.drawString(500, 40, str('Página %s ' %var.cv.getPageNumber()))
+        except Exception as error:
+            print('Error creación de pie de informe clientes', error)

@@ -838,6 +838,68 @@ Carga el reguistro de una venta realizada en la tabla ventas de nosseque
         except Exception as error:
             print('Error en Borrar Venta Factura (conexión.delVentaFac) ', error)
 
+    '''
+       Gestión proveedores
+       '''
+
+    def altaproveedor(newpro):
+        try:
+            query = QtSql.QSqlQuery()
+            query.prepare('insert into proveedores(CIF, nombre, fechaaltaprov, email, telefono) '
+                          'VALUES (:CIF, :nombre, :fechaaltaprov, :email, :telefono)')
+            query.bindValue(':CIF', newpro[0])
+            query.bindValue(':nombre', newpro[1])
+            query.bindValue(':fechaaltaprov', newpro[2])
+            query.bindValue(':email', newpro[3])
+            query.bindValue(':telefono', newpro[4])
+            if query.exec_():
+                msg = QtWidgets.QMessageBox()
+                msg.setWindowTitle('Aviso')
+                msg.setIcon(QtWidgets.QMessageBox.Information)
+                msg.setText('Proveedor dado de alta')
+                msg.exec()
+            else:
+                msg = QtWidgets.QMessageBox()
+                msg.setWindowTitle('Aviso')
+                msg.setIcon(QtWidgets.QMessageBox.Warning)
+                msg.setText(query.lastError().text())
+                msg.exec()
+        except Exception as error:
+            print('Error en alta proveedor: ', error)
+
+    def mostrarProvtab(self):
+        try:
+            index = 0
+            query = QtSql.QSqlQuery()
+            query.prepare('select nombre, fechaaltaprov,  telefono from proveedores')
+            if query.exec_():
+                while query.next():
+                    var.ui.tabProv.setRowCount(index + 1)
+                    print(query.value(0))
+                    var.ui.tabProv.setItem(index, 0, QtWidgets.QTableWidgetItem(str(query.value(0))))
+                    var.ui.tabProv.item(index, 0).setTextAlignment(QtCore.Qt.AlignLeft)
+                    var.ui.tabProv.setItem(index, 1, QtWidgets.QTableWidgetItem(str(query.value(1))))
+                    var.ui.tabProv.item(index, 1).setTextAlignment(QtCore.Qt.AlignCenter)
+                    var.ui.tabProv.setItem(index, 2, QtWidgets.QTableWidgetItem(str(query.value(2))))
+                    var.ui.tabProv.item(index, 2).setTextAlignment(QtCore.Qt.AlignCenter)
+                    index = index + 1
+        except Exception as error:
+
+            print('error mostrar proveedores')
+
+    def datosprov(empresa):
+        try:
+            datos = []
+            query = QtSql.QSqlQuery()
+            query.prepare('select CIF, email from proveedores where nombre = :nombre')
+            query.bindValue(':nombre', str(empresa))
+            if query.exec_():
+                while query.next():
+                    datos.append(str(query.value(0)))
+                    datos.append(str(query.value(1)))
+            return datos
+        except Exception as error:
+            print("error de seleccionar cif y mail")
 
 
 

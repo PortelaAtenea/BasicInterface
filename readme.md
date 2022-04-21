@@ -48,6 +48,17 @@ https://github.com/XoanCarlos?tab=repositories
   * Eleccion de campos que quieres incluir en el informe
   * nuevos campos de busqueda
 
+##Arreghlar lo que falta de los dias que fralte en abrir:
+  * dar de alta proveedores
+  * tavka como con los clientes que pone la informacion c
+  * unado clicas en la tabla en los cosas de arriba
+  * 
+
+
+
+
+
+
 
 
 from img import basura
