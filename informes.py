@@ -8,8 +8,6 @@ import conexion
 
 
 class Informes():
-    var.cv = canvas.Canvas('informes/ListadoClientes.pdf')  # Creación del lienzo de la plantilla
-    var.cvProv = canvas.Canvas('informes/ListadoProvedores.pdf')  # Creación del lienzo de la plantilla
 
     def listadoClientes(self):
                 """
@@ -18,6 +16,7 @@ class Informes():
                 """
                 try:
 
+                    var.cv = canvas.Canvas('informes/ListadoClientes.pdf')  # Creación del lienzo de la plantilla
 
 
                     Informes.cabecera(self)
@@ -385,63 +384,107 @@ class Informes():
                 """
                 try:
 
+                    var.cvProv = canvas.Canvas('informes/listadoProveedores.pdf')
 
+                    Informes.cabeceraProv(self)
 
-                    Informes.cabecera(self)
-
-                    var.cv.setFont('Helvetica-Bold', 9)
-                    textotitulo = 'LISTADO CLIENTES'
-                    var.cv.drawString(255, 690, textotitulo)
-                    var.cv.line(40, 685, 530, 685)
-                    items = ['CIF', 'Nombre', 'Telefono']
-                    var.cv.drawString(65, 675, items[0])
-                    var.cv.drawString(220, 675, items[1])
-                    var.cv.drawString(400, 675, items[2])
-                    var.cv.line(40, 670, 530, 670)
-                    Informes.pie(textotitulo)
+                    var.cvProv.setFont('Helvetica-Bold', 12)
+                    textotitulo = 'LISTADO PROVEEDORES'
+                    var.cvProv.drawString(255, 690, textotitulo)
+                    var.cvProv.line(40, 685, 530, 685)
+                    var.cvProv.setFont('Helvetica', 10)
+                    items = ['Razón Social', 'Telefono', 'Email']
+                    var.cvProv.drawString(65, 675, items[0])
+                    var.cvProv.drawString(240, 675, items[1])
+                    var.cvProv.drawString(400, 675, items[2])
+                    var.cvProv.line(40, 670, 530, 670)
+                    Informes.pieProv(textotitulo)
                     query = QtSql.QSqlQuery()
-                    query.prepare('select cif,nombre, telefono from proveedores order by cif')
-                    var.cv.setFont('Helvetica', 8)
+                    query.prepare('select nombre, telefono, email from proveedores order by nombre')
+                    var.cvProv.setFont('Helvetica', 8)
                     if query.exec_():
                         i = 50
                         j = 655
                         while query.next():
                             if j <= 80:
                                 # Para saltar de página y colocar pie y cabecera en la nueva
-                                var.cv.drawString(460, 65,
+                                var.cvProv.drawString(460, 65,
                                                   'Página siguiente...')  # Ellos están poniendo esta línea más abajo
-                                var.cv.showPage()  # Avanza la página
-                                var.cv.setFont('Helvetica-Bold', 10)
+                                var.cvProv.showPage()  # Avanza la página
+                                var.cvProv.setFont('Helvetica-Bold', 10)
                                 textotitulo = 'LISTADO PROVEEDORES'
-                                var.cv.drawString(255, 690, textotitulo)
-                                var.cv.line(40, 685, 530, 685)
-                                items = ['CIF', 'Nombre', 'Telefono']
-                                var.cv.drawString(65, 675, items[0])
-                                var.cv.drawString(220, 675, items[1])
-                                var.cv.drawString(400, 675, items[2])
-                                var.cv.line(40, 670, 530, 670)
-                                Informes.cabecera(self)
-                                Informes.pie(textotitulo)
+                                var.cvProv.drawString(255, 690, textotitulo)
+                                var.cvProv.line(40, 685, 530, 685)
+                                items = ['Nombre', 'Telefono', 'Email']
+                                var.cvProv.drawString(65, 675, items[0])
+                                var.cvProv.drawString(240, 675, items[1])
+                                var.cvProv.drawString(400, 675, items[2])
+                                var.cvProv.line(40, 670, 530, 670)
+                                Informes.cabeceraProv(self)
+                                Informes.pieProv(textotitulo)
                                 i = 50
                                 j = 655
-                            var.cv.drawString(i, j, str(query.value(0)))
-                            var.cv.drawString(i + 150, j, (str(query.value(1))))
-                            var.cv.drawString(i + 310, j, str(query.value(2)))
+
+                            var.cvProv.setFont('Helvetica', 8)
+                            var.cvProv.drawString(i, j, str(query.value(0)))
+                            var.cvProv.drawString(i + 200, j, (str(query.value(1))))
+                            var.cvProv.drawString(i + 310, j, str(query.value(2)))
                             j -= 20
 
                     # Propiedades del documento
-                    var.cv.setFont('Helvetica', 8)
-                    var.cv.setTitle('Listado Clientes')
-                    var.cv.setAuthor('Departamento de administración')
+                    var.cvProv.setFont('Helvetica', 10)
+                    var.cvProv.setTitle('Listado Proveedores')
+                    var.cvProv.setAuthor('Departamento de administración')
 
                     # Guarda el lienzo
-                    var.cv.save()
+                    var.cvProv.save()
                     rootPath = '.\\Informes'
                     cont = 0
 
                     for file in os.listdir(rootPath):
-                        if file.endswith('tes.pdf'):
+                        if file.endswith('res.pdf'):
                             os.startfile('%s/%s' % (rootPath, file))
 
                 except Exception as error:
                     print('Error al listar Proveedores informe ', error)
+    def cabeceraProv(self):
+        """
+
+        Metodo qeu imprime la cabecera en el pdf
+
+        """
+        try:
+            logo ='img/logo_empresa1.png'
+            var.cvProv.drawImage(logo, 425, 722)
+            var.cvProv.line(40,800,530,800)
+            var.cvProv.setFont('Helvetica-Bold', 14)
+            var.cvProv.drawString(50,785,'Import-Export Vigo')
+            var.cvProv.setFont('Helvetica', 10)
+            var.cvProv.drawString(50,770,'CIF: A0000000H')
+            var.cvProv.drawString(50, 755, 'Direccion Avenida Galiza 102')
+            var.cvProv.drawString(50, 740, 'Vigo - 123456 - Galiza')
+            var.cvProv.drawString(50, 725, 'email: importexportVigo@gmail.com')
+            #var.cv.drawImage(logo, 425,735)
+            var.cvProv.line(40,710,530,710)
+
+
+
+        except Exception as error:
+            print('Error en cabezeca interna ', error)
+
+
+    def pieProv(texto):
+        """
+        Método que dibuja el pie del informe con un formato común.
+        Recibe el título del informe para printarlo.
+        """
+        try:
+            var.cvProv.line(50, 50, 530, 50)
+            fecha = datetime.today()
+            fecha = fecha.strftime('%d.%m.%Y %H.%M.%S')
+            var.cvProv.setFont('Helvetica', 6)
+            var.cvProv.drawString(70, 40, str(fecha))
+            var.cvProv.drawString(255, 40, str(texto))
+            var.cvProv.drawString(500, 40, str('Página %s ' % var.cv.getPageNumber()))
+        except Exception as error:
+            print('Error al crear pie de informe clientes ', error)

@@ -87,6 +87,8 @@ class Main(QtWidgets.QMainWindow):
         var.ui.btnCalendarProv.clicked.connect(events.Eventos.abrirCal)
         var.ui.btnAltaProv.clicked.connect(proveedores.Proveedor.altaprov)  # Acciones del boton de Aceptar
         var.ui.btnLimpiarProv.clicked.connect(proveedores.Proveedor.limpiar)
+        var.ui.btnBajaProv.clicked.connect(proveedores.Proveedor.bajaProv)  # Acciones del boton de Aceptar
+        var.ui.btnModifProv.clicked.connect(proveedores.Proveedor.modifProv)  # Acciones del boton de Aceptar
 
         '''
         Eventos de la barra de menus

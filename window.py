@@ -725,7 +725,7 @@ class Ui_MainWindow(object):
         self.btnBajaProv.setObjectName("btnBajaProv")
         self.horizontalLayout_9.addWidget(self.btnBajaProv)
         self.line_4 = QtWidgets.QFrame(self.groupBox_3)
-        self.line_4.setGeometry(QtCore.QRect(0, 230, 871, 20))
+        self.line_4.setGeometry(QtCore.QRect(0, 210, 871, 20))
         self.line_4.setFrameShape(QtWidgets.QFrame.HLine)
         self.line_4.setFrameShadow(QtWidgets.QFrame.Sunken)
         self.line_4.setObjectName("line_4")
@@ -816,7 +816,7 @@ class Ui_MainWindow(object):
         self.lblAltaProv.setText("")
         self.lblAltaProv.setObjectName("lblAltaProv")
         self.tabProv = QtWidgets.QTableWidget(self.tabProveedores_2)
-        self.tabProv.setGeometry(QtCore.QRect(0, 250, 871, 251))
+        self.tabProv.setGeometry(QtCore.QRect(0, 230, 871, 341))
         font = QtGui.QFont()
         font.setPointSize(9)
         self.tabProv.setFont(font)
@@ -921,7 +921,7 @@ class Ui_MainWindow(object):
         self.toolBar.addAction(self.actionbarImprimir)
 
         self.retranslateUi(MainWindow)
-        self.tabPrograma.setCurrentIndex(0)
+        self.tabPrograma.setCurrentIndex(3)
         QtCore.QMetaObject.connectSlotsByName(MainWindow)
 
     def retranslateUi(self, MainWindow):

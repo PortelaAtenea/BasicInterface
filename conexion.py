@@ -875,7 +875,6 @@ Carga el reguistro de una venta realizada en la tabla ventas de nosseque
             if query.exec_():
                 while query.next():
                     var.ui.tabProv.setRowCount(index + 1)
-                    print(query.value(0))
                     var.ui.tabProv.setItem(index, 0, QtWidgets.QTableWidgetItem(str(query.value(0))))
                     var.ui.tabProv.item(index, 0).setTextAlignment(QtCore.Qt.AlignLeft)
                     var.ui.tabProv.setItem(index, 1, QtWidgets.QTableWidgetItem(str(query.value(1))))
@@ -901,6 +900,67 @@ Carga el reguistro de una venta realizada en la tabla ventas de nosseque
         except Exception as error:
             print("error de seleccionar cif y mail")
 
+    def bajaProv(self, cif):
+        """
+
+        Modulo que recibe dni del cliente y lo elimina de la bbdd
+
+        :param cif: dni del cliente a eliminar
+        :type cif: String
+        :return: None
+        :rtype: Object
+
+        """
+        try:
+            query = QtSql.QSqlQuery()
+            query.prepare('delete from proveedores where cif = :cif')
+            query.bindValue(':cif', str(cif))
+            if query.exec_():
+                msg = QtWidgets.QMessageBox()
+                msg.setWindowTitle('AVISO')
+                msg.setIcon(QtWidgets.QMessageBox.Warning)
+                msg.setText('Proveedor DADO DE BAJA DE LA BBDD CON EXITO')
+                msg.exec()
+            else:
+                msg = QtWidgets.QMessageBox()
+                msg.setWindowTitle('ERROR!!!')
+                msg.setIcon(QtWidgets.QMessageBox.Warning)
+                msg.setText(query.lastError().text())
+                msg.exec()
+
+        except Exception as error:
+            print('Error en baja de un proveedor de la bd  ', error)
+            return None
+
+    def modifProv(self, modprov):
+        """
 
 
+        Modulo que recibe los datos del cliente al modificar y lo modifica en la bbdd
 
+        :param modprov: Contiene los datos del cliente a modificar
+        :type modprov: Lista
+
+        """
+        try:
+            query = QtSql.QSqlQuery()
+            query.prepare('UPDATE proveedores SET nombre =:nombre, fechaaltaprov =:fechaaltaprov, email =:email, telefono =:telefono WHERE CIF =:CIF')
+            query.bindValue(':CIF', modprov[0])
+            query.bindValue(':nombre', modprov[1])
+            query.bindValue(':fechaaltaprov', modprov[2])
+            query.bindValue(':email', modprov[3])
+            query.bindValue(':telefono', modprov[4])
+            if query.exec_():
+                msg = QtWidgets.QMessageBox()
+                msg.setWindowTitle('AVISO')
+                msg.setIcon(QtWidgets.QMessageBox.Warning)
+                msg.setText('prov MODIFICADO EN LA BBDD CON EXITO')
+                msg.exec()
+            else:
+                msg = QtWidgets.QMessageBox()
+                msg.setWindowTitle('ERROR!!!')
+                msg.setIcon(QtWidgets.QMessageBox.Warning)
+                msg.setText(query.lastError().text())
+                msg.exec()
+        except Exception as error:
+            print('Error en modificar prov (conexión) ', error)

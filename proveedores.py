@@ -11,6 +11,7 @@ class Proveedor():
             newpro.append(str(var.ui.txtTelefono.text()))
 
             conexion.Conexion.altaproveedor(newpro)
+            conexion.Conexion.mostrarProvtab(self)
 
         except Exception as error:
             print ("error en alta proveedor ", error)
@@ -77,12 +78,30 @@ class Proveedor():
         """
         try:
             cif = var.ui.txtCif.text()
-            conexion.Conexion.bajaProv(cif)
-            conexion.Conexion.cargaTabCli(self)
+            conexion.Conexion.bajaProv(self,cif)
+            conexion.Conexion.mostrarProvtab(self)
 
         except Exception as error:
             print('Error en dar de baja un clientes', error)
 
+    def modifProv(self):
+        """
+
+        Metodo que se ejecuta cuando se quiere modificar a un cliente. Este metodo recoje todos los datos introducidos por el usuario y los envia al metod modifCli de conexion
+        para que e modifiqeu el la bbdd. Por ultimo se llama al metrodo cargarTabCli para actualizar los datos de la interfaz.
+
+        """
+        try:
+            modprov = []
+            modprov.append(str(var.ui.txtCif.text()))
+            modprov.append(str(var.ui.txtRazonSocial.text()))
+            modprov.append(str(var.ui.lblAltaProv.text()))
+            modprov.append(str(var.ui.txtEmail.text()))
+            modprov.append(str(var.ui.txtTelefono.text()))
+            conexion.Conexion.modifProv(self,modprov)
+            conexion.Conexion.mostrarProvtab(self)
+        except Exception as error:
+            print('Error en Modificar un cliente', error)
 
 
 
