@@ -104,8 +104,6 @@ class Eventos():
             header = var.ui.tabProv.horizontalHeader()
             for i in range(3):
                 header.setSectionResizeMode(i, QtWidgets.QHeaderView.Stretch)
-                if i == 2:
-                    header.setSectionResizeMode(i, QtWidgets.QHeaderView.ResizeToContents)
         except Exception as error:
             print('Error en al redimensionar la tabla ', error)
 

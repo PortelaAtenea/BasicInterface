@@ -1,0 +1,73 @@
+en provedores:
+
+	    def modifProv(self):
+        """
+
+        Metodo que se ejecuta cuando se quiere modificar a un cliente. Este metodo recoje todos los datos introducidos por el usuario y los envia al metod modifCli de conexion
+        para que e modifiqeu el la bbdd. Por ultimo se llama al metrodo cargarTabCli para actualizar los datos de la interfaz.
+
+        """
+        try:
+            modprov = []
+            modprov.append(str(var.ui.txtCif.text()))
+            modprov.append(str(var.ui.txtRazonSocial.text()))
+            modprov.append(str(var.ui.lblAltaProv.text()))
+            modprov.append(str(var.ui.txtEmail.text()))
+            modprov.append(str(var.ui.txtTelefono.text()))
+            conexion.Conexion.modifProv(self,modprov)
+            conexion.Conexion.cargaTabProv(self)
+        except Exception as error:
+            print('Error en Modificar un cliente', error)
+
+en conexion:
+
+
+	    def modifProv(self, modprov):
+        """
+
+
+        Modulo que recibe los datos del cliente al modificar y lo modifica en la bbdd
+
+        :param modprov: Contiene los datos del cliente a modificar
+        :type modprov: Lista
+
+        """
+        try:
+            query = QtSql.QSqlQuery()
+            query.prepare('UPDATE proveedores SET nombre =:nombre, fechaaltaprov =:fechaaltaprov, email =:email, telefono =:telefono WHERE CIF =:CIF')
+            query.bindValue(':CIF', modprov[0])
+            query.bindValue(':nombre', modprov[1])
+            query.bindValue(':fechaaltaprov', modprov[2])
+            query.bindValue(':email', modprov[3])
+            query.bindValue(':telefono', modprov[4])
+            if query.exec_():
+                msg = QtWidgets.QMessageBox()
+                msg.setWindowTitle('AVISO')
+                msg.setIcon(QtWidgets.QMessageBox.Warning)
+                msg.setText('prov MODIFICADO EN LA BBDD CON EXITO')
+                msg.exec()
+            else:
+                msg = QtWidgets.QMessageBox()
+                msg.setWindowTitle('ERROR!!!')
+                msg.setIcon(QtWidgets.QMessageBox.Warning)
+                msg.setText(query.lastError().text())
+                msg.exec()
+        except Exception as error:
+            print('Error en modificar prov (conexión) ', error)
+
+en Main:
+
+	        var.ui.btnModifProv.clicked.connect(proveedores.Proveedor.modifProv)
+
+
+
+
+
+
+
+
+
+
+
+
+

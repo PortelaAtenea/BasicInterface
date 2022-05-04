@@ -1,3 +1,5 @@
+from PyQt5 import QtWidgets
+
 import conexion, var
 
 class Proveedor():
@@ -11,7 +13,7 @@ class Proveedor():
             newpro.append(str(var.ui.txtTelefono.text()))
 
             conexion.Conexion.altaproveedor(newpro)
-            conexion.Conexion.mostrarProvtab(self)
+            conexion.Conexion.cargaTabProv(self)
 
         except Exception as error:
             print ("error en alta proveedor ", error)
@@ -72,14 +74,15 @@ class Proveedor():
     def bajaProv(self):
         """
 
-        Metodo que se ejecuta cuando el ususario quiere dar de baja a un cliente. Este llama al metodo bajaCli de Conexxion que recibe el dni del cliente a eliminar. Por
-        ultimo, se llama al metodo cargaTabCli para recargar la tabla y que el cliente eliminado no aparezca mas en esta
+        Metodo que se ejecuta cuando el ususario quiere dar de baja a un proveedor. Este llama al metodo bajaProv de Conexxion que recibe el cif del proveedor a eliminar. Por
+        ultimo, se llama al metodo cargaTabProv para recargar la tabla y que el proveedor eliminado no aparezca mas en esta
 
         """
         try:
             cif = var.ui.txtCif.text()
-            conexion.Conexion.bajaProv(self,cif)
-            conexion.Conexion.mostrarProvtab(self)
+            nombre = var.ui.txtRazonSocial.text()
+            conexion.Conexion.bajaProv(self,cif,nombre)
+            conexion.Conexion.cargaTabProv(self)
 
         except Exception as error:
             print('Error en dar de baja un clientes', error)
@@ -91,17 +94,35 @@ class Proveedor():
         para que e modifiqeu el la bbdd. Por ultimo se llama al metrodo cargarTabCli para actualizar los datos de la interfaz.
 
         """
+
         try:
+
+            fila = var.ui.tabProv.selectedItems()
+            if fila:
+                row = [dato.text() for dato in fila]
+
+            row2 = conexion.Conexion.datosprov(row[0])
             modprov = []
             modprov.append(str(var.ui.txtCif.text()))
             modprov.append(str(var.ui.txtRazonSocial.text()))
             modprov.append(str(var.ui.lblAltaProv.text()))
             modprov.append(str(var.ui.txtEmail.text()))
             modprov.append(str(var.ui.txtTelefono.text()))
-            conexion.Conexion.modifProv(self,modprov)
-            conexion.Conexion.mostrarProvtab(self)
+            print(row2[0])
+            print(modprov[0])
+
+            if  row2[0] == modprov[0]:
+                conexion.Conexion.modifProv(self, modprov)
+                conexion.Conexion.cargaTabProv(self)
+            else:
+                msg = QtWidgets.QMessageBox()
+                msg.setWindowTitle('AVISO')
+                msg.setIcon(QtWidgets.QMessageBox.Warning)
+                msg.setText('Operacion no realizada. No se puede modificar el cif')
+                msg.exec()
         except Exception as error:
-            print('Error en Modificar un cliente', error)
+            print('Error en Modificar un proovedor', error)
+
 
 
 

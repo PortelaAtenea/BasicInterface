@@ -88,8 +88,7 @@ class Main(QtWidgets.QMainWindow):
         var.ui.btnAltaProv.clicked.connect(proveedores.Proveedor.altaprov)  # Acciones del boton de Aceptar
         var.ui.btnLimpiarProv.clicked.connect(proveedores.Proveedor.limpiar)
         var.ui.btnBajaProv.clicked.connect(proveedores.Proveedor.bajaProv)  # Acciones del boton de Aceptar
-        var.ui.btnModifProv.clicked.connect(proveedores.Proveedor.modifProv)  # Acciones del boton de Aceptar
-
+        var.ui.btnModifProv.clicked.connect(proveedores.Proveedor.modifProv)
         '''
         Eventos de la barra de menus
         '''
@@ -169,7 +168,7 @@ class Main(QtWidgets.QMainWindow):
         #Tabla Articulos
         conexion.Conexion.cargaTabArti(self)
         #Tabla Clientes
-        conexion.Conexion.mostrarProvtab(self)
+        conexion.Conexion.cargaTabProv(self)
         '''Eventos del menu de herramientas'''
 
         var.ui.actionbarSalir.triggered.connect(events.Eventos.Salir)

@@ -2072,14 +2072,20 @@ background-color: rgb(252, 255, 235);</string>
    </widget>
    <widget class="QMenu" name="menuinformes">
     <property name="title">
-     <string>informes</string>
+     <string>Informes</string>
     </property>
     <addaction name="actionlistadoClientes"/>
     <addaction name="actionlistado_Proveedores"/>
    </widget>
+   <widget class="QMenu" name="menuAcerca_De">
+    <property name="title">
+     <string>Acerca De</string>
+    </property>
+   </widget>
    <addaction name="menuArchivo"/>
    <addaction name="menuHerramientas"/>
    <addaction name="menuinformes"/>
+   <addaction name="menuAcerca_De"/>
   </widget>
   <widget class="QStatusBar" name="statusbar"/>
   <widget class="QToolBar" name="toolBar">
@@ -2218,11 +2224,11 @@ background-color: rgb(252, 255, 235);</string>
  </resources>
  <connections/>
  <buttongroups>
-  <buttongroup name="rbtGroupSex"/>
   <buttongroup name="chkGroupPago">
    <property name="exclusive">
     <bool>false</bool>
    </property>
   </buttongroup>
+  <buttongroup name="rbtGroupSex"/>
  </buttongroups>
 </ui>
