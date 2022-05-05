@@ -1,0 +1,9 @@
+Poner al día el proyecto del curso
+
+Listado de proveedores con la forma de pago
+
+Añadir un radiobuttón con dos campos:
+	- Recogida en local
+	- Transporte del pedido
+
+Un campo más en la base de datos de proveedores llamado formadeenvío

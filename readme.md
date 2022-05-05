@@ -60,6 +60,10 @@ https://github.com/XoanCarlos?tab=repositories
   * Elegir desde un comboBox cargar desde un array
   * Diseñar interfaz
   * Codificar: para guardar en bbdd
+  * ###PAra hacer cunaod no esta
+  * Modificar listado para que incluya forma de pago
+  * añadir 2 radio button: recojida del producto o envio forma de envio
+  * un campo mas de proberoder llamdo forma de envio: recojida en local o transporte del pedido
 
 
 
