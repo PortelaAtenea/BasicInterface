@@ -845,13 +845,14 @@ Carga el reguistro de una venta realizada en la tabla ventas de nosseque
     def altaproveedor(newpro):
         try:
             query = QtSql.QSqlQuery()
-            query.prepare('insert into proveedores(CIF, nombre, fechaaltaprov, email, telefono) '
-                          'VALUES (:CIF, :nombre, :fechaaltaprov, :email, :telefono)')
+            query.prepare('insert into proveedores(CIF, nombre, fechaaltaprov, email, telefono, formaPago) '
+                          'VALUES (:CIF, :nombre, :fechaaltaprov, :email, :telefono, :formaPago)')
             query.bindValue(':CIF', newpro[0])
             query.bindValue(':nombre', newpro[1])
             query.bindValue(':fechaaltaprov', newpro[2])
             query.bindValue(':email', newpro[3])
             query.bindValue(':telefono', newpro[4])
+            query.bindValue(':formaPago', newpro[5])
             if query.exec_():
                 msg = QtWidgets.QMessageBox()
                 msg.setWindowTitle('Aviso')
@@ -871,7 +872,7 @@ Carga el reguistro de una venta realizada en la tabla ventas de nosseque
         try:
             index = 0
             query = QtSql.QSqlQuery()
-            query.prepare('select nombre, fechaaltaprov,  telefono from proveedores')
+            query.prepare('select nombre, fechaaltaprov,  telefono, formaPago from proveedores')
             if query.exec_():
                 while query.next():
                     var.ui.tabProv.setRowCount(index + 1)
@@ -881,6 +882,8 @@ Carga el reguistro de una venta realizada en la tabla ventas de nosseque
                     var.ui.tabProv.item(index, 1).setTextAlignment(QtCore.Qt.AlignCenter)
                     var.ui.tabProv.setItem(index, 2, QtWidgets.QTableWidgetItem(str(query.value(2))))
                     var.ui.tabProv.item(index, 2).setTextAlignment(QtCore.Qt.AlignCenter)
+                    var.ui.tabProv.setItem(index, 3, QtWidgets.QTableWidgetItem(str(query.value(3))))
+                    var.ui.tabProv.item(index, 3).setTextAlignment(QtCore.Qt.AlignCenter)
                     index = index + 1
         except Exception as error:
 
@@ -890,12 +893,13 @@ Carga el reguistro de una venta realizada en la tabla ventas de nosseque
         try:
             datos = []
             query = QtSql.QSqlQuery()
-            query.prepare('select CIF, email from proveedores where nombre = :nombre')
+            query.prepare('select CIF, email, formaPago from proveedores where nombre = :nombre')
             query.bindValue(':nombre', str(empresa))
             if query.exec_():
                 while query.next():
                     datos.append(str(query.value(0)))
                     datos.append(str(query.value(1)))
+                    datos.append(str(query.value(2)))
             return datos
         except Exception as error:
             print("error de seleccionar cif y mail")
@@ -971,12 +975,13 @@ Carga el reguistro de una venta realizada en la tabla ventas de nosseque
             if bttn:
                 query = QtSql.QSqlQuery()
                 query.prepare(
-                    'UPDATE proveedores SET nombre =:nombre, fechaaltaprov =:fechaaltaprov, email =:email, telefono =:telefono WHERE CIF =:CIF')
+                    'UPDATE proveedores SET nombre =:nombre, fechaaltaprov =:fechaaltaprov, email =:email, telefono =:telefono, formaPago =:formaPago WHERE CIF =:CIF')
                 query.bindValue(':CIF', modprov[0])
                 query.bindValue(':nombre', modprov[1])
                 query.bindValue(':fechaaltaprov', modprov[2])
                 query.bindValue(':email', modprov[3])
                 query.bindValue(':telefono', modprov[4])
+                query.bindValue(':formaPago', modprov[5])
                 if query.exec_():
                     msg = QtWidgets.QMessageBox()
                     msg.setWindowTitle('AVISO')

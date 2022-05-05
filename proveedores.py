@@ -11,6 +11,7 @@ class Proveedor():
             newpro.append(str(var.ui.lblAltaProv.text()))
             newpro.append(str(var.ui.txtEmail.text()))
             newpro.append(str(var.ui.txtTelefono.text()))
+            newpro.append(var.ui.cmbPago.currentText())
 
             conexion.Conexion.altaproveedor(newpro)
             conexion.Conexion.cargaTabProv(self)
@@ -47,11 +48,13 @@ class Proveedor():
 
     def limpiar(self = None):
         try:
-            form = [var.ui.txtCif, var.ui.lblAltaProv, var.ui.txtRazonSocial, var.ui.txtEmail, var.ui.txtTelefono ]
+            form = [var.ui.txtCif, var.ui.lblAltaProv, var.ui.txtRazonSocial, var.ui.txtEmail, var.ui.txtTelefono]
             for dato in form:
                 dato.setText('')
+
+            var.ui.cmbPago.setCurrentIndex(0)
         except Exception as error:
-            print('Error en limpiar formulario proveedor')
+            print('Error en cargarfecha del  proveedor')
 
     def cargarProv(self):
         try:
@@ -63,13 +66,16 @@ class Proveedor():
             for i, dato in enumerate(form):
                 dato.setText(row[i])
 
-            form2 = [var.ui.txtCif, var.ui.txtEmail ]
+            form2 = [var.ui.txtCif, var.ui.txtEmail, var.ui.cmbPago ]
             row2 = conexion.Conexion.datosprov(row[0])
             for i, dato in enumerate(form2):
-                dato.setText(row2[i])
+                if i == 2:
+                    dato.setCurrentText(str(row2[2]))
+                else:
+                    dato.setText(row2[i])
 
         except Exception as error:
-            print('Error en cargar dato de un proveedor ', error)
+            print('Error en cargar datos de un proveedor ', error)
 
     def bajaProv(self):
         """
@@ -85,7 +91,7 @@ class Proveedor():
             conexion.Conexion.cargaTabProv(self)
 
         except Exception as error:
-            print('Error en dar de baja un clientes', error)
+            print('Error en dar de baja un provedor', error)
 
     def modifProv(self):
         """
@@ -108,8 +114,7 @@ class Proveedor():
             modprov.append(str(var.ui.lblAltaProv.text()))
             modprov.append(str(var.ui.txtEmail.text()))
             modprov.append(str(var.ui.txtTelefono.text()))
-            print(row2[0])
-            print(modprov[0])
+            modprov.append(var.ui.cmbPago.currentText())
 
             if  row2[0] == modprov[0]:
                 conexion.Conexion.modifProv(self, modprov)
@@ -123,8 +128,20 @@ class Proveedor():
         except Exception as error:
             print('Error en Modificar un proovedor', error)
 
+    def cargaPago(self):
+        """
 
+        Modulo que carga la lista de provincias en la interfaz. Para conseguir la lista de provincias llama al metodo listaProvincia que
+        devuelve un array con las provincias
 
+        """
+        try:
+            var.ui.cmbPago.clear()
+            pagos = var.pago
+            for i in pagos:
+                var.ui.cmbPago.addItem(i)
+        except Exception as error:
+            print('Error en módulos al cargar pagos, ', error)
 
 
 

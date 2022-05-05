@@ -1868,7 +1868,7 @@ background-color: rgb(252, 255, 235);</string>
         <rect>
          <x>140</x>
          <y>60</y>
-         <width>371</width>
+         <width>351</width>
          <height>20</height>
         </rect>
        </property>
@@ -1997,6 +1997,36 @@ background-color: rgb(252, 255, 235);</string>
         <string/>
        </property>
       </widget>
+      <widget class="QComboBox" name="cmbPago">
+       <property name="geometry">
+        <rect>
+         <x>620</x>
+         <y>60</y>
+         <width>211</width>
+         <height>20</height>
+        </rect>
+       </property>
+      </widget>
+      <widget class="QLabel" name="lblMuni_2">
+       <property name="geometry">
+        <rect>
+         <x>510</x>
+         <y>60</y>
+         <width>101</width>
+         <height>16</height>
+        </rect>
+       </property>
+       <property name="font">
+        <font>
+         <pointsize>10</pointsize>
+         <weight>75</weight>
+         <bold>true</bold>
+        </font>
+       </property>
+       <property name="text">
+        <string>Forma de Pago</string>
+       </property>
+      </widget>
      </widget>
      <widget class="QTableWidget" name="tabProv">
       <property name="geometry">
@@ -2031,6 +2061,11 @@ background-color: rgb(252, 255, 235);</string>
       <column>
        <property name="text">
         <string>Telefono</string>
+       </property>
+      </column>
+      <column>
+       <property name="text">
+        <string>Forma de Pago</string>
        </property>
       </column>
      </widget>
@@ -2224,11 +2259,11 @@ background-color: rgb(252, 255, 235);</string>
  </resources>
  <connections/>
  <buttongroups>
+  <buttongroup name="rbtGroupSex"/>
   <buttongroup name="chkGroupPago">
    <property name="exclusive">
     <bool>false</bool>
    </property>
   </buttongroup>
-  <buttongroup name="rbtGroupSex"/>
  </buttongroups>
 </ui>

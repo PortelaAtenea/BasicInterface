@@ -53,7 +53,13 @@ https://github.com/XoanCarlos?tab=repositories
   * tavka como con los clientes que pone la informacion c
   * unado clicas en la tabla en los cosas de arriba
   * 
-
+  * 
+## Provedores nuevo:
+  * Forma de pago: Transferencia, Cargo cuenta, Efectivo, Targeta
+  * Modificar la bbdd para el cmapo metodoPago --> Listo
+  * Elegir desde un comboBox cargar desde un array
+  * Diseñar interfaz
+  * Codificar: para guardar en bbdd
 
 
 

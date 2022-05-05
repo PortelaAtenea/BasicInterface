@@ -167,8 +167,9 @@ class Main(QtWidgets.QMainWindow):
         var.ui.tabFac.setSelectionBehavior(QtWidgets.QTableWidget.SelectRows)
         #Tabla Articulos
         conexion.Conexion.cargaTabArti(self)
-        #Tabla Clientes
+        #Tabla Proveedores
         conexion.Conexion.cargaTabProv(self)
+        proveedores.Proveedor.cargaPago(self)
         '''Eventos del menu de herramientas'''
 
         var.ui.actionbarSalir.triggered.connect(events.Eventos.Salir)

@@ -14,6 +14,7 @@ global cv
 global cvProv
 global txtCantidad
 global cmbProducto
+pago = ["Transferencia", "Cargo en cuenta", "Efectivo", "Tarjeta"]
 filedb = 'bbdd.sqlite'
 filexlsx = 'DATOSCLIENTES.xls'
 
