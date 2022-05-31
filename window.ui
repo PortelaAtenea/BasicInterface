@@ -1724,52 +1724,6 @@ background-color: rgb(252, 255, 235);</string>
         <string>Fecha de alta</string>
        </property>
       </widget>
-      <widget class="QWidget" name="layoutWidget_4">
-       <property name="geometry">
-        <rect>
-         <x>180</x>
-         <y>160</y>
-         <width>441</width>
-         <height>51</height>
-        </rect>
-       </property>
-       <layout class="QHBoxLayout" name="horizontalLayout_9">
-        <item>
-         <widget class="QPushButton" name="btnAltaProv">
-          <property name="text">
-           <string>Alta</string>
-          </property>
-         </widget>
-        </item>
-        <item>
-         <widget class="QPushButton" name="btnModifProv">
-          <property name="text">
-           <string>Modificar</string>
-          </property>
-         </widget>
-        </item>
-        <item>
-         <widget class="QPushButton" name="btnBajaProv">
-          <property name="text">
-           <string>Eliminar</string>
-          </property>
-         </widget>
-        </item>
-       </layout>
-      </widget>
-      <widget class="Line" name="line_4">
-       <property name="geometry">
-        <rect>
-         <x>0</x>
-         <y>210</y>
-         <width>871</width>
-         <height>20</height>
-        </rect>
-       </property>
-       <property name="orientation">
-        <enum>Qt::Horizontal</enum>
-       </property>
-      </widget>
       <widget class="QPushButton" name="btnLimpiarProv">
        <property name="geometry">
         <rect>
@@ -2027,14 +1981,60 @@ background-color: rgb(252, 255, 235);</string>
         <string>Forma de Pago</string>
        </property>
       </widget>
+      <widget class="QLabel" name="lblSexo_3">
+       <property name="geometry">
+        <rect>
+         <x>42</x>
+         <y>150</y>
+         <width>102</width>
+         <height>17</height>
+        </rect>
+       </property>
+       <property name="font">
+        <font>
+         <pointsize>10</pointsize>
+         <weight>75</weight>
+         <bold>true</bold>
+        </font>
+       </property>
+       <property name="text">
+        <string>Envio:</string>
+       </property>
+      </widget>
+      <widget class="QRadioButton" name="rbtTransporte">
+       <property name="geometry">
+        <rect>
+         <x>260</x>
+         <y>150</y>
+         <width>102</width>
+         <height>17</height>
+        </rect>
+       </property>
+       <property name="text">
+        <string>Transporte</string>
+       </property>
+      </widget>
+      <widget class="QRadioButton" name="rbtRecojida">
+       <property name="geometry">
+        <rect>
+         <x>150</x>
+         <y>150</y>
+         <width>103</width>
+         <height>17</height>
+        </rect>
+       </property>
+       <property name="text">
+        <string>Recojida en local</string>
+       </property>
+      </widget>
      </widget>
      <widget class="QTableWidget" name="tabProv">
       <property name="geometry">
        <rect>
         <x>0</x>
-        <y>230</y>
+        <y>270</y>
         <width>871</width>
-        <height>341</height>
+        <height>301</height>
        </rect>
       </property>
       <property name="font">
@@ -2068,6 +2068,52 @@ background-color: rgb(252, 255, 235);</string>
         <string>Forma de Pago</string>
        </property>
       </column>
+     </widget>
+     <widget class="Line" name="line_4">
+      <property name="geometry">
+       <rect>
+        <x>0</x>
+        <y>240</y>
+        <width>871</width>
+        <height>20</height>
+       </rect>
+      </property>
+      <property name="orientation">
+       <enum>Qt::Horizontal</enum>
+      </property>
+     </widget>
+     <widget class="QWidget" name="layoutWidget_4">
+      <property name="geometry">
+       <rect>
+        <x>190</x>
+        <y>190</y>
+        <width>441</width>
+        <height>51</height>
+       </rect>
+      </property>
+      <layout class="QHBoxLayout" name="horizontalLayout_9">
+       <item>
+        <widget class="QPushButton" name="btnAltaProv">
+         <property name="text">
+          <string>Alta</string>
+         </property>
+        </widget>
+       </item>
+       <item>
+        <widget class="QPushButton" name="btnModifProv">
+         <property name="text">
+          <string>Modificar</string>
+         </property>
+        </widget>
+       </item>
+       <item>
+        <widget class="QPushButton" name="btnBajaProv">
+         <property name="text">
+          <string>Eliminar</string>
+         </property>
+        </widget>
+       </item>
+      </layout>
      </widget>
     </widget>
    </widget>

@@ -393,14 +393,16 @@ class Informes():
                     var.cvProv.drawString(255, 690, textotitulo)
                     var.cvProv.line(40, 685, 530, 685)
                     var.cvProv.setFont('Helvetica', 10)
-                    items = ['Razón Social', 'Telefono', 'Email']
+
+                    items = ['Nombre', 'Telefono', 'Email', 'Forma de Pago']
                     var.cvProv.drawString(65, 675, items[0])
                     var.cvProv.drawString(240, 675, items[1])
-                    var.cvProv.drawString(400, 675, items[2])
+                    var.cvProv.drawString(350, 675, items[2])
+                    var.cvProv.drawString(450, 675, items[3])
                     var.cvProv.line(40, 670, 530, 670)
                     Informes.pieProv(textotitulo)
                     query = QtSql.QSqlQuery()
-                    query.prepare('select nombre, telefono, email from proveedores order by nombre')
+                    query.prepare('select nombre, telefono, email, formaPago from proveedores order by nombre')
                     var.cvProv.setFont('Helvetica', 8)
                     if query.exec_():
                         i = 50
@@ -415,10 +417,11 @@ class Informes():
                                 textotitulo = 'LISTADO PROVEEDORES'
                                 var.cvProv.drawString(255, 690, textotitulo)
                                 var.cvProv.line(40, 685, 530, 685)
-                                items = ['Nombre', 'Telefono', 'Email']
+                                items = ['Nombre', 'Telefono', 'Email', 'Forma de Pago']
                                 var.cvProv.drawString(65, 675, items[0])
                                 var.cvProv.drawString(240, 675, items[1])
-                                var.cvProv.drawString(400, 675, items[2])
+                                var.cvProv.drawString(350, 675, items[2])
+                                var.cvProv.drawString(450, 675, items[3])
                                 var.cvProv.line(40, 670, 530, 670)
                                 Informes.cabeceraProv(self)
                                 Informes.pieProv(textotitulo)
@@ -428,7 +431,8 @@ class Informes():
                             var.cvProv.setFont('Helvetica', 8)
                             var.cvProv.drawString(i, j, str(query.value(0)))
                             var.cvProv.drawString(i + 200, j, (str(query.value(1))))
-                            var.cvProv.drawString(i + 310, j, str(query.value(2)))
+                            var.cvProv.drawString(i + 250, j, str(query.value(2)))
+                            var.cvProv.drawString(i + 420, j, str(query.value(3)))
                             j -= 20
 
                     # Propiedades del documento

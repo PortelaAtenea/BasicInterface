@@ -845,14 +845,15 @@ Carga el reguistro de una venta realizada en la tabla ventas de nosseque
     def altaproveedor(newpro):
         try:
             query = QtSql.QSqlQuery()
-            query.prepare('insert into proveedores(CIF, nombre, fechaaltaprov, email, telefono, formaPago) '
-                          'VALUES (:CIF, :nombre, :fechaaltaprov, :email, :telefono, :formaPago)')
+            query.prepare('insert into proveedores(CIF, nombre, fechaaltaprov, email, telefono, formaPago, envio) '
+                          'VALUES (:CIF, :nombre, :fechaaltaprov, :email, :telefono, :formaPago , :envio)')
             query.bindValue(':CIF', newpro[0])
             query.bindValue(':nombre', newpro[1])
             query.bindValue(':fechaaltaprov', newpro[2])
             query.bindValue(':email', newpro[3])
             query.bindValue(':telefono', newpro[4])
             query.bindValue(':formaPago', newpro[5])
+            query.bindValue(':envio', newpro[6])
             if query.exec_():
                 msg = QtWidgets.QMessageBox()
                 msg.setWindowTitle('Aviso')
@@ -893,13 +894,14 @@ Carga el reguistro de una venta realizada en la tabla ventas de nosseque
         try:
             datos = []
             query = QtSql.QSqlQuery()
-            query.prepare('select CIF, email, formaPago from proveedores where nombre = :nombre')
+            query.prepare('select CIF, email, formaPago, envio from proveedores where nombre = :nombre')
             query.bindValue(':nombre', str(empresa))
             if query.exec_():
                 while query.next():
                     datos.append(str(query.value(0)))
                     datos.append(str(query.value(1)))
                     datos.append(str(query.value(2)))
+                    datos.append(str(query.value(3)))
             return datos
         except Exception as error:
             print("error de seleccionar cif y mail")
@@ -975,13 +977,14 @@ Carga el reguistro de una venta realizada en la tabla ventas de nosseque
             if bttn:
                 query = QtSql.QSqlQuery()
                 query.prepare(
-                    'UPDATE proveedores SET nombre =:nombre, fechaaltaprov =:fechaaltaprov, email =:email, telefono =:telefono, formaPago =:formaPago WHERE CIF =:CIF')
+                    'UPDATE proveedores SET nombre =:nombre, fechaaltaprov =:fechaaltaprov, email =:email, telefono =:telefono, formaPago =:formaPago , envio =:envio WHERE CIF =:CIF')
                 query.bindValue(':CIF', modprov[0])
                 query.bindValue(':nombre', modprov[1])
                 query.bindValue(':fechaaltaprov', modprov[2])
                 query.bindValue(':email', modprov[3])
                 query.bindValue(':telefono', modprov[4])
                 query.bindValue(':formaPago', modprov[5])
+                query.bindValue(':envio', modprov[6])
                 if query.exec_():
                     msg = QtWidgets.QMessageBox()
                     msg.setWindowTitle('AVISO')

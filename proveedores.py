@@ -12,6 +12,12 @@ class Proveedor():
             newpro.append(str(var.ui.txtEmail.text()))
             newpro.append(str(var.ui.txtTelefono.text()))
             newpro.append(var.ui.cmbPago.currentText())
+            if var.ui.rbtTransporte.isChecked():
+                newpro.append('Transporte')
+            elif var.ui.rbtRecojida.isChecked():
+                newpro.append('Recojida')
+            else:
+                newpro.append('No especificado')
 
             conexion.Conexion.altaproveedor(newpro)
             conexion.Conexion.cargaTabProv(self)
@@ -73,6 +79,10 @@ class Proveedor():
                     dato.setCurrentText(str(row2[2]))
                 else:
                     dato.setText(row2[i])
+                if str(row2[3]) == 'Recojida':
+                    var.ui.rbtRecojida.setChecked(True)
+                elif str(row2[3]) == 'Transporte':
+                    var.ui.rbtTransporte.setChecked(True)
 
         except Exception as error:
             print('Error en cargar datos de un proveedor ', error)
@@ -115,7 +125,12 @@ class Proveedor():
             modprov.append(str(var.ui.txtEmail.text()))
             modprov.append(str(var.ui.txtTelefono.text()))
             modprov.append(var.ui.cmbPago.currentText())
-
+            if var.ui.rbtTransporte.isChecked():
+                modprov.append('Transporte')
+            elif var.ui.rbtRecojida.isChecked():
+                modprov.append('Recojida')
+            else:
+                modprov.append('No especificado')
             if  row2[0] == modprov[0]:
                 conexion.Conexion.modifProv(self, modprov)
                 conexion.Conexion.cargaTabProv(self)
