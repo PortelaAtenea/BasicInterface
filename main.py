@@ -12,6 +12,7 @@ import conexion
 import informes
 import invoice
 import proveedores
+from windowImprimirProv import Ui_Dialog
 from windowaviso import *
 from window import *
 from windowcal import *
@@ -42,6 +43,15 @@ class dialogCalendar(QtWidgets.QDialog):
         var.dlgcalendar.Calendar.clicked.connect(invoice.Facturas.cargarFecha)
 
         var.dlgcalendar.Calendar.clicked.connect(proveedores.Proveedor.cargarFecha)
+class DialogImprimir(QtWidgets.QDialog):
+    def __init__(self):
+        '''
+        Ventana del calendario
+        '''
+        super(DialogImprimir, self).__init__()
+        var.dlgimprimir = Ui_Dialog()
+        var.dlgimprimir.setupUi(self)
+
 
 class DialogAviso(QtWidgets.QDialog):
     def __init__(self):
@@ -186,9 +196,6 @@ class Main(QtWidgets.QMainWindow):
 
 
 
-
-
-
 if __name__ == '__main__':
     app = QtWidgets.QApplication([])
     window = Main()
@@ -197,6 +204,7 @@ if __name__ == '__main__':
     y = (desktop.height() - window.height()) // 2
     window.move(x, y)
     var.dlgaviso = DialogAviso()
+    var.dlgimprimir = DialogImprimir()
     var.dlgcalendar = dialogCalendar()
     var.dlgabrir = fileDialogAbrir()
     window.show()

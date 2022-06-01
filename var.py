@@ -6,6 +6,7 @@ Fichero de variables generales
 
 global ui
 global dlgaviso
+global dlgimprimir
 global dlgcalendar
 global dlgabrir
 global copia

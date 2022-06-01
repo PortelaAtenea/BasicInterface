@@ -66,6 +66,10 @@ https://github.com/XoanCarlos?tab=repositories
   * un campo mas de proberoder llamdo forma de envio: recojida en local o transporte del pedido
 
 
+Imprimir por orden
+
+Una venana nmbre o forma de pago
+
 
 
 

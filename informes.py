@@ -1,7 +1,8 @@
 import os, var
 from datetime import datetime
 
-from PyQt5 import QtSql
+from PyQt5 import QtSql, QtWidgets, Qt
+from PyQt5.QtWidgets import QComboBox, QVBoxLayout, QLabel
 from reportlab.pdfgen import canvas
 
 import conexion
@@ -383,71 +384,174 @@ class Informes():
                 Usa los métodos cabecera y pie para dibujar dichas partes.
                 """
                 try:
+                    #Iniciar una nueva ventana que te pregunte cin un combobox que orden(nombre o forma de pagho)
 
-                    var.cvProv = canvas.Canvas('informes/listadoProveedores.pdf')
+                    msgbox = QtWidgets.QMessageBox()
+                    msgbox.setText('                                                         ')
+                    cb = QtWidgets.QComboBox(msgbox)
+                    cb.addItem('Por forma de pago     ')
+                    cb.addItem('Por nombre')
+                    cb.adjustSize()
+                    v_layout = QVBoxLayout()
 
-                    Informes.cabeceraProv(self)
 
-                    var.cvProv.setFont('Helvetica-Bold', 12)
-                    textotitulo = 'LISTADO PROVEEDORES'
-                    var.cvProv.drawString(255, 690, textotitulo)
-                    var.cvProv.line(40, 685, 530, 685)
-                    var.cvProv.setFont('Helvetica', 10)
+                    v_layout.addWidget(cb)
+                    v_layout.addStretch(10000)
 
-                    items = ['Nombre', 'Telefono', 'Email', 'Forma de Pago']
-                    var.cvProv.drawString(65, 675, items[0])
-                    var.cvProv.drawString(240, 675, items[1])
-                    var.cvProv.drawString(350, 675, items[2])
-                    var.cvProv.drawString(450, 675, items[3])
-                    var.cvProv.line(40, 670, 530, 670)
-                    Informes.pieProv(textotitulo)
-                    query = QtSql.QSqlQuery()
-                    query.prepare('select nombre, telefono, email, formaPago from proveedores order by nombre')
-                    var.cvProv.setFont('Helvetica', 8)
-                    if query.exec_():
-                        i = 50
-                        j = 655
-                        while query.next():
-                            if j <= 80:
-                                # Para saltar de página y colocar pie y cabecera en la nueva
-                                var.cvProv.drawString(460, 65,
-                                                  'Página siguiente...')  # Ellos están poniendo esta línea más abajo
-                                var.cvProv.showPage()  # Avanza la página
-                                var.cvProv.setFont('Helvetica-Bold', 10)
-                                textotitulo = 'LISTADO PROVEEDORES'
-                                var.cvProv.drawString(255, 690, textotitulo)
-                                var.cvProv.line(40, 685, 530, 685)
-                                items = ['Nombre', 'Telefono', 'Email', 'Forma de Pago']
-                                var.cvProv.drawString(65, 675, items[0])
-                                var.cvProv.drawString(240, 675, items[1])
-                                var.cvProv.drawString(350, 675, items[2])
-                                var.cvProv.drawString(450, 675, items[3])
-                                var.cvProv.line(40, 670, 530, 670)
-                                Informes.cabeceraProv(self)
-                                Informes.pieProv(textotitulo)
-                                i = 50
-                                j = 655
+                    # Call the custom method if any item is selected
 
-                            var.cvProv.setFont('Helvetica', 8)
-                            var.cvProv.drawString(i, j, str(query.value(0)))
-                            var.cvProv.drawString(i + 200, j, (str(query.value(1))))
-                            var.cvProv.drawString(i + 250, j, str(query.value(2)))
-                            var.cvProv.drawString(i + 420, j, str(query.value(3)))
-                            j -= 20
 
-                    # Propiedades del documento
-                    var.cvProv.setFont('Helvetica', 10)
-                    var.cvProv.setTitle('Listado Proveedores')
-                    var.cvProv.setAuthor('Departamento de administración')
+                    # Set the configurations for the window
 
-                    # Guarda el lienzo
-                    var.cvProv.save()
-                    rootPath = '.\\Informes'
-                    cont = 0
+                    msgbox.setContentsMargins(20, 20, 20, 20)
 
-                    for file in os.listdir(rootPath):
-                        if file.endswith('res.pdf'):
-                            os.startfile('%s/%s' % (rootPath, file))
+                    msgbox.setLayout(v_layout)
+
+                    msgbox.move(800, 300)
+
+                    msgbox.setWindowTitle('Seleccione el orden')
+
+                    msgbox.adjustSize()
+                    msgbox .exec_()
+                    cb.show()
+
+                    bttn = cb.currentText()
+
+                    if bttn == 'Por nombre':
+                        var.cvProv = canvas.Canvas('informes/listadoProveedores.pdf')
+
+                        Informes.cabeceraProv(self)
+
+                        var.cvProv.setFont('Helvetica-Bold', 12)
+                        textotitulo = 'LISTADO PROVEEDORES'
+                        var.cvProv.drawString(255, 690, textotitulo)
+                        var.cvProv.line(40, 685, 530, 685)
+                        var.cvProv.setFont('Helvetica', 10)
+
+                        items = ['Nombre', 'Telefono', 'Email', 'Forma de Pago']
+                        var.cvProv.drawString(65, 675, items[0])
+                        var.cvProv.drawString(230, 675, items[1])
+                        var.cvProv.drawString(350, 675, items[2])
+                        var.cvProv.drawString(450, 675, items[3])
+                        var.cvProv.line(40, 670, 530, 670)
+                        Informes.pieProv(textotitulo)
+                        query = QtSql.QSqlQuery()
+                        query.prepare('select nombre, telefono, email, formaPago from proveedores order by nombre')
+                        var.cvProv.setFont('Helvetica', 7)
+                        if query.exec_():
+                            i = 50
+                            j = 655
+                            while query.next():
+                                if j <= 80:
+                                    # Para saltar de página y colocar pie y cabecera en la nueva
+                                    var.cvProv.drawString(460, 65,
+                                                          'Página siguiente...')  # Ellos están poniendo esta línea más abajo
+                                    var.cvProv.showPage()  # Avanza la página
+                                    var.cvProv.setFont('Helvetica-Bold', 10)
+                                    textotitulo = 'LISTADO PROVEEDORES'
+                                    var.cvProv.drawString(255, 690, textotitulo)
+                                    var.cvProv.line(40, 685, 530, 685)
+                                    items = ['Nombre', 'Telefono', 'Email', 'Forma de Pago']
+                                    var.cvProv.drawString(65, 675, items[0])
+                                    var.cvProv.drawString(230, 675, items[1])
+                                    var.cvProv.drawString(330, 675, items[2])
+                                    var.cvProv.drawString(450, 675, items[3])
+                                    var.cvProv.line(40, 670, 530, 670)
+                                    Informes.cabeceraProv(self)
+                                    Informes.pieProv(textotitulo)
+                                    i = 50
+                                    j = 655
+
+                                var.cvProv.setFont('Helvetica', 8)
+                                var.cvProv.drawString(i, j, str(query.value(0)))
+                                var.cvProv.drawString(i + 180, j, (str(query.value(1))))
+                                var.cvProv.drawString(i + 230, j, str(query.value(2)))
+                                var.cvProv.drawString(i + 420, j, str(query.value(3)))
+                                j -= 20
+
+                        # Propiedades del documento
+                        var.cvProv.setFont('Helvetica', 10)
+                        var.cvProv.setTitle('Listado Proveedores')
+                        var.cvProv.setAuthor('Departamento de administración')
+
+                        # Guarda el lienzo
+                        var.cvProv.save()
+                        rootPath = '.\\Informes'
+                        cont = 0
+
+                        for file in os.listdir(rootPath):
+                            if file.endswith('res.pdf'):
+                                os.startfile('%s/%s' % (rootPath, file))
+
+                    else:
+                        var.cvProv = canvas.Canvas('informes/listadoProveedores.pdf')
+
+                        Informes.cabeceraProv(self)
+
+                        var.cvProv.setFont('Helvetica-Bold', 12)
+                        textotitulo = 'LISTADO PROVEEDORES'
+                        var.cvProv.drawString(255, 690, textotitulo)
+                        var.cvProv.line(40, 685, 530, 685)
+                        var.cvProv.setFont('Helvetica', 10)
+
+                        items = ['Nombre', 'Telefono', 'Email', 'Forma de Pago']
+                        var.cvProv.drawString(65, 675, items[0])
+                        var.cvProv.drawString(200, 675, items[1])
+                        var.cvProv.drawString(330, 675, items[2])
+                        var.cvProv.drawString(450, 675, items[3])
+                        var.cvProv.line(40, 670, 530, 670)
+                        Informes.pieProv(textotitulo)
+                        query2 = QtSql.QSqlQuery()
+                        query2.prepare('select nombre, telefono, email, formaPago from proveedores order by formaPago')
+                        var.cvProv.setFont('Helvetica', 8)
+                        if query2.exec_():
+                            i = 50
+                            j = 655
+                            while query2.next():
+                                if j <= 80:
+                                    # Para saltar de página y colocar pie y cabecera en la nueva
+                                    var.cvProv.drawString(460, 65,
+                                                          'Página siguiente...')  # Ellos están poniendo esta línea más abajo
+                                    var.cvProv.showPage()  # Avanza la página
+                                    var.cvProv.setFont('Helvetica-Bold', 10)
+                                    textotitulo = 'LISTADO PROVEEDORES'
+                                    var.cvProv.drawString(255, 690, textotitulo)
+                                    var.cvProv.line(40, 685, 530, 685)
+                                    items = ['Nombre', 'Telefono', 'Email', 'Forma de Pago']
+                                    var.cvProv.drawString(65, 675, items[0])
+                                    var.cvProv.drawString(220, 675, items[1])
+                                    var.cvProv.drawString(330, 675, items[2])
+                                    var.cvProv.drawString(450, 675, items[3])
+                                    var.cvProv.line(40, 670, 530, 670)
+                                    Informes.cabeceraProv(self)
+                                    Informes.pieProv(textotitulo)
+                                    i = 50
+                                    j = 655
+
+                                var.cvProv.setFont('Helvetica', 8)
+
+                                var.cvProv.drawString(i, j, str(query2.value(0)))
+                                var.cvProv.drawString(i + 150, j, (str(query2.value(1))))
+                                var.cvProv.drawString(i + 230, j, str(query2.value(2)))
+                                var.cvProv.drawString(i + 420, j, str(query2.value(3)))
+                                j -= 20
+
+                        # Propiedades del documento
+                        var.cvProv.setFont('Helvetica', 10)
+                        var.cvProv.setTitle('Listado Proveedores')
+                        var.cvProv.setAuthor('Departamento de administración')
+
+                        # Guarda el lienzo
+                        var.cvProv.save()
+                        rootPath = '.\\Informes'
+                        cont = 0
+
+                        for file in os.listdir(rootPath):
+                            if file.endswith('res.pdf'):
+                                os.startfile('%s/%s' % (rootPath, file))
+
+
+
 
                 except Exception as error:
                     print('Error al listar Proveedores informe ', error)

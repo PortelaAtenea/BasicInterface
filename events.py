@@ -47,6 +47,17 @@ class Eventos():
         except Exception as error:
             print('Error al abrir el calendario', error)
 
+    def abrirImprimir(self):
+        """
+
+        Metodo que abre el calendario cuando es requerido por el ususario
+
+        """
+        try:
+            var.dlgimprimir.show()
+        except Exception as error:
+            print('Error al abrir el impresion', error)
+
 
     def resizeTablaCli(self):
         """
